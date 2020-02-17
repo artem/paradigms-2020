@@ -3,6 +3,15 @@
 [Условия домашних заданий](http://www.kgeorgiy.info/courses/paradigms/homeworks.html)
 
 
+## Домашнее задание 3. Очередь на массиве
+
+Модификации
+ * *Базовая*
+    * Классы должны находиться в пакете `queue`
+    * [Исходный код тестов](java/queue/ArrayQueueTest.java)
+    * [Откомпилированные тесты](artifacts/queue/ArrayQueueTest.jar)
+
+
 ## Домашнее задание 2. Бинарный поиск
 
 Модификации
