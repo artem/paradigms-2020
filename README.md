@@ -19,11 +19,13 @@
     * Класс `BinarySearch` должен находиться в пакете `search`
     * [Исходный код тестов](java/search/BinarySearchTest.java)
     * [Откомпилированные тесты](artifacts/search/BinarySearchTest.jar)
- * *Missing*
-    * Класс `BinarySearch` должен находиться в пакете `search`
+ * *Простая*
+    * Если в массиве `a` отсутствует элемент, равный `x`, то требуется
+      вывести индекс вставки в формате, определенном в
+      [`Arrays.binarySearch`](http://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html#binarySearch-int:A-int-).
+    * Класс должен иметь имя `BinarySearchMissing`
     * [Исходный код тестов](java/search/BinarySearchMissingTest.java)
     * [Откомпилированные тесты](artifacts/search/BinarySearchMissingTest.jar)
-
 ## Домашнее задание 1. Обработка ошибок
 
 Модификации
