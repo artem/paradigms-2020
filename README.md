@@ -19,7 +19,10 @@
     * Класс `BinarySearch` должен находиться в пакете `search`
     * [Исходный код тестов](java/search/BinarySearchTest.java)
     * [Откомпилированные тесты](artifacts/search/BinarySearchTest.jar)
-
+ * *Missing*
+    * Класс `BinarySearch` должен находиться в пакете `search`
+    * [Исходный код тестов](java/search/BinarySearchMissingTest.java)
+    * [Откомпилированные тесты](artifacts/search/BinarySearchMissingTest.jar)
 
 ## Домашнее задание 1. Обработка ошибок
 
