@@ -69,7 +69,7 @@ public class BinarySearchMissing {
 
     /*
      * pre: a != null,
-     *      l < r,
+     *      l < r, l >= -1, r <= a.length
      *      a[l] <= x,
      *      a[r]  > x
      * post: R = i: a[i - 1] > x, a[i] <= x
