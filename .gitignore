@@ -1,0 +1,6 @@
+# Idea project files
+.idea/
+*.iml
+
+# Compilation output dir
+out/
