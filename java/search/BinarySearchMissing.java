@@ -1,6 +1,6 @@
 package search;
 
-public class BinarySearch {
+public class BinarySearchMissing {
     /*
      * pre: a != null
      *      for i 0..|a|: a[i] >= a[i + 1]
@@ -55,8 +55,16 @@ public class BinarySearch {
         }
         // l - r == 1
         // a[l] > x, a[r] <= x
-        return r;
-        // R = r
+        // r >= 0
+        if (r >= a.length || a[r] != x) {
+            // !(x in a)
+            return -1 - r;
+            // R = insertion index = (-r - 1)
+        } else {
+            // a[r] == x
+            return r;
+            // R = r
+        }
     }
 
     /*
@@ -70,8 +78,16 @@ public class BinarySearch {
         // a[l] > x, a[r] <= x
         if (r - l <= 1) {
             // r - l = 1 && a[l] > x, a[r] <= x
-            return r;
-            // R = r
+            // r >= 0
+            if (r >= a.length || a[r] != x) {
+                // !(x in a)
+                return -1 - r;
+                // R = insertion index = (-r - 1)
+            } else {
+                // a[r] == x
+                return r;
+                // R = r
+            }
         }
 
         // r - l > 1
