@@ -37,7 +37,7 @@
     * [Откомпилированные тесты](artifacts/search/BinarySearchSpanTest.jar)
  * *Shift*
     * На вход подается отсортированный массив, циклически сдвинутый на `k`
-      элементов. Требуется найти `k`.
+      элементов. Требуется найти `k`. Все числа в массиве различны.
     * Класс должен иметь имя `BinarySearchShift`
     * [Исходный код тестов](java/search/BinarySearchShiftTest.java)
     * [Откомпилированные тесты](artifacts/search/BinarySearchShiftTest.jar)
