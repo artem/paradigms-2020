@@ -19,14 +19,14 @@
     * Класс `BinarySearch` должен находиться в пакете `search`
     * [Исходный код тестов](java/search/BinarySearchTest.java)
     * [Откомпилированные тесты](artifacts/search/BinarySearchTest.jar)
- * *Простая*
+ * *Missing*
     * Если в массиве `a` отсутствует элемент, равный `x`, то требуется
       вывести индекс вставки в формате, определенном в
       [`Arrays.binarySearch`](http://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html#binarySearch-int:A-int-).
     * Класс должен иметь имя `BinarySearchMissing`
     * [Исходный код тестов](java/search/BinarySearchMissingTest.java)
     * [Откомпилированные тесты](artifacts/search/BinarySearchMissingTest.jar)
- * *Сложная*
+ * *Span*
     * Требуется вывести два числа: начало и длину диапазона элементов,
       равных `x`. Если таких элементов нет, то следует вывести
       пустой диапазон, у которого левая граница совпадает с местом
@@ -35,6 +35,12 @@
     * Класс должен иметь имя `BinarySearchSpan`
     * [Исходный код тестов](java/search/BinarySearchSpanTest.java)
     * [Откомпилированные тесты](artifacts/search/BinarySearchSpanTest.jar)
+ * *Shift*
+    * На вход подается отсортированный массив, циклически сдвинутый на `k`
+      элементов. Требуется найти `k`.
+    * Класс должен иметь имя `BinarySearchShift`
+    * [Исходный код тестов](java/search/BinarySearchShiftTest.java)
+    * [Откомпилированные тесты](artifacts/search/BinarySearchShiftTest.jar)
 
 ## Домашнее задание 1. Обработка ошибок
 
