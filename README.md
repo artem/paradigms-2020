@@ -3,6 +3,14 @@
 [Условия домашних заданий](http://www.kgeorgiy.info/courses/paradigms/homeworks.html)
 
 
+## Домашнее задание 4. Очередь на связном списке
+
+Модификации
+ * *Базовая*
+    * [Исходный код тестов](java/queue/QueueTest.java)
+    * [Откомпилированные тесты](artifacts/queue/QueueTest.jar)
+
+
 ## Домашнее задание 3. Очередь на массиве
 
 Модификации
