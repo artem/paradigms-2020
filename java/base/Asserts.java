@@ -12,7 +12,7 @@ public class Asserts {
     }
 
     public static void assertEquals(final String message, final Object expected, final Object actual) {
-        assertTrue(String.format("%s:%n     expected `%s`,%n       actual `%s`", message, expected, actual), Objects.equals(expected, actual));
+        assertTrue(String.format("%s:%n     expected `%s`,%n       actual `%s`", message, expected, actual), Objects.deepEquals(expected, actual));
     }
 
     public static void assertTrue(final String message, final boolean value) {

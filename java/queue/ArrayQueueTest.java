@@ -3,12 +3,12 @@ package queue;
 import base.Asserts;
 import base.TestCounter;
 
-import java.io.File;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.file.Paths;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Random;
@@ -17,6 +17,7 @@ import java.util.Random;
  * @author Georgiy Korneev (kgeorgiy@kgeorgiy.info)
  */
 public class ArrayQueueTest<T extends ArrayQueueTest.Queue> extends Asserts {
+    public static final int OPERATIONS = 100_000;
     private final QueueFactory<T> factory;
     private final TestCounter counter = new TestCounter();
 
@@ -55,15 +56,15 @@ public class ArrayQueueTest<T extends ArrayQueueTest.Queue> extends Asserts {
         testSingleton(create(className, mode));
         testClear(create(className, mode));
         for (int i = 0; i <= 10; i += step) {
-            testRandom(create(className, mode), 100_000, (double) i / 10);
+            testRandom(create(className, mode), (double) i / 10);
         }
     }
 
     protected T create(final String className, final Mode mode) {
         try {
             return factory.create(className, mode);
-        } catch (MalformedURLException | NoSuchMethodException | ClassNotFoundException e) {
-            throw new AssertionError("Cannot create Queue (" + className + "): " + e.getMessage());
+        } catch (final MalformedURLException | NoSuchMethodException | ClassNotFoundException e) {
+            throw new AssertionError("Cannot create Queue (" + className + "): " + e.getMessage(), e);
         }
     }
 
@@ -106,11 +107,11 @@ public class ArrayQueueTest<T extends ArrayQueueTest.Queue> extends Asserts {
         counter.passed();
     }
 
-    protected void testRandom(final T queue, final int operations, final double addFreq) {
+    protected void testRandom(final T queue, final double addFreq) {
         nextTest("testRandom, add frequency = " + addFreq);
         final Deque<Object> deque = new ArrayDeque<>();
         int ops = 0;
-        for (int i = 0; i < operations; i++) {
+        for (int i = 0; i < OPERATIONS; i++) {
             if (deque.isEmpty() || random.nextDouble() < addFreq) {
                 add(deque, queue, randomElement());
             } else {
@@ -120,6 +121,7 @@ public class ArrayQueueTest<T extends ArrayQueueTest.Queue> extends Asserts {
             if (ops++ >= deque.size() && random.nextDouble() < 0.25) {
                 ops -= deque.size();
                 linearTest(deque, queue);
+                checkAndSize(deque, queue);
             }
         }
         linearTest(deque, queue);
@@ -159,9 +161,11 @@ public class ArrayQueueTest<T extends ArrayQueueTest.Queue> extends Asserts {
     }
 
     protected void assertSize(final int size, final T queue) {
+        counter.nextTest();
         assertEquals("size()", size, queue.size());
         assert queue.size() == size : "Expected size() " + size + ", found " + queue.size();
         assert (size == 0) == queue.isEmpty() : "Expected isEmpty() " + (size == 0) + ", found " + queue.isEmpty();
+        counter.passed();
     }
 
     enum Mode {
@@ -180,7 +184,7 @@ public class ArrayQueueTest<T extends ArrayQueueTest.Queue> extends Asserts {
                 result[0] = instance.getClass();
                 System.arraycopy(args, 0, result, 1, args.length);
 
-                return checkStatic(true, new ZMethod<T>(instance, name, result) {
+                return checkStatic(true, new ZMethod<>(instance, name, result) {
                     @Override
                     protected T invoke(final Object... args) {
                         if (args.length == 1) {
@@ -266,10 +270,10 @@ public class ArrayQueueTest<T extends ArrayQueueTest.Queue> extends Asserts {
 
         private static Object createInstance(final String name, final Mode mode) throws MalformedURLException, ClassNotFoundException {
             final String className = "queue." + name + mode.suffix;
-            final URL url = new File(".").toURI().toURL();
+            final URL url = Paths.get(".").toUri().toURL();
             final Class<?> clazz = new URLClassLoader(new URL[]{url}).loadClass(className);
             try {
-                return clazz.newInstance();
+                return clazz.getConstructor().newInstance();
             } catch (final Exception e) {
                 throw new AssertionError("Cannot create instance of " + className, e);
             }
