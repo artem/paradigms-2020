@@ -10,6 +10,11 @@
     * Классы должны находиться в пакете `queue`
     * [Исходный код тестов](java/queue/ArrayQueueTest.java)
     * [Откомпилированные тесты](artifacts/queue/ArrayQueueTest.jar)
+ * *ToStr* (простая)
+    * Реализовать метод `toStr`, возвращающий сроковое представление
+      очереди в виде '`[`' _голова_ '`, `' ... '`, `' _хвост_ '`]`'
+    * [Исходный код тестов](java/queue/ArrayQueueToStrTest.java)
+    * [Откомпилированные тесты](artifacts/queue/ArrayQueueToStrTest.jar)
 
 
 ## Домашнее задание 2. Бинарный поиск
