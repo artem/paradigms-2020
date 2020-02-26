@@ -1,17 +1,18 @@
 package queue;
 
-import java.util.Arrays;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 /**
  * @author Georgiy Korneev (kgeorgiy@kgeorgiy.info)
  */
 public class QueueTest<T extends ArrayQueueTest.Queue> extends ArrayQueueTest<T> {
-    public QueueTest(final QueueFactory<T> factory) {
-        super(factory);
+    public QueueTest(final Class<T> type, final Function<Stream<Object>, T> reference) {
+        super(type, reference);
     }
 
     public static void main(final String[] args) {
-        new QueueTest<>(Queue::new).test();
+        new QueueTest<>(Queue.class, ReferenceQueue::new).test();
     }
 
     public void test() {
@@ -19,19 +20,15 @@ public class QueueTest<T extends ArrayQueueTest.Queue> extends ArrayQueueTest<T>
         test("ArrayQueue", 2, Mode.CLASS);
     }
 
+    private static boolean implementsQueue(final Class<?> type) {
+        return type != Object.class
+                && (Stream.of(type.getInterfaces()).map(Class::getName).anyMatch("queue.Queue"::equals)
+                    || implementsQueue(type.getSuperclass()));
+    }
+
     @Override
-    protected T create(final String className, final Mode mode) {
-        return check(super.create(className, mode));
-    }
-
-    protected static <T extends Queue> T check(final T queue) {
-        final Class<?> type = queue.instance.getClass();
+    protected void checkImplementation(final Class<?> type) {
         assertTrue(type + " should extend AbstractQueue", "queue.AbstractQueue".equals(type.getSuperclass().getName()));
-        assertTrue(type + " should implement interface Queue", implementsQueue(type) || implementsQueue(type.getSuperclass()));
-        return queue;
-    }
-
-    private static boolean implementsQueue(final Class<?> clazz) {
-        return Arrays.stream(clazz.getInterfaces()).map(Class::getName).anyMatch("queue.Queue"::equals);
+        assertTrue(type + " should implement interface Queue", implementsQueue(type));
     }
 }
