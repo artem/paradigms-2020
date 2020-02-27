@@ -1,5 +1,9 @@
 package queue;
 
+/*
+ * INV: n >= 0
+ *      for i 0..n-1 : queue[i] != null
+ */
 public class ArrayQueue {
     private static int INIT_CAPACITY = 4;
     private Object[] queue = new Object[INIT_CAPACITY];
@@ -78,5 +82,21 @@ public class ArrayQueue {
         start = 0;
         end = 0;
         size = 0;
+    }
+
+    /*
+     * Post: queue - immutable
+     *       R = [q0, q1, .. qn]
+     */
+    public String toStr() {
+        StringBuilder sb = new StringBuilder("[");
+        if (size > 0) {
+            sb.append(queue[start]);
+            for (int i = 1; i < size; i++) {
+                sb.append(", ");
+                sb.append(queue[(start + i) % queue.length]);
+            }
+        }
+        return sb.append("]").toString();
     }
 }
