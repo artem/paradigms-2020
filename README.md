@@ -23,6 +23,13 @@
     * Дублирования кода быть не должно
     * [Исходный код тестов](java/queue/ArrayQueueToArrayTest.java)
     * [Откомпилированные тесты](artifacts/queue/ArrayQueueToArrayTest.jar)
+ * *Deque* (сложная)
+    * Реализовать методы
+        * `push` – добавить элемент в начало очереди
+        * `peek` – вернуть последний элемент в очереди
+        * `remove` – вернуть и удалить последний элемент из очереди
+    * [Исходный код тестов](java/queue/ArrayQueueDequeTest.java)
+    * [Откомпилированные тесты](artifacts/queue/ArrayQueueDequeTest.jar)
 
 
 ## Домашнее задание 2. Бинарный поиск
