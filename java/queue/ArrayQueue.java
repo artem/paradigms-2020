@@ -1,11 +1,17 @@
 package queue;
 
 public class ArrayQueue {
-    private Object[] queue = new Object[4];
+    private static int INIT_CAPACITY = 4;
+    private Object[] queue = new Object[INIT_CAPACITY];
     private int size = 0;
     private int start = 0;
     private int end = 0; // start + size по модулю
 
+    /*
+     * Pre: e != null
+     * Post: queue' = {queue[0] .. queue[n - 1], e}
+     *       |queue'| = |queue| + 1
+     */
     public void enqueue(Object e) {
         if (size == queue.length) {
             Object[] old = queue;
@@ -25,17 +31,20 @@ public class ArrayQueue {
         size++;
     }
 
+    /*
+     * Pre: |queue| >= 1
+     * Post: queue - immutable
+     */
     public Object element() {
         return queue[start];
     }
 
-    public void clear() {
-        queue = new Object[4];
-        start = 0;
-        end = 0;
-        size = 0;
-    }
-
+    /*
+     * Pre: |queue| >= 1
+     * Post: R = queue[0]
+     *       queue' = {queue[1] .. queue[n - 1]}
+     *       |queue'| = |queue| - 1
+     */
     public Object dequeue() {
         Object ret = queue[start];
         queue[start] = null;
@@ -44,11 +53,30 @@ public class ArrayQueue {
         return ret;
     }
 
+    /*
+     * Post: R = |queue|
+     *           queue - immutable
+     */
+    public int size() {
+        return size;
+    }
+
+    /*
+     * Post: R = |queue| == 0
+     *           queue - immutable
+     */
     public boolean isEmpty() {
         return size == 0;
     }
 
-    public int size() {
-        return size;
+    /*
+     * Post: |queue| = 0
+     *       queue - immutable
+     */
+    public void clear() {
+        queue = new Object[INIT_CAPACITY];
+        start = 0;
+        end = 0;
+        size = 0;
     }
 }

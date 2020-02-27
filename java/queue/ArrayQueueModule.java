@@ -1,11 +1,17 @@
 package queue;
 
 public class ArrayQueueModule {
-    private static Object[] queue = new Object[4];
+    private static int INIT_CAPACITY = 4;
+    private static Object[] queue = new Object[INIT_CAPACITY];
     private static int size = 0;
     private static int start = 0;
     private static int end = 0; // start + size по модулю
 
+    /*
+     * Pre: e != null
+     * Post: queue' = {queue[0] .. queue[n - 1], e}
+     *       |queue'| = |queue| + 1
+     */
     public static void enqueue(Object e) {
         if (size == queue.length) {
             Object[] old = queue;
@@ -25,17 +31,20 @@ public class ArrayQueueModule {
         size++;
     }
 
+    /*
+     * Pre: |queue| >= 1
+     * Post: queue - immutable
+     */
     public static Object element() {
         return queue[start];
     }
 
-    public static void clear() {
-        queue = new Object[4];
-        start = 0;
-        end = 0;
-        size = 0;
-    }
-
+    /*
+     * Pre: |queue| >= 1
+     * Post: R = queue[0]
+     *       queue' = {queue[1] .. queue[n - 1]}
+     *       |queue'| = |queue| - 1
+     */
     public static Object dequeue() {
         Object ret = queue[start];
         queue[start] = null;
@@ -44,11 +53,30 @@ public class ArrayQueueModule {
         return ret;
     }
 
+    /*
+     * Post: R = |queue|
+     *           queue - immutable
+     */
+    public static int size() {
+        return size;
+    }
+
+    /*
+     * Post: R = |queue| == 0
+     *           queue - immutable
+     */
     public static boolean isEmpty() {
         return size == 0;
     }
 
-    public static int size() {
-        return size;
+    /*
+     * Post: |queue| = 0
+     *       queue - immutable
+     */
+    public static void clear() {
+        queue = new Object[INIT_CAPACITY];
+        start = 0;
+        end = 0;
+        size = 0;
     }
 }

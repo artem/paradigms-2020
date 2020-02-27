@@ -1,11 +1,17 @@
 package queue;
 
 public class ArrayQueueADT {
-    private Object[] queue = new Object[4];
+    private static int INIT_CAPACITY = 4;
+    private Object[] queue = new Object[INIT_CAPACITY];
     private int size = 0;
     private int start = 0;
     private int end = 0; // start + size по модулю
 
+    /*
+     * Pre: e != null
+     * Post: queue' = {queue[0] .. queue[n - 1], e}
+     *       |queue'| = |queue| + 1
+     */
     public static void enqueue(ArrayQueueADT q, Object e) {
         if (q.size == q.queue.length) {
             Object[] old = q.queue;
@@ -25,17 +31,20 @@ public class ArrayQueueADT {
         q.size++;
     }
 
+    /*
+     * Pre: |queue| >= 1
+     * Post: queue - immutable
+     */
     public static Object element(ArrayQueueADT q) {
         return q.queue[q.start];
     }
 
-    public static void clear(ArrayQueueADT q) {
-        q.queue = new Object[4];
-        q.start = 0;
-        q.end = 0;
-        q.size = 0;
-    }
-
+    /*
+     * Pre: |queue| >= 1
+     * Post: R = queue[0]
+     *       queue' = {queue[1] .. queue[n - 1]}
+     *       |queue'| = |queue| - 1
+     */
     public static Object dequeue(ArrayQueueADT q) {
         Object ret = q.queue[q.start];
         q.queue[q.start] = null;
@@ -44,11 +53,30 @@ public class ArrayQueueADT {
         return ret;
     }
 
+    /*
+     * Post: R = |queue|
+     *           queue - immutable
+     */
+    public static int size(ArrayQueueADT q) {
+        return q.size;
+    }
+
+    /*
+     * Post: R = |queue| == 0
+     *           queue - immutable
+     */
     public static boolean isEmpty(ArrayQueueADT q) {
         return q.size == 0;
     }
 
-    public static int size(ArrayQueueADT q) {
-        return q.size;
+    /*
+     * Post: |queue| = 0
+     *       queue - immutable
+     */
+    public static void clear(ArrayQueueADT q) {
+        q.queue = new Object[INIT_CAPACITY];
+        q.start = 0;
+        q.end = 0;
+        q.size = 0;
     }
 }
