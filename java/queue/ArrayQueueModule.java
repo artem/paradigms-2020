@@ -9,7 +9,6 @@ public class ArrayQueueModule {
     private static Object[] queue = new Object[INIT_CAPACITY];
     private static int size = 0;
     private static int start = 0;
-    private static int end = 0; // start + size по модулю
 
     /*
      * Pre: e != null
@@ -19,7 +18,9 @@ public class ArrayQueueModule {
     public static void enqueue(Object e) {
         if (size == queue.length) {
             Object[] old = queue;
+            int end = (start + size) % old.length;
             queue = new Object[queue.length * 2];
+
             if (end <= start) {
                 System.arraycopy(old, start, queue, 0, old.length - start);
                 System.arraycopy(old, 0, queue, old.length - start, end);
@@ -30,8 +31,7 @@ public class ArrayQueueModule {
             end = size;
         }
 
-        queue[end] = e;
-        end = (end + 1) % queue.length;
+        queue[(start + size) % queue.length] = e;
         size++;
     }
 
@@ -80,7 +80,6 @@ public class ArrayQueueModule {
     public static void clear() {
         queue = new Object[INIT_CAPACITY];
         start = 0;
-        end = 0;
         size = 0;
     }
 

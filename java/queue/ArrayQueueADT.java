@@ -9,7 +9,6 @@ public class ArrayQueueADT {
     private Object[] queue = new Object[INIT_CAPACITY];
     private int size = 0;
     private int start = 0;
-    private int end = 0; // start + size по модулю
 
     /*
      * Pre: e != null
@@ -19,19 +18,19 @@ public class ArrayQueueADT {
     public static void enqueue(ArrayQueueADT q, Object e) {
         if (q.size == q.queue.length) {
             Object[] old = q.queue;
+            int end = (q.start + q.size) % old.length;
             q.queue = new Object[q.queue.length * 2];
-            if (q.end <= q.start) {
+
+            if (end <= q.start) {
                 System.arraycopy(old, q.start, q.queue, 0, old.length - q.start);
-                System.arraycopy(old, 0, q.queue, old.length - q.start, q.end);
+                System.arraycopy(old, 0, q.queue, old.length - q.start, end);
             } else {
-                System.arraycopy(old, q.start, q.queue, 0, q.end - q.start);
+                System.arraycopy(old, q.start, q.queue, 0, end - q.start);
             }
             q.start = 0;
-            q.end = q.size;
         }
 
-        q.queue[q.end] = e;
-        q.end = (q.end + 1) % q.queue.length;
+        q.queue[(q.start + q.size) % q.queue.length] = e;
         q.size++;
     }
 
@@ -80,7 +79,6 @@ public class ArrayQueueADT {
     public static void clear(ArrayQueueADT q) {
         q.queue = new Object[INIT_CAPACITY];
         q.start = 0;
-        q.end = 0;
         q.size = 0;
     }
 
