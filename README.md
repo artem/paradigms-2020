@@ -38,6 +38,13 @@
         * `remove` – вернуть и удалить последний элемент из очереди
     * [Исходный код тестов](java/queue/ArrayQueueDequeTest.java)
     * [Откомпилированные тесты](artifacts/queue/ArrayQueueDequeTest.jar)
+ * *IndexedDeque*
+    * Реализовать модификацию *Deque*
+    * Реализовать методы
+        * `get` – получить элемент по индексу, отсчитываемому с головы
+        * `set` – заменить элемент по индексу, отсчитываемому с головы
+    * [Исходный код тестов](java/queue/ArrayQueueIndexedDequeTest.java)
+    * [Откомпилированные тесты](artifacts/queue/ArrayQueueIndexedDequeTest.jar)
 
 
 ## Домашнее задание 2. Бинарный поиск
