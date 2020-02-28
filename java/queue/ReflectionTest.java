@@ -35,8 +35,14 @@ public class ReflectionTest extends Asserts {
             if (DEBUG) {
                 System.err.println("\t\t" + call);
             }
-            final Object expected = method.invoke(reference, args);
-            final Object actual = method.invoke(tested, args);
+            final Object expected;
+            final Object actual;
+            try {
+                expected = method.invoke(reference, args);
+                actual = method.invoke(tested, args);
+            } catch (final InvocationTargetException e) {
+                throw e.getCause();
+            }
             checkResult(call, expected, actual);
             return actual;
         });
@@ -160,7 +166,12 @@ public class ReflectionTest extends Asserts {
                 if (method.getName().equals("toString")) {
                     return instance.toString();
                 }
-                final Object result = methods.get(method).invoke(instance, args);
+                final Object result;
+                try {
+                    result = methods.get(method).invoke(instance, args);
+                } catch (InvocationTargetException e) {
+                    throw e.getCause();
+                }
                 if (type.isAssignableFrom(method.getReturnType())) {
                     return wrap(result);
                 }
