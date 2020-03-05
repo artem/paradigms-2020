@@ -2,5 +2,6 @@
 .idea/
 *.iml
 
-# Compilation output dir
+# Compilation output
 out/
+*.class
