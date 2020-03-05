@@ -9,14 +9,8 @@ public class ArrayQueue extends AbstractQueue implements Queue {
     private Object[] queue = new Object[INIT_CAPACITY];
     private int start = 0;
 
-    /*
-     * Pre: e != null
-     * Post: queue' = {queue[0] .. queue[n - 1], e}
-     *       |queue'| = |queue| + 1
-     */
-    @Override
-    public void enqueue(Object e) {
-        if (size == queue.length) {
+    private void ensureCapacity(int size) {
+        if (queue.length < size) {
             Object[] old = queue;
             int end = (start + size) % old.length;
             queue = new Object[queue.length * 2];
@@ -25,6 +19,16 @@ public class ArrayQueue extends AbstractQueue implements Queue {
             System.arraycopy(old, 0, queue, old.length - start, end);
             start = 0;
         }
+    }
+
+    /*
+     * Pre: e != null
+     * Post: queue' = {queue[0] .. queue[n - 1], e}
+     *       |queue'| = |queue| + 1
+     */
+    @Override
+    public void enqueue(Object e) {
+        ensureCapacity(size + 1);
 
         queue[(start + size) % queue.length] = e;
         size++;

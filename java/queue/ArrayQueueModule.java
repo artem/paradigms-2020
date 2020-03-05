@@ -10,13 +10,8 @@ public class ArrayQueueModule {
     private static int size = 0;
     private static int start = 0;
 
-    /*
-     * Pre: e != null
-     * Post: queue' = {queue[0] .. queue[n - 1], e}
-     *       |queue'| = |queue| + 1
-     */
-    public static void enqueue(Object e) {
-        if (size == queue.length) {
+    private static void ensureCapacity(int size) {
+        if (queue.length < size) {
             Object[] old = queue;
             int end = (start + size) % old.length;
             queue = new Object[queue.length * 2];
@@ -24,8 +19,16 @@ public class ArrayQueueModule {
             System.arraycopy(old, start, queue, 0, old.length - start);
             System.arraycopy(old, 0, queue, old.length - start, end);
             start = 0;
-            end = size;
         }
+    }
+
+    /*
+     * Pre: e != null
+     * Post: queue' = {queue[0] .. queue[n - 1], e}
+     *       |queue'| = |queue| + 1
+     */
+    public static void enqueue(Object e) {
+        ensureCapacity(size + 1);
 
         queue[(start + size) % queue.length] = e;
         size++;

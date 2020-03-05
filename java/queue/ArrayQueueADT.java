@@ -10,13 +10,8 @@ public class ArrayQueueADT {
     private int size = 0;
     private int start = 0;
 
-    /*
-     * Pre: e != null
-     * Post: queue' = {queue[0] .. queue[n - 1], e}
-     *       |queue'| = |queue| + 1
-     */
-    public static void enqueue(ArrayQueueADT q, Object e) {
-        if (q.size == q.queue.length) {
+    private static void ensureCapacity(ArrayQueueADT q, int size) {
+        if (q.queue.length < size) {
             Object[] old = q.queue;
             int end = (q.start + q.size) % old.length;
             q.queue = new Object[q.queue.length * 2];
@@ -25,6 +20,15 @@ public class ArrayQueueADT {
             System.arraycopy(old, 0, q.queue, old.length - q.start, end);
             q.start = 0;
         }
+    }
+
+    /*
+     * Pre: e != null
+     * Post: queue' = {queue[0] .. queue[n - 1], e}
+     *       |queue'| = |queue| + 1
+     */
+    public static void enqueue(ArrayQueueADT q, Object e) {
+        ensureCapacity(q, q.size + 1);
 
         q.queue[(q.start + q.size) % q.queue.length] = e;
         q.size++;
