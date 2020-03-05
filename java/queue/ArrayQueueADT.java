@@ -5,7 +5,7 @@ package queue;
  *      for i 0..n-1 : queue[i] != null
  */
 public class ArrayQueueADT {
-    private static int INIT_CAPACITY = 4;
+    private static int INIT_CAPACITY = 32;
     private Object[] queue = new Object[INIT_CAPACITY];
     private int size = 0;
     private int start = 0;
@@ -21,12 +21,8 @@ public class ArrayQueueADT {
             int end = (q.start + q.size) % old.length;
             q.queue = new Object[q.queue.length * 2];
 
-            if (end <= q.start) {
-                System.arraycopy(old, q.start, q.queue, 0, old.length - q.start);
-                System.arraycopy(old, 0, q.queue, old.length - q.start, end);
-            } else {
-                System.arraycopy(old, q.start, q.queue, 0, end - q.start);
-            }
+            System.arraycopy(old, q.start, q.queue, 0, old.length - q.start);
+            System.arraycopy(old, 0, q.queue, old.length - q.start, end);
             q.start = 0;
         }
 

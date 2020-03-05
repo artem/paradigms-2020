@@ -21,12 +21,8 @@ public class ArrayQueue extends AbstractQueue implements Queue {
             int end = (start + size) % old.length;
             queue = new Object[queue.length * 2];
 
-            if (end <= start) {
-                System.arraycopy(old, start, queue, 0, old.length - start);
-                System.arraycopy(old, 0, queue, old.length - start, end);
-            } else {
-                System.arraycopy(old, start, queue, 0, end - start);
-            }
+            System.arraycopy(old, start, queue, 0, old.length - start);
+            System.arraycopy(old, 0, queue, old.length - start, end);
             start = 0;
         }
 

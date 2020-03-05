@@ -5,7 +5,7 @@ package queue;
  *      for i 0..n-1 : queue[i] != null
  */
 public class ArrayQueueModule {
-    private static int INIT_CAPACITY = 4;
+    private static int INIT_CAPACITY = 32;
     private static Object[] queue = new Object[INIT_CAPACITY];
     private static int size = 0;
     private static int start = 0;
@@ -21,12 +21,8 @@ public class ArrayQueueModule {
             int end = (start + size) % old.length;
             queue = new Object[queue.length * 2];
 
-            if (end <= start) {
-                System.arraycopy(old, start, queue, 0, old.length - start);
-                System.arraycopy(old, 0, queue, old.length - start, end);
-            } else {
-                System.arraycopy(old, start, queue, 0, end - start);
-            }
+            System.arraycopy(old, start, queue, 0, old.length - start);
+            System.arraycopy(old, 0, queue, old.length - start, end);
             start = 0;
             end = size;
         }
