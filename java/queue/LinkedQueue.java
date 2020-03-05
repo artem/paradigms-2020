@@ -80,6 +80,10 @@ public class LinkedQueue extends AbstractQueue implements Queue {
         return sb.append("]").toString();
     }
 
+    /*
+     * Post: queue- immutable
+     *       R = a: a = {q0, q1, .. qn}
+     */
     @Override
     public Object[] toArray() {
         Object[] ret = new Object[size];

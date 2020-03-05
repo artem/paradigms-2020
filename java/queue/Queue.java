@@ -45,5 +45,9 @@ public interface Queue {
      */
     String toStr();
 
+    /*
+     * Post: queue - immutable
+     *       R = a: a = {q0, q1, .. qn}
+     */
     Object[] toArray();
 }

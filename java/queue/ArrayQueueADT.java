@@ -24,6 +24,7 @@ public class ArrayQueueADT {
 
     /*
      * Pre: e != null
+     *      q != null
      * Post: queue' = {queue[0] .. queue[n - 1], e}
      *       |queue'| = |queue| + 1
      */
@@ -36,6 +37,7 @@ public class ArrayQueueADT {
 
     /*
      * Pre: |queue| >= 1
+     *      q != null
      * Post: queue - immutable
      */
     public static Object element(ArrayQueueADT q) {
@@ -44,6 +46,7 @@ public class ArrayQueueADT {
 
     /*
      * Pre: |queue| >= 1
+     *      q != null
      * Post: R = queue[0]
      *       queue' = {queue[1] .. queue[n - 1]}
      *       |queue'| = |queue| - 1
@@ -57,6 +60,7 @@ public class ArrayQueueADT {
     }
 
     /*
+     * Pre: q != null
      * Post: R = |queue|
      *           queue - immutable
      */
@@ -65,6 +69,7 @@ public class ArrayQueueADT {
     }
 
     /*
+     * Pre: q != null
      * Post: R = |queue| == 0
      *           queue - immutable
      */
@@ -73,6 +78,7 @@ public class ArrayQueueADT {
     }
 
     /*
+     * Pre: q != null
      * Post: |queue| = 0
      *       queue - immutable
      */
@@ -83,6 +89,7 @@ public class ArrayQueueADT {
     }
 
     /*
+     * Pre: q != null
      * Post: queue - immutable
      *       R = "[q0, q1, .. qn]"
      */
