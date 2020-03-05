@@ -1,15 +1,14 @@
 package queue;
 
-import java.net.MalformedURLException;
-import java.util.Arrays;
-import java.util.Deque;
+import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * @author Georgiy Korneev (kgeorgiy@kgeorgiy.info)
  */
 public class ArrayQueueToArrayTest extends ArrayQueueTest<ArrayQueueToArrayTest.ToArrayQueue> {
     public ArrayQueueToArrayTest() {
-        super(ToArrayQueue::new);
+        super(ToArrayQueue.class, ReferenceToArrayQueue::new);
     }
 
     public static void main(final String[] args) {
@@ -17,18 +16,23 @@ public class ArrayQueueToArrayTest extends ArrayQueueTest<ArrayQueueToArrayTest.
     }
 
     @Override
-    protected void linearTest(final Deque<Object> expected, final ToArrayQueue actual) {
-        assertEquals("toArray()", Arrays.asList(expected.toArray()), Arrays.asList(actual.toArray()));
+    protected List<ToArrayQueue> linearTest(final ToArrayQueue queue) {
+        queue.toArray();
+        return List.of();
     }
 
-    static class ToArrayQueue extends ArrayQueueTest.Queue {
-        private final ZMethod<Object[]> toArray;
+    protected interface ToArrayQueue extends Queue {
+        Object[] toArray();
+    }
 
-        public ToArrayQueue(final String className, final Mode mode) throws MalformedURLException, NoSuchMethodException, ClassNotFoundException {
-            super(className, mode);
-            toArray = findMethod("toArray");
+    protected static class ReferenceToArrayQueue extends ReferenceQueue implements ToArrayQueue {
+        public ReferenceToArrayQueue(final Stream<Object> elements) {
+            super(elements);
         }
 
-        public Object[] toArray() { return toArray.invoke(); }
+        @Override
+        public Object[] toArray() {
+            return deque.toArray();
+        }
     }
 }

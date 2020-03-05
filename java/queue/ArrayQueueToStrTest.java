@@ -1,14 +1,14 @@
 package queue;
 
-import java.net.MalformedURLException;
-import java.util.Deque;
+import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * @author Georgiy Korneev (kgeorgiy@kgeorgiy.info)
  */
 public class ArrayQueueToStrTest extends ArrayQueueTest<ArrayQueueToStrTest.ToStrQueue> {
     public ArrayQueueToStrTest() {
-        super(ToStrQueue::new);
+        super(ToStrQueue.class, ReferenceToStrQueue::new);
     }
 
     public static void main(final String[] args) {
@@ -16,21 +16,23 @@ public class ArrayQueueToStrTest extends ArrayQueueTest<ArrayQueueToStrTest.ToSt
     }
 
     @Override
-    protected void linearTest(final Deque<Object> expected, final ToStrQueue actual) {
-        assertEquals("toStr()", expected.toString(), actual.toString());
+    protected List<ToStrQueue> linearTest(final ToStrQueue queue) {
+        queue.toStr();
+        return List.of();
     }
 
-    static class ToStrQueue extends ArrayQueueTest.Queue {
-        private final ZMethod<String> toStr;
+    protected interface ToStrQueue extends Queue {
+        String toStr();
+    }
 
-        public ToStrQueue(final String className, final Mode mode) throws MalformedURLException, NoSuchMethodException, ClassNotFoundException {
-            super(className, mode);
-            toStr = findMethod("toStr");
+    protected static class ReferenceToStrQueue extends ReferenceQueue implements ToStrQueue {
+        public ReferenceToStrQueue(final Stream<Object> elements) {
+            super(elements);
         }
 
         @Override
-        public String toString() {
-            return toStr.invoke();
+        public String toStr() {
+            return deque.toString();
         }
     }
 }
