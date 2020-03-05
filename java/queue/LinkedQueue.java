@@ -8,6 +8,11 @@ public class LinkedQueue extends AbstractQueue implements Queue {
     private Node head;
     private Node tail;
 
+    /*
+     * Pre: e != null
+     * Post: queue' = {queue[0] .. queue[n - 1], e}
+     *       |queue'| = |queue| + 1
+     */
     @Override
     public void enqueue(Object element) {
         if (tail == null) {
@@ -20,11 +25,21 @@ public class LinkedQueue extends AbstractQueue implements Queue {
         size++;
     }
 
+    /*
+     * Pre: |queue| >= 1
+     * Post: queue - immutable
+     */
     @Override
     public Object element() {
         return head.val;
     }
 
+    /*
+     * Pre: |queue| >= 1
+     * Post: R = queue[0]
+     *       queue' = {queue[1] .. queue[n - 1]}
+     *       |queue'| = |queue| - 1
+     */
     @Override
     public Object dequeue() {
         Object ret = element();
@@ -36,6 +51,9 @@ public class LinkedQueue extends AbstractQueue implements Queue {
         return ret;
     }
 
+    /*
+     * Post: |queue| = 0
+     */
     @Override
     public void clear() {
         head = null;
@@ -43,15 +61,10 @@ public class LinkedQueue extends AbstractQueue implements Queue {
         size = 0;
     }
 
-    private class Node {
-        private final Object val;
-        private Node next;
-
-        private Node(Object val) {
-            this.val = val;
-        }
-    }
-
+    /*
+     * Post: queue - immutable
+     *       R = [q0, q1, .. qn]
+     */
     @Override
     public String toStr() {
         StringBuilder sb = new StringBuilder("[");
@@ -65,5 +78,14 @@ public class LinkedQueue extends AbstractQueue implements Queue {
             }
         }
         return sb.append("]").toString();
+    }
+
+    private class Node {
+        private final Object val;
+        private Node next;
+
+        private Node(Object val) {
+            this.val = val;
+        }
     }
 }

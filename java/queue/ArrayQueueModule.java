@@ -85,7 +85,7 @@ public class ArrayQueueModule {
 
     /*
      * Post: queue - immutable
-     *       R = [q0, q1, .. qn]
+     *       R = "[q0, q1, .. qn]"
      */
     public static String toStr() {
         StringBuilder sb = new StringBuilder("[");

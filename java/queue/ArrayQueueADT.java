@@ -84,7 +84,7 @@ public class ArrayQueueADT {
 
     /*
      * Post: queue - immutable
-     *       R = [q0, q1, .. qn]
+     *       R = "[q0, q1, .. qn]"
      */
     public static String toStr(ArrayQueueADT q) {
         StringBuilder sb = new StringBuilder("[");

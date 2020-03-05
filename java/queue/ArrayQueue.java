@@ -60,7 +60,6 @@ public class ArrayQueue extends AbstractQueue implements Queue {
 
     /*
      * Post: |queue| = 0
-     *       queue - immutable
      */
     @Override
     public void clear() {
@@ -71,7 +70,7 @@ public class ArrayQueue extends AbstractQueue implements Queue {
 
     /*
      * Post: queue - immutable
-     *       R = [q0, q1, .. qn]
+     *       R = "[q0, q1, .. qn]"
      */
     @Override
     public String toStr() {
