@@ -4,14 +4,18 @@ package queue;
  * INV: n >= 0
  *      for i 0..n-1 : queue[i] != null
  */
-public class LinkedQueue extends AbstractQueue implements ArrayQueueTest.Queue {
+public class LinkedQueue extends AbstractQueue implements Queue {
     private Node head;
     private Node tail;
+
     @Override
     public void enqueue(Object element) {
-        head = new Node(element, head);
         if (tail == null) {
+            head = new Node(element);
             tail = head;
+        } else {
+            tail.next = new Node(element);
+            tail = tail.next;
         }
         size++;
     }
@@ -25,6 +29,9 @@ public class LinkedQueue extends AbstractQueue implements ArrayQueueTest.Queue {
     public Object dequeue() {
         Object ret = element();
         head = head.next;
+        if (head == null) {
+            tail = null;
+        }
         size--;
         return ret;
     }
@@ -38,11 +45,25 @@ public class LinkedQueue extends AbstractQueue implements ArrayQueueTest.Queue {
 
     private class Node {
         private final Object val;
-        private final Node next;
+        private Node next;
 
-        private Node(Object val, Node next) {
+        private Node(Object val) {
             this.val = val;
-            this.next = next;
         }
+    }
+
+    @Override
+    public String toStr() {
+        StringBuilder sb = new StringBuilder("[");
+        if (size > 0) {
+            Node cur = head;
+            sb.append(cur.val);
+            for (int i = 1; i < size; i++) {
+                sb.append(", ");
+                cur = cur.next;
+                sb.append(cur.val);
+            }
+        }
+        return sb.append("]").toString();
     }
 }

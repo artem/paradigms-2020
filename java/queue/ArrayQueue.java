@@ -4,8 +4,8 @@ package queue;
  * INV: n >= 0
  *      for i 0..n-1 : queue[i] != null
  */
-public class ArrayQueue extends AbstractQueue implements ArrayQueueTest.Queue {
-    private static int INIT_CAPACITY = 4;
+public class ArrayQueue extends AbstractQueue implements Queue {
+    private static int INIT_CAPACITY = 32;
     private Object[] queue = new Object[INIT_CAPACITY];
     private int start = 0;
 
@@ -73,6 +73,7 @@ public class ArrayQueue extends AbstractQueue implements ArrayQueueTest.Queue {
      * Post: queue - immutable
      *       R = [q0, q1, .. qn]
      */
+    @Override
     public String toStr() {
         StringBuilder sb = new StringBuilder("[");
         if (size > 0) {
