@@ -4,10 +4,9 @@ package queue;
  * INV: n >= 0
  *      for i 0..n-1 : queue[i] != null
  */
-public class ArrayQueue {
+public class ArrayQueue extends AbstractQueue implements ArrayQueueTest.Queue {
     private static int INIT_CAPACITY = 4;
     private Object[] queue = new Object[INIT_CAPACITY];
-    private int size = 0;
     private int start = 0;
 
     /*
@@ -15,6 +14,7 @@ public class ArrayQueue {
      * Post: queue' = {queue[0] .. queue[n - 1], e}
      *       |queue'| = |queue| + 1
      */
+    @Override
     public void enqueue(Object e) {
         if (size == queue.length) {
             Object[] old = queue;
@@ -38,6 +38,7 @@ public class ArrayQueue {
      * Pre: |queue| >= 1
      * Post: queue - immutable
      */
+    @Override
     public Object element() {
         return queue[start];
     }
@@ -48,6 +49,7 @@ public class ArrayQueue {
      *       queue' = {queue[1] .. queue[n - 1]}
      *       |queue'| = |queue| - 1
      */
+    @Override
     public Object dequeue() {
         Object ret = queue[start];
         queue[start] = null;
@@ -57,25 +59,10 @@ public class ArrayQueue {
     }
 
     /*
-     * Post: R = |queue|
-     *           queue - immutable
-     */
-    public int size() {
-        return size;
-    }
-
-    /*
-     * Post: R = |queue| == 0
-     *           queue - immutable
-     */
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-    /*
      * Post: |queue| = 0
      *       queue - immutable
      */
+    @Override
     public void clear() {
         queue = new Object[INIT_CAPACITY];
         start = 0;
