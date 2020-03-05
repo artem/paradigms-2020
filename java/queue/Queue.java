@@ -44,4 +44,6 @@ public interface Queue {
      *       R = "[q0, q1, .. qn]"
      */
     String toStr();
+
+    Object[] toArray();
 }

@@ -84,4 +84,19 @@ public class ArrayQueue extends AbstractQueue implements Queue {
         }
         return sb.append("]").toString();
     }
+
+    @Override
+    public Object[] toArray() {
+        Object[] ret = new Object[size];
+        if (size > 0) {
+            int end = (start + size) % queue.length;
+            if (end <= start) {
+                System.arraycopy(queue, start, ret, 0, queue.length - start);
+                System.arraycopy(queue, 0, ret, queue.length - start, end);
+            } else {
+                System.arraycopy(queue, start, ret, 0, end - start);
+            }
+        }
+        return ret;
+    }
 }

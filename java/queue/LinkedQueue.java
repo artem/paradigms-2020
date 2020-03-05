@@ -80,6 +80,17 @@ public class LinkedQueue extends AbstractQueue implements Queue {
         return sb.append("]").toString();
     }
 
+    @Override
+    public Object[] toArray() {
+        Object[] ret = new Object[size];
+        Node cur = head;
+        for (int i = 0; i < size; i++) {
+            ret[i] = cur.val;
+            cur = cur.next;
+        }
+        return ret;
+    }
+
     private class Node {
         private final Object val;
         private Node next;
