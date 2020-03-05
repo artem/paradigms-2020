@@ -39,6 +39,18 @@
     * Дублирования кода быть не должно
     * [Исходный код тестов](java/queue/QueueToArrayTest.java)
     * [Откомпилированные тесты](artifacts/queue/QueueToArrayTest.jar)
+ * *Functions* (сложная)
+    * Добавить в интерфейс очереди и реализовать методы
+        * `filter(predicate)` – создать очередь, содержащую элементы, удовлетворяющие
+            [предикату](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html)
+        * `map(function)` – создать очередь, содержащую результаты применения
+            [функции](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Function.html)
+    * Исходная очередь должна остаться неизменной
+    * Тип возвращаемой очереди должен соответствовать типу исходной очереди
+    * Взаимный порядок элементов должен сохраняться
+    * Дублирования кода быть не должно
+    * [Исходный код тестов](java/queue/QueueFunctionsTest.java)
+    * [Откомпилированные тесты](artifacts/queue/QueueFunctionsTest.jar)
 
 ## Домашнее задание 3. Очередь на массиве
 
