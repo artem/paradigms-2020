@@ -55,7 +55,7 @@
     * Добавить в интерфейс очереди и реализовать методы
         * `removeIf(predicate)` – удалить элементы, удовлетворяющие
             [предикату](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html)
-        * `retainIn(predicate)` – удалить элементы, не удовлетворяющие
+        * `retainIf(predicate)` – удалить элементы, не удовлетворяющие
             [предикату](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html)
         * `takeWhile(predicate)` – сохранить подряд идущие элементы, удовлетворяющие
             [предикату](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html)
