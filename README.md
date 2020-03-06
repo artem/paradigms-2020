@@ -30,7 +30,7 @@
  * *Базовая*
     * [Исходный код тестов](java/queue/QueueTest.java)
     * [Откомпилированные тесты](artifacts/queue/QueueTest.jar)
- * *ToArray* (простая)
+ * *ToArray*
     * Добавить в интерфейс очереди и реализовать метод
       `toArray`, возвращающий массив,
       содержащий элементы, лежащие в очереди в порядке
@@ -39,7 +39,7 @@
     * Дублирования кода быть не должно
     * [Исходный код тестов](java/queue/QueueToArrayTest.java)
     * [Откомпилированные тесты](artifacts/queue/QueueToArrayTest.jar)
- * *Functions* (сложная)
+ * *Functions*
     * Добавить в интерфейс очереди и реализовать методы
         * `filter(predicate)` – создать очередь, содержащую элементы, удовлетворяющие
             [предикату](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html)
@@ -51,6 +51,21 @@
     * Дублирования кода быть не должно
     * [Исходный код тестов](java/queue/QueueFunctionsTest.java)
     * [Откомпилированные тесты](artifacts/queue/QueueFunctionsTest.jar)
+ * *IfWhile*
+    * Добавить в интерфейс очереди и реализовать методы
+        * `removeIf(predicate)` – удалить элементы, удовлетворяющие
+            [предикату](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html)
+        * `retainIn(predicate)` – удалить элементы, не удовлетворяющие
+            [предикату](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html)
+        * `takeWhile(predicate)` – сохранить подряд идущие элементы, удовлетворяющие
+            [предикату](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html)
+        * `dropWhile(predicate)` – удалить подряд идущие элементы, не удовлетворяющие
+            [предикату](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html)
+    * Взаимный порядок элементов должен сохраняться
+    * Дублирования кода быть не должно
+    * [Исходный код тестов](java/queue/QueueIfWhileTest.java)
+    * [Откомпилированные тесты](artifacts/queue/QueueIfWhileTest.jar)
+
 
 ## Домашнее задание 3. Очередь на массиве
 
