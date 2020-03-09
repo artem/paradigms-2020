@@ -40,10 +40,11 @@ public class Asserts {
     public static void assertEquals(final String message, final double precision, final double expected, final double actual) {
         assertTrue(
                 String.format("%s: Expected %.12f, found %.12f", message, expected, actual),
-                Math.abs(actual - expected) < precision ||
-                        Math.abs(actual - expected) < precision * Math.abs(actual) ||
-                        (Double.isNaN(actual) || Double.isInfinite(actual)) &&
+                Math.abs(actual - expected) < precision
+                        || Math.abs(actual - expected) < precision * Math.abs(actual)
+                        || (Double.isNaN(actual) || Double.isInfinite(actual)) &&
                                 (Double.isNaN(expected) || Double.isInfinite(expected))
+                        || (Double.isNaN(expected) && actual == 0)
         );
     }
 
