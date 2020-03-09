@@ -3,6 +3,23 @@
 [Условия домашних заданий](http://www.kgeorgiy.info/courses/paradigms/homeworks.html)
 
 
+## Исходный код к лекциям по JavaScript
+
+[Скрипт с примерами](javascript/examples.js)
+
+Запуск примеров
+ * [В браузере](javascript/RunJS.html)
+ * Из консоли
+    * [на Java](javascript/RunJS.java): [RunJS.cmd](javascript/RunJS.cmd), [RunJS.sh](javascript/RunJS.sh)
+    * [на node.js](javascript/RunJS.node.js): `node RunJS.node.js`
+
+Лекция 1. Типы и функции
+ * [Типы](javascript/examples/1_1_types.js)
+ * [Функции](javascript/examples/1_2_functions.js)
+ * [Функции высшего порядка](javascript/examples/1_3_functions-hi.js).
+   Обратите внимание на реализацию функции `mCurry`.
+
+
 ## Домашнее задание 5. Вычисление в различных типах
 
 Модификации
