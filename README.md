@@ -3,6 +3,38 @@
 [Условия домашних заданий](http://www.kgeorgiy.info/courses/paradigms/homeworks.html)
 
 
+## Домашнее задание 6. Функциональные выражения на JavaScript
+
+Модификации
+ * *Базовая*
+    * Код должен находиться в файле `functionalExpression.js`.
+    * [Исходный код тестов](javascript/jstest/functional/FunctionalExpressionTest.java)
+        * Запускать c аргументом `hard` или `easy`;
+
+Запуск тестов
+ * Для запуска тестов используется [GraalJS](https://github.com/graalvm/graaljs)
+   (часть проекта [GraalVM](https://www.graalvm.org/), вам не требуется их скачивать отдельно)
+ * Для запуска тестов можно использовать скрипты [TestJS.cmd](javascript/TestJS.cmd) и [TestJS.sh](javascript/TestJS.sh)
+    * Репозиторий должен быть скачан целиком.
+    * Скрипты должны находиться в каталоге `javascript` (их нельзя перемещать, но можно вызывать из других каталогов).
+ * Для самостоятельно запуска из консоли необходимо использовать командную строку вида:
+    `java -ea --module-path=<js>/graal --class-path <js> jstest.functional.FunctionalExpressionTest {hard|easy}`, где
+    * `-ea` – включение проверок времени исполнения;
+    * `--module-path=<js>/graal` путь к модулям Graal (здесь и далее `<js>` путь к каталогу `javascript` этого репозитория);
+    * `--class-path <js>` путь к откомпилированным тестам;
+    * {`hard`|`easy`} указание тестируемой модификации.
+ * При запуске из IDE, обычно не требуется указывать `--class-path`, так как он формируется автоматически.
+   Остальные опции все равно необходимо указать.
+ * Troubleshooting
+    * `Error occurred during initialization of boot layer java.lang.module.FindException: Module org.graalvm.truffle not found, required by jdk.internal.vm.compiler` – неверно указан `--module-path`;
+    * `Graal.js not found` – неверно указаны `--module-path`
+    * `Error: Could not find or load main class jstest.functional.FunctionalExpressionTest` – неверно указан `--class-path`;
+    * `Error: Could not find or load main class <other class>` – неверно указано полное имя класса теста;
+    * `Exception in thread "main" java.lang.AssertionError: You should enable assertions by running 'java -ea jstest.functional.FunctionalExpressionTest'` – не указана опция `-ea`;
+    * `First argument should be one of: "easy", "hard", found: XXX` – неверно указана сложность;
+    * `Exception in thread "main" jstest.EngineException: Script 'functionalExpression.js' not found` – в текущем каталоге отсутствует решение (`functionalExpression.js`)
+
+
 ## Исходный код к лекциям по JavaScript
 
 [Скрипт с примерами](javascript/examples.js)
