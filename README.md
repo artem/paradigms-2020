@@ -3,6 +3,61 @@
 [Условия домашних заданий](http://www.kgeorgiy.info/courses/paradigms/homeworks.html)
 
 
+## Домашнее задание 6. Функциональные выражения на JavaScript
+
+Модификации
+ * *Базовая*
+    * Код должен находиться в файле `functionalExpression.js`.
+    * [Исходный код тестов](javascript/jstest/functional/FunctionalExpressionTest.java)
+        * Запускать c аргументом `hard` или `easy`;
+ * *Mini*
+    * Не поддерживаются бинарные операции
+    * Код находится в файле [functionalMiniExpression.js](javascript/functionalMiniExpression.js).
+    * [Исходный код тестов](javascript/jstest/functional/FunctionalMiniTest.java)
+        * Запускать c аргументом `hard` или `easy`;
+
+
+Запуск тестов
+ * Для запуска тестов используется [GraalJS](https://github.com/graalvm/graaljs)
+   (часть проекта [GraalVM](https://www.graalvm.org/), вам не требуется их скачивать отдельно)
+ * Для запуска тестов можно использовать скрипты [TestJS.cmd](javascript/TestJS.cmd) и [TestJS.sh](javascript/TestJS.sh)
+    * Репозиторий должен быть скачан целиком.
+    * Скрипты должны находиться в каталоге `javascript` (их нельзя перемещать, но можно вызывать из других каталогов).
+ * Для самостоятельно запуска из консоли необходимо использовать командную строку вида:
+    `java -ea --module-path=<js>/graal --class-path <js> jstest.functional.FunctionalExpressionTest {hard|easy}`, где
+    * `-ea` – включение проверок времени исполнения;
+    * `--module-path=<js>/graal` путь к модулям Graal (здесь и далее `<js>` путь к каталогу `javascript` этого репозитория);
+    * `--class-path <js>` путь к откомпилированным тестам;
+    * {`hard`|`easy`} указание тестируемой модификации.
+ * При запуске из IDE, обычно не требуется указывать `--class-path`, так как он формируется автоматически.
+   Остальные опции все равно необходимо указать.
+ * Troubleshooting
+    * `Error occurred during initialization of boot layer java.lang.module.FindException: Module org.graalvm.truffle not found, required by jdk.internal.vm.compiler` – неверно указан `--module-path`;
+    * `Graal.js not found` – неверно указаны `--module-path`
+    * `Error: Could not find or load main class jstest.functional.FunctionalExpressionTest` – неверно указан `--class-path`;
+    * `Error: Could not find or load main class <other class>` – неверно указано полное имя класса теста;
+    * `Exception in thread "main" java.lang.AssertionError: You should enable assertions by running 'java -ea jstest.functional.FunctionalExpressionTest'` – не указана опция `-ea`;
+    * `First argument should be one of: "easy", "hard", found: XXX` – неверно указана сложность;
+    * `Exception in thread "main" jstest.EngineException: Script 'functionalExpression.js' not found` – в текущем каталоге отсутствует решение (`functionalExpression.js`)
+
+
+## Исходный код к лекциям по JavaScript
+
+[Скрипт с примерами](javascript/examples.js)
+
+Запуск примеров
+ * [В браузере](javascript/RunJS.html)
+ * Из консоли
+    * [на Java](javascript/RunJS.java): [RunJS.cmd](javascript/RunJS.cmd), [RunJS.sh](javascript/RunJS.sh)
+    * [на node.js](javascript/RunJS.node.js): `node RunJS.node.js`
+
+Лекция 1. Типы и функции
+ * [Типы](javascript/examples/1_1_types.js)
+ * [Функции](javascript/examples/1_2_functions.js)
+ * [Функции высшего порядка](javascript/examples/1_3_functions-hi.js).
+   Обратите внимание на реализацию функции `mCurry`.
+
+
 ## Домашнее задание 5. Вычисление в различных типах
 
 Модификации
@@ -22,6 +77,25 @@
           Если значение не определено (например, по причине переполнения),
           то соответствующий элемент должен быть равен `null`.
     * [Исходный код тестов](java/expression/generic/GenericTest.java)
+ * *Сmm* (простая)
+    * Дополнительно реализовать унарные операции:
+        * `count` – число установленных битов, `count 5` равно 2.
+    * Дополнительно реализовать бинарную операцию (минимальный приоритет):
+        * `min` – минимум, `2 min 3` равно 2;
+        * `max` – максимум, `2 max 3` равно 3.
+    * [Исходный код тестов](java/expression/generic/GenericCmmTest.java)
+ * *Ls* (простая)
+    * Дополнительно реализовать поддержку режимов:
+        * `l` – вычисления в `long` без проверки на переполнение;
+        * `s` – вычисления в `short` без проверки на переполнение.
+    * [Исходный код тестов](java/expression/generic/GenericLsTest.java)
+ * *CmmUls* (сложная)
+    * Реализовать операции из модификации *Cmm*.
+    * Дополнительно реализовать поддержку режимов:
+        * `u` – вычисления в `int` без проверки на переполнение;
+        * `l` – вычисления в `long` без проверки на переполнение;
+        * `s` – вычисления в `s` без проверки на переполнение.
+    * [Исходный код тестов](java/expression/generic/GenericCmmUlsTest.java)
 
 
 ## Домашнее задание 4. Очередь на связном списке
@@ -30,7 +104,7 @@
  * *Базовая*
     * [Исходный код тестов](java/queue/QueueTest.java)
     * [Откомпилированные тесты](artifacts/queue/QueueTest.jar)
- * *ToArray* (простая)
+ * *ToArray*
     * Добавить в интерфейс очереди и реализовать метод
       `toArray`, возвращающий массив,
       содержащий элементы, лежащие в очереди в порядке
@@ -39,6 +113,33 @@
     * Дублирования кода быть не должно
     * [Исходный код тестов](java/queue/QueueToArrayTest.java)
     * [Откомпилированные тесты](artifacts/queue/QueueToArrayTest.jar)
+ * *Functions*
+    * Добавить в интерфейс очереди и реализовать методы
+        * `filter(predicate)` – создать очередь, содержащую элементы, удовлетворяющие
+            [предикату](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html)
+        * `map(function)` – создать очередь, содержащую результаты применения
+            [функции](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Function.html)
+    * Исходная очередь должна остаться неизменной
+    * Тип возвращаемой очереди должен соответствовать типу исходной очереди
+    * Взаимный порядок элементов должен сохраняться
+    * Дублирования кода быть не должно
+    * [Исходный код тестов](java/queue/QueueFunctionsTest.java)
+    * [Откомпилированные тесты](artifacts/queue/QueueFunctionsTest.jar)
+ * *IfWhile*
+    * Добавить в интерфейс очереди и реализовать методы
+        * `removeIf(predicate)` – удалить элементы, удовлетворяющие
+            [предикату](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html)
+        * `retainIf(predicate)` – удалить элементы, не удовлетворяющие
+            [предикату](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html)
+        * `takeWhile(predicate)` – сохранить подряд идущие элементы, удовлетворяющие
+            [предикату](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html)
+        * `dropWhile(predicate)` – удалить подряд идущие элементы, не удовлетворяющие
+            [предикату](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html)
+    * Взаимный порядок элементов должен сохраняться
+    * Дублирования кода быть не должно
+    * [Исходный код тестов](java/queue/QueueIfWhileTest.java)
+    * [Откомпилированные тесты](artifacts/queue/QueueIfWhileTest.jar)
+
 
 ## Домашнее задание 3. Очередь на массиве
 
