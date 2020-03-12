@@ -13,6 +13,22 @@ public class Long extends Value<Long> {
         super(num);
     }
 
+    @Override
+    public Long min(Long second) {
+        long a = (long) this.val;
+        long b = (long) second.val;
+
+        return new Long(Math.min(a, b));
+    }
+
+    @Override
+    public Long max(Long second) {
+        long a = (long) this.val;
+        long b = (long) second.val;
+
+        return new Long(Math.max(a, b));
+    }
+
     public Long add(Long second) {
         long a = (long) this.val;
         long b = (long) second.val;
@@ -46,5 +62,10 @@ public class Long extends Value<Long> {
 
     public Long negate() {
         return new Long(-((long) this.val));
+    }
+
+    @Override
+    public Long count() {
+        return new Long(String.valueOf(java.lang.Long.bitCount((long) this.val)));
     }
 }

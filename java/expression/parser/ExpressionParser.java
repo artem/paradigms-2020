@@ -37,27 +37,29 @@ public class ExpressionParser<E extends Value<E>> implements Parser<E> {
         }
 
         private Expression<E> parseOperand() throws ParserException {
-            return parseAddSub();
+            return parseMinMax();
         }
 
-        /*
-        private CommonExpression parseBitwiseShift() throws ParserException {
-            CommonExpression left = parseAddSub();
+        private Expression<E> parseMinMax() throws ParserException {
+            Expression<E> left = parseAddSub();
 
             while (true) {
                 skipWhitespace();
-                if (test('<')) {
-                    expect('<');
-                    left = new LeftShift(left, parseAddSub());
-                } else if (test('>')) {
-                    expect('>');
-                    left = new RightShift(left, parseAddSub());
+                if (test('m')) {
+                    if (test('i')) {
+                        expect('n');
+                        left = new Min<>(left, parseAddSub());
+                    } else if (test('a')) {
+                        expect('x');
+                        left = new Max<>(left, parseAddSub());
+                    } else {
+                        throw error("Starts with m");
+                    }
                 } else {
                     return left;
                 }
             }
         }
-         */
 
         private Expression<E> parseAddSub() throws ParserException {
             Expression<E> left = parseMulDiv();
@@ -102,6 +104,9 @@ public class ExpressionParser<E extends Value<E>> implements Parser<E> {
                 } else {
                     return new Negate<>(parseValue());
                 }
+            } else if (test('c')) {
+                expect("ount");
+                return new BitCount<>(parseValue());
             } else if (between('0', '9')) {
                 return parseNumber(true);
             } else {

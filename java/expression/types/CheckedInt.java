@@ -13,6 +13,23 @@ public class CheckedInt extends Value<CheckedInt> {
         super(num);
     }
 
+    @Override
+    public CheckedInt min(CheckedInt second) {
+        int a = (int) this.val;
+        int b = (int) second.val;
+
+        return new CheckedInt(Math.min(a, b));
+    }
+
+    @Override
+    public CheckedInt max(CheckedInt second) {
+        int a = (int) this.val;
+        int b = (int) second.val;
+
+        return new CheckedInt(Math.max(a, b));
+    }
+
+    @Override
     public CheckedInt add(CheckedInt second) {
         int a = (int) this.val;
         int b = (int) second.val;
@@ -23,6 +40,7 @@ public class CheckedInt extends Value<CheckedInt> {
         return new CheckedInt(result);
     }
 
+    @Override
     public CheckedInt sub(CheckedInt second) {
         int a = (int) this.val;
         int b = (int) second.val;
@@ -33,6 +51,7 @@ public class CheckedInt extends Value<CheckedInt> {
         return new CheckedInt(result);
     }
 
+    @Override
     public CheckedInt mul(CheckedInt second) {
         int a = (int) this.val;
         int b = (int) second.val;
@@ -55,6 +74,7 @@ public class CheckedInt extends Value<CheckedInt> {
         return new CheckedInt(result);
     }
 
+    @Override
     public CheckedInt div(CheckedInt second) {
         int a = (int) this.val;
         int b = (int) second.val;
@@ -67,11 +87,17 @@ public class CheckedInt extends Value<CheckedInt> {
         return new CheckedInt(a / b);
     }
 
+    @Override
     public CheckedInt negate() {
         int a = (int) this.val;
         if (a == Integer.MIN_VALUE) {
             throw new ArithmeticException("oof");//UnderflowException(this);
         }
         return new CheckedInt(-a);
+    }
+
+    @Override
+    public CheckedInt count() {
+        return new CheckedInt(String.valueOf(Integer.bitCount((Integer) this.val)));
     }
 }

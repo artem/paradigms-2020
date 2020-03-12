@@ -7,11 +7,14 @@ public abstract class Value<E> {
         this.val = val;
     }
 
+    public abstract E min(E val);
+    public abstract E max(E val);
     public abstract E add(E val);
     public abstract E sub(E val);
     public abstract E mul(E val);
     public abstract E div(E val);
     public abstract E negate();
+    public abstract E count();
     public Number getVal() {
         return val;
     }
