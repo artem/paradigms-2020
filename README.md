@@ -10,6 +10,12 @@
     * Код должен находиться в файле `functionalExpression.js`.
     * [Исходный код тестов](javascript/jstest/functional/FunctionalExpressionTest.java)
         * Запускать c аргументом `hard` или `easy`;
+ * *Mini*
+    * Не поддерживаются бинарные операции
+    * Код находится в файле [functionalMiniExpression.js](javascript/functionalMiniExpression.js).
+    * [Исходный код тестов](javascript/jstest/functional/FunctionalMiniTest.java)
+        * Запускать c аргументом `hard` или `easy`;
+
 
 Запуск тестов
  * Для запуска тестов используется [GraalJS](https://github.com/graalvm/graaljs)
