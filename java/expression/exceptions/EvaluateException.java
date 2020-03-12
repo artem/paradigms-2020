@@ -1,9 +1,9 @@
 package expression.exceptions;
 
-import expression.CommonExpression;
+import expression.Expression;
 
 public abstract class EvaluateException extends RuntimeException {
-    public EvaluateException(String err, CommonExpression expr) {
+    public EvaluateException(String err, Expression expr) {
         super(err + ": " + expr);
     }
 }

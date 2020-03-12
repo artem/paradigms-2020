@@ -2,26 +2,16 @@ package expression;
 
 import java.util.Objects;
 
-public final class Const implements CommonExpression {
-    private final Number value;
+public final class Const<E> implements Expression<E> {
+    private final E value;
 
-    public Const(Number value) {
+    public Const(E value) {
         this.value = value;
     }
 
     @Override
-    public int evaluate(int x) {
-        return value.intValue();
-    }
-
-    @Override
-    public double evaluate(double x) {
-        return value.doubleValue();
-    }
-
-    @Override
-    public int evaluate(int x, int y, int z) {
-        return evaluate(x);
+    public E evaluate(E x, E y, E z) {
+        return value;
     }
 
     @Override

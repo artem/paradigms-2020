@@ -1,9 +1,9 @@
 package expression.exceptions;
 
-import expression.CommonExpression;
+import expression.Expression;
 
 public class OverflowException extends EvaluateException {
-    public OverflowException(CommonExpression expr) {
+    public OverflowException(Expression expr) {
         super(expr.getClass().getName() + " overflow", expr);
     }
 }

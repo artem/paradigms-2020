@@ -2,10 +2,10 @@ package expression;
 
 import java.util.Objects;
 
-public abstract class UnaryOperation extends Operation {
-    private final CommonExpression arg1;
+public abstract class UnaryOperation<E> extends Operation<E> {
+    private final Expression<E> arg1;
 
-    protected UnaryOperation(CommonExpression arg1) {
+    protected UnaryOperation(Expression<E> arg1) {
         this.arg1 = arg1;
     }
 
@@ -30,15 +30,9 @@ public abstract class UnaryOperation extends Operation {
     }
 
     @Override
-    public int evaluate(int x, int y, int z) {
+    public E evaluate(E x, E y, E z) {
         return calculate(arg1.evaluate(x, y, z));
     }
 
-    @Override
-    public double evaluate(double x) {
-        return calculate(arg1.evaluate(x));
-    }
-
-    protected abstract double calculate(double a);
-    protected abstract int calculate(int a);
+    protected abstract E calculate(E a);
 }

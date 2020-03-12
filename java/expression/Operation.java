@@ -1,10 +1,5 @@
 package expression;
 
-public abstract class Operation implements CommonExpression {
-    @Override
-    public int evaluate(int x) {
-        return evaluate(x, 0, 0);
-    }
-
+public abstract class Operation<E> implements Expression<E> {
     protected abstract String getOperation();
 }

@@ -1,34 +1,42 @@
 package expression.parser;
 
 import expression.*;
+import expression.calculators.AbstractCalculator;
 import expression.exceptions.*;
 import expression.exceptions.IllegalArgumentException;
+import expression.types.Value;
 
 import java.util.List;
 
-public class ExpressionParser implements expression.exceptions.Parser {
+public class ExpressionParser<E extends Value<E>> implements Parser<E> {
+    private final AbstractCalculator calc;
+
+    public ExpressionParser(AbstractCalculator calc) {
+        this.calc = calc;
+    }
+
     @Override
-    public CommonExpression parse(final String source) throws ParserException {
+    public Expression<E> parse(final String source) throws ParserException {
         return parse(new StringSource(source));
     }
 
-    private CommonExpression parse(StringSource expression) throws ParserException {
-        return new InternalParser(expression).parse();
+    private Expression<E> parse(StringSource expression) throws ParserException {
+        return new InternalParser<E>(expression).parse();
     }
 
-    private static class InternalParser extends BaseParser {
+    private class InternalParser<E extends Value<E>> extends BaseParser<E> {
         protected InternalParser(ExpressionSource source) {
-            super(source);
+            super(source, calc);
         }
 
-        public CommonExpression parse() throws ParserException {
-            CommonExpression ret = parseOperand();
+        public Expression<E> parse() throws ParserException {
+            Expression<E> ret = parseOperand();
             expect('\0');
 
             return ret;
         }
 
-        private CommonExpression parseOperand() throws ParserException {
+        private Expression<E> parseOperand() throws ParserException {
             return parseAddSub();
         }
 
@@ -51,48 +59,48 @@ public class ExpressionParser implements expression.exceptions.Parser {
         }
          */
 
-        private CommonExpression parseAddSub() throws ParserException {
-            CommonExpression left = parseMulDiv();
+        private Expression<E> parseAddSub() throws ParserException {
+            Expression<E> left = parseMulDiv();
 
             while (true) {
                 skipWhitespace();
                 if (test('+')) {
-                    left = new CheckedAdd(left, parseMulDiv());
+                    left = new Add<>(left, parseMulDiv());
                 } else if (test('-')) {
-                    left = new CheckedSubtract(left, parseMulDiv());
+                    left = new Subtract<>(left, parseMulDiv());
                 } else {
                     return left;
                 }
             }
         }
 
-        private CommonExpression parseMulDiv() throws ParserException {
-            CommonExpression left = parseValue();
+        private Expression<E> parseMulDiv() throws ParserException {
+            Expression<E> left = parseValue();
 
             while (true) {
                 skipWhitespace();
                 if (test('*')) {
-                    left = new CheckedMultiply(left, parseValue());
+                    left = new Multiply<>(left, parseValue());
                 } else if (test('/')) {
-                    left = new CheckedDivide(left, parseValue());
+                    left = new Divide<>(left, parseValue());
                 } else {
                     return left;
                 }
             }
         }
 
-        private CommonExpression parseValue() throws ParserException{
+        private Expression<E> parseValue() throws ParserException{
             skipWhitespace();
 
             if (test('(')) {
-                CommonExpression tmp = parseOperand();
+                Expression<E> tmp = parseOperand();
                 expect(')');
                 return tmp;
             } else if (test('-')) {
                 if (between('0', '9')) {
                     return parseNumber(false);
                 } else {
-                    return new Negate(parseValue());
+                    return new Negate<>(parseValue());
                 }
             } else if (between('0', '9')) {
                 return parseNumber(true);
@@ -100,7 +108,7 @@ public class ExpressionParser implements expression.exceptions.Parser {
                 // Что-то про Set<Character> и "xyz".indexOf() . . .
                 for (char var : List.of('x', 'y', 'z')) {
                     if (test(var)) {
-                        return new Variable(String.valueOf(var));
+                        return new Variable<E>(String.valueOf(var));
                     }
                 }
 

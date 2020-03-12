@@ -1,9 +1,9 @@
 package expression.exceptions;
 
-import expression.CommonExpression;
+import expression.Expression;
 
 public class DBZException extends EvaluateException {
-    public DBZException(CommonExpression expr) {
+    public DBZException(Expression expr) {
         super("Division by zero", expr);
     }
 }

@@ -2,7 +2,7 @@ package expression;
 
 import java.util.Objects;
 
-public class Variable implements CommonExpression {
+public class Variable<E> implements Expression<E> {
     private final String variable;
 
     public Variable(String variable) {
@@ -10,17 +10,7 @@ public class Variable implements CommonExpression {
     }
 
     @Override
-    public int evaluate(int x) {
-        return x;
-    }
-
-    @Override
-    public double evaluate(double x) {
-        return x;
-    }
-
-    @Override
-    public int evaluate(int x, int y, int z) {
+    public E evaluate(E x, E y, E z) {
         switch (variable) {
             case "x":
                 return x;
@@ -29,7 +19,7 @@ public class Variable implements CommonExpression {
             case "z":
                 return z;
             default:
-                return 0;
+                throw new IllegalArgumentException("oof"); //FIXME
         }
     }
 

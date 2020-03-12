@@ -1,18 +1,21 @@
 package expression.parser;
 
 import expression.Const;
+import expression.calculators.AbstractCalculator;
 import expression.exceptions.MissingParenthesisException;
 import expression.exceptions.ParserException;
 
 /**
  * @author Georgiy Korneev (kgeorgiy@kgeorgiy.info)
  */
-public abstract class BaseParser {
+public abstract class BaseParser<E> {
     private final ExpressionSource source;
+    private final AbstractCalculator calc;
     protected char ch;
 
-    protected BaseParser(final ExpressionSource source) {
+    protected BaseParser(final ExpressionSource source, AbstractCalculator calc) {
         this.source = source;
+        this.calc = calc;
         nextChar();
     }
 
@@ -49,12 +52,12 @@ public abstract class BaseParser {
         }
     }
 
-    protected Const parseNumber(boolean positive) throws ParserException {
+    protected Const<E> parseNumber(boolean positive) throws ParserException {
         final StringBuilder sb = new StringBuilder(positive ? "" : "-");
         copyInteger(sb);
 
         try {
-            return new Const(Integer.parseInt(sb.toString()));
+            return new Const<>((E)calc.parse(sb.toString())); //FIXME
         } catch (NumberFormatException e) {
             throw error("Const integer overflow: " + sb);
         }

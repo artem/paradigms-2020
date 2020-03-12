@@ -2,11 +2,11 @@ package expression;
 
 import java.util.Objects;
 
-public abstract class BinaryOperation extends Operation {
-    private final CommonExpression arg1;
-    private final CommonExpression arg2;
+public abstract class BinaryOperation<E> extends Operation<E> {
+    private final Expression<E> arg1;
+    private final Expression<E> arg2;
 
-    protected BinaryOperation(CommonExpression arg1, CommonExpression arg2) {
+    protected BinaryOperation(Expression<E> arg1, Expression<E> arg2) {
         this.arg1 = arg1;
         this.arg2 = arg2;
     }
@@ -27,20 +27,14 @@ public abstract class BinaryOperation extends Operation {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(arg1, arg2, getClass());
-    }
-
-    @Override
-    public int evaluate(int x, int y, int z) {
+    public E evaluate(E x, E y, E z) {
         return calculate(arg1.evaluate(x, y, z), arg2.evaluate(x, y, z));
     }
 
     @Override
-    public double evaluate(double x) {
-        return calculate(arg1.evaluate(x), arg2.evaluate(x));
+    public int hashCode() {
+        return Objects.hash(arg1, arg2, getClass());
     }
 
-    protected abstract double calculate(double a, double b);
-    protected abstract int calculate(int a, int b);
+    protected abstract E calculate(E a, E b);
 }
