@@ -46,7 +46,7 @@ public abstract class AbstractTests implements Cloneable {
     }
 
     protected AbstractExpression generateOp(final Random random, final int depth) {
-        if (random.nextInt(6) == 0 || operatorNames.isEmpty()) {
+        if (random.nextInt(6) == 0) {
             return generateP(random, depth);
         } else {
             final String name = operatorNames.get(random.nextInt(operatorNames.size()));
