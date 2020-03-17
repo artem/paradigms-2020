@@ -16,6 +16,16 @@
     * [Исходный код тестов](javascript/jstest/functional/FunctionalMiniTest.java)
         * Запускать c аргументом `hard` или `easy`;
 
+ * *PieSinCos*. Дополнительно реализовать поддержку:
+    * переменных: `y`, `z`;
+    * констант:
+        * `pi` – π;
+        * `e` – основание натурального логарифма;
+    * операций:
+        * `sin` – синус, `pi sin` равно 0;
+        * `cos` – косинус, `pi cos` равно -1.
+    * [Исходный код тестов](javascript/jstest/functional/FunctionalPieSinCosTest.java)
+        * Запускать c аргументом `hard` или `easy`
 
 Запуск тестов
  * Для запуска тестов используется [GraalJS](https://github.com/graalvm/graaljs)
