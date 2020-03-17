@@ -3,6 +3,14 @@
 [Условия домашних заданий](http://www.kgeorgiy.info/courses/paradigms/homeworks.html)
 
 
+## Домашнее задание 7. Объектные выражения на JavaScript
+
+Модификации
+ * *Базовая*
+    * Код должен находиться в файле `objectExpression.js`.
+    * [Исходный код тестов](javascript/jstest/object/ObjectExpressionTest.java)
+        * Запускать c аргументом `easy`, `hard` или `bonus`.
+
 ## Домашнее задание 6. Функциональные выражения на JavaScript
 
 Модификации
