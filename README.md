@@ -66,6 +66,8 @@
  * [Функции](javascript/examples/1_2_functions.js)
  * [Функции высшего порядка](javascript/examples/1_3_functions-hi.js).
    Обратите внимание на реализацию функции `mCurry`.
+Лекция 2. Объекты и методы
+ * [Объекты](javascript/examples/2_1_objects.js)
 
 
 ## Домашнее задание 5. Вычисление в различных типах
