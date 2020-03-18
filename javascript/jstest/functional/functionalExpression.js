@@ -11,8 +11,8 @@ const parse = input => input.trim() === "x" ? variable("x") : cnst(+input);
 
 const negate = f1 => x => -f1(x);
 
-const binaryOp = (f1, f2, op) => x => op(f1(x), f2(x));
-const add = (f1, f2) => binaryOp(f1, f2, addImpl);
-const subtract = (f1, f2) => binaryOp(f1, f2, subImpl);
-const multiply = (f1, f2) => binaryOp(f1, f2, mulImpl);
-const divide = (f1, f2) => binaryOp(f1, f2, divImpl);
+const binaryOp = op => (f1, f2) => x => op(f1(x), f2(x));
+const add = binaryOp(addImpl);
+const subtract = binaryOp(subImpl);
+const multiply = binaryOp(mulImpl);
+const divide = binaryOp(divImpl);
