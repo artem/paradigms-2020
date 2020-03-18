@@ -35,6 +35,13 @@
     * [Исходный код тестов](javascript/jstest/functional/FunctionalPieSinCosTest.java)
         * Запускать c аргументом `hard` или `easy`
 
+ * *Cube*. Дополнительно реализовать поддержку:
+    * переменных: `y`, `z`;
+    * унарных функций:
+        * `cube` – возведение в куб, `2 cube` равно 8;
+        * `cuberoot` – кубический корень, `8 cuberoot` равно 2;
+    * [Исходный код тестов](javascript/jstest/functional/FunctionalCubeTest.java)
+
 Запуск тестов
  * Для запуска тестов используется [GraalJS](https://github.com/graalvm/graaljs)
    (часть проекта [GraalVM](https://www.graalvm.org/), вам не требуется их скачивать отдельно)
