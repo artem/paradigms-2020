@@ -1,5 +1,7 @@
 package expression;
 
+import expression.types.Calculator;
+
 import java.util.Objects;
 
 public abstract class UnaryOperation<E> extends Operation<E> {
@@ -30,9 +32,9 @@ public abstract class UnaryOperation<E> extends Operation<E> {
     }
 
     @Override
-    public E evaluate(E x, E y, E z) {
-        return calculate(arg1.evaluate(x, y, z));
+    public E evaluate(E x, E y, E z, Calculator<E> op) {
+        return calculate(arg1.evaluate(x, y, z, op), op);
     }
 
-    protected abstract E calculate(E a);
+    protected abstract E calculate(E a, Calculator<E> op);
 }

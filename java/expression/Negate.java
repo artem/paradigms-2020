@@ -1,15 +1,15 @@
 package expression;
 
-import expression.types.Value;
+import expression.types.Calculator;
 
-public class Negate<E extends Value<E>> extends UnaryOperation<E> {
+public class Negate<E> extends UnaryOperation<E> {
     public Negate(Expression<E> arg) {
         super(arg);
     }
 
     @Override
-    protected E calculate(E a) {
-        return a.negate();
+    protected E calculate(E a, Calculator<E> op) {
+        return op.negate(a);
     }
 
     @Override

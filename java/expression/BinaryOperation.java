@@ -1,5 +1,7 @@
 package expression;
 
+import expression.types.Calculator;
+
 import java.util.Objects;
 
 public abstract class BinaryOperation<E> extends Operation<E> {
@@ -27,8 +29,8 @@ public abstract class BinaryOperation<E> extends Operation<E> {
     }
 
     @Override
-    public E evaluate(E x, E y, E z) {
-        return calculate(arg1.evaluate(x, y, z), arg2.evaluate(x, y, z));
+    public E evaluate(E x, E y, E z, Calculator<E> op) {
+        return calculate(arg1.evaluate(x, y, z, op), arg2.evaluate(x, y, z, op), op);
     }
 
     @Override
@@ -36,5 +38,5 @@ public abstract class BinaryOperation<E> extends Operation<E> {
         return Objects.hash(arg1, arg2, getClass());
     }
 
-    protected abstract E calculate(E a, E b);
+    protected abstract E calculate(E a, E b, Calculator<E> op);
 }

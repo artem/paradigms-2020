@@ -1,15 +1,15 @@
 package expression;
 
-import expression.types.Value;
+import expression.types.Calculator;
 
-public class Subtract<E extends Value<E>> extends BinaryOperation<E> {
+public class Subtract<E> extends BinaryOperation<E> {
     public Subtract(Expression<E> arg1, Expression<E> arg2) {
         super(arg1, arg2);
     }
 
     @Override
-    protected E calculate(E a, E b) {
-        return a.sub(b);
+    protected E calculate(E a, E b, Calculator<E> op) {
+        return op.sub(a, b);
     }
 
     @Override

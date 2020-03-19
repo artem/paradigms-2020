@@ -1,15 +1,15 @@
 package expression;
 
-import expression.types.Value;
+import expression.types.Calculator;
 
-public class Add<E extends Value<E>> extends BinaryOperation<E> {
+public class Add<E> extends BinaryOperation<E> {
     public Add(Expression<E> arg1, Expression<E> arg2) {
         super(arg1, arg2);
     }
 
     @Override
-    protected E calculate(E a, E b) {
-        return a.add(b);
+    protected E calculate(E a, E b, Calculator<E> op) {
+        return op.add(a, b);
     }
 
     @Override

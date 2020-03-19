@@ -1,17 +1,16 @@
 package expression.parser;
 
 import expression.*;
-import expression.calculators.AbstractCalculator;
 import expression.exceptions.IllegalArgumentException;
 import expression.exceptions.ParserException;
-import expression.types.Value;
+import expression.types.Calculator;
 
 import java.util.List;
 
-public class ExpressionParser<E extends Value<E>> implements Parser<E> {
-    private final AbstractCalculator calc;
+public class ExpressionParser<E> implements Parser<E> {
+    private final Calculator<E> calc;
 
-    public ExpressionParser(AbstractCalculator calc) {
+    public ExpressionParser(Calculator<E> calc) {
         this.calc = calc;
     }
 
@@ -21,10 +20,10 @@ public class ExpressionParser<E extends Value<E>> implements Parser<E> {
     }
 
     private Expression<E> parse(StringSource expression) throws ParserException {
-        return new InternalParser<E>(expression).parse();
+        return new InternalParser(expression).parse();
     }
 
-    private class InternalParser<E extends Value<E>> extends BaseParser<E> {
+    private class InternalParser extends BaseParser<E> {
         protected InternalParser(ExpressionSource source) {
             super(source, calc);
         }
@@ -48,7 +47,7 @@ public class ExpressionParser<E extends Value<E>> implements Parser<E> {
                 if (test('m')) {
                     if (test('i')) {
                         expect('n');
-                        left = new Min<>(left, parseAddSub());
+                        left = new Min<E>(left, parseAddSub());
                     } else if (test('a')) {
                         expect('x');
                         left = new Max<>(left, parseAddSub());

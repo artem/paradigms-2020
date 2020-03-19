@@ -1,19 +1,19 @@
 package expression.parser;
 
 import expression.Const;
-import expression.calculators.AbstractCalculator;
 import expression.exceptions.MissingParenthesisException;
 import expression.exceptions.ParserException;
+import expression.types.Calculator;
 
 /**
  * @author Georgiy Korneev (kgeorgiy@kgeorgiy.info)
  */
 public abstract class BaseParser<E> {
     private final ExpressionSource source;
-    private final AbstractCalculator calc;
+    private final Calculator<E> calc;
     protected char ch;
 
-    protected BaseParser(final ExpressionSource source, AbstractCalculator calc) {
+    protected BaseParser(final ExpressionSource source, Calculator<E> calc) {
         this.source = source;
         this.calc = calc;
         nextChar();
@@ -57,7 +57,7 @@ public abstract class BaseParser<E> {
         copyInteger(sb);
 
         try {
-            return new Const<>((E)calc.parse(sb.toString())); //FIXME
+            return new Const<>(calc.parse(sb.toString()));
         } catch (NumberFormatException e) {
             throw error("Const integer overflow: " + sb);
         }

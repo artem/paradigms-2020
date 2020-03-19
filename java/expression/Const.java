@@ -1,5 +1,7 @@
 package expression;
 
+import expression.types.Calculator;
+
 import java.util.Objects;
 
 public final class Const<E> implements Expression<E> {
@@ -10,7 +12,7 @@ public final class Const<E> implements Expression<E> {
     }
 
     @Override
-    public E evaluate(E x, E y, E z) {
+    public E evaluate(E x, E y, E z, Calculator<E> op) {
         return value;
     }
 
