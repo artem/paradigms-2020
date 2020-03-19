@@ -3,6 +3,14 @@
 [Условия домашних заданий](http://www.kgeorgiy.info/courses/paradigms/homeworks.html)
 
 
+## Домашнее задание 7. Объектные выражения на JavaScript
+
+Модификации
+ * *Базовая*
+    * Код должен находиться в файле `objectExpression.js`.
+    * [Исходный код тестов](javascript/jstest/object/ObjectExpressionTest.java)
+        * Запускать c аргументом `easy`, `hard` или `bonus`.
+
 ## Домашнее задание 6. Функциональные выражения на JavaScript
 
 Модификации
@@ -16,6 +24,34 @@
     * [Исходный код тестов](javascript/jstest/functional/FunctionalMiniTest.java)
         * Запускать c аргументом `hard` или `easy`;
 
+ * *PieSinCos*. Дополнительно реализовать поддержку:
+    * переменных: `y`, `z`;
+    * констант:
+        * `pi` – π;
+        * `e` – основание натурального логарифма;
+    * операций:
+        * `sin` – синус, `pi sin` равно 0;
+        * `cos` – косинус, `pi cos` равно -1.
+    * [Исходный код тестов](javascript/jstest/functional/FunctionalPieSinCosTest.java)
+        * Запускать c аргументом `hard` или `easy`
+
+ * *Cube*. Дополнительно реализовать поддержку:
+    * переменных: `y`, `z`;
+    * унарных функций:
+        * `cube` – возведение в куб, `2 cube` равно 8;
+        * `cuberoot` – кубический корень, `8 cuberoot` равно 2;
+    * [Исходный код тестов](javascript/jstest/functional/FunctionalCubeTest.java)
+    
+ * *PieAvgMed*. Дополнительно реализовать поддержку:
+    * переменных: `y`, `z`;
+    * констант:
+        * `pi` – π;
+        * `e` – основание натурального логарифма;
+    * операций:
+        * `avg5` – арифметическое среднее пяти аргументов, `1 2 3 4 5 avg5` равно 7.5;
+        * `med3` – медиана трех аргументов, `1 2 -10 med3` равно 1.
+    * [Исходный код тестов](javascript/jstest/functional/FunctionalPieAvgMedTest.java)
+        * Запускать c аргументом `hard` или `easy`
 
 Запуск тестов
  * Для запуска тестов используется [GraalJS](https://github.com/graalvm/graaljs)
@@ -56,6 +92,8 @@
  * [Функции](javascript/examples/1_2_functions.js)
  * [Функции высшего порядка](javascript/examples/1_3_functions-hi.js).
    Обратите внимание на реализацию функции `mCurry`.
+Лекция 2. Объекты и методы
+ * [Объекты](javascript/examples/2_1_objects.js)
 
 
 ## Домашнее задание 5. Вычисление в различных типах

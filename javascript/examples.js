@@ -10,3 +10,6 @@ include("examples/1_1_types.js");
 include("examples/1_2_functions.js");
 include("examples/1_3_functions-hi.js");
 include("examples/1_4_vectors.js");
+
+// Lecture 2. Objects and Methods
+include("examples/2_1_objects.js");
