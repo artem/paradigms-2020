@@ -14,13 +14,13 @@ public class SpecialTabulator {
         int zDelta = z2 - z1 + 1;
         Object[][][] table = new Object[xDelta][yDelta][zDelta];
 
-        Parser<T> parser = new ExpressionParser<T>(calc);
-        Expression<T> expr = parser.parse(expression);
+        Parser<T> parser = new ExpressionParser<T>();
+        Expression<T> expr = parser.parse(expression, calc);
         for (int i = 0; i < xDelta; i++) {
             for (int j = 0; j < yDelta; j++) {
                 for (int k = 0; k < zDelta; k++) {
                     try {
-                        table[i][j][k] = expr.evaluate(calc.cast(x1 + i), calc.cast(y1 + j), calc.cast(z1 + k), calc); //FIXME
+                        table[i][j][k] = expr.evaluate(calc.cast(x1 + i), calc.cast(y1 + j), calc.cast(z1 + k), calc);
                     } catch (EvaluateException e) {
                         // ignore
                     }

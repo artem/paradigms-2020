@@ -13,9 +13,9 @@ public abstract class BaseParser<E> {
     private final Calculator<E> calc;
     protected char ch;
 
-    protected BaseParser(final ExpressionSource source, Calculator<E> calc) {
+    protected BaseParser(final ExpressionSource source, Calculator<E> op) {
         this.source = source;
-        this.calc = calc;
+        this.calc = op;
         nextChar();
     }
 

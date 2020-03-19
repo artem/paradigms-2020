@@ -8,24 +8,18 @@ import expression.types.Calculator;
 import java.util.List;
 
 public class ExpressionParser<E> implements Parser<E> {
-    private final Calculator<E> calc;
-
-    public ExpressionParser(Calculator<E> calc) {
-        this.calc = calc;
-    }
-
     @Override
-    public Expression<E> parse(final String source) throws ParserException {
-        return parse(new StringSource(source));
+    public Expression<E> parse(final String source, Calculator<E> op) throws ParserException {
+        return parse(new StringSource(source), op);
     }
 
-    private Expression<E> parse(StringSource expression) throws ParserException {
-        return new InternalParser(expression).parse();
+    private Expression<E> parse(StringSource expression, Calculator<E> op) throws ParserException {
+        return new InternalParser(expression, op).parse();
     }
 
     private class InternalParser extends BaseParser<E> {
-        protected InternalParser(ExpressionSource source) {
-            super(source, calc);
+        protected InternalParser(ExpressionSource source, Calculator<E> op) {
+            super(source, op);
         }
 
         public Expression<E> parse() throws ParserException {
