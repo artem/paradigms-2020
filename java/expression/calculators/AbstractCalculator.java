@@ -1,6 +1,5 @@
 package expression.calculators;
 
-import expression.types.CheckedInt;
 import expression.types.Value;
 
 public abstract class AbstractCalculator {

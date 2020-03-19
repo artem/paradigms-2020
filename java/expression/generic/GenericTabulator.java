@@ -18,7 +18,7 @@ public class GenericTabulator implements Tabulator {
             case "bi":
                 return new SpecialTabulator<BigInt>().tabulate(expression, x1, x2, y1, y2, z1, z2, new BigIntCalculator());
             default:
-                throw new IllegalArgumentException("oof");//fixme
+                throw new IllegalArgumentException("Unknown mode");
         }
     }
 }

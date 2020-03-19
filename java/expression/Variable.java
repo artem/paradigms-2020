@@ -19,7 +19,7 @@ public class Variable<E> implements Expression<E> {
             case "z":
                 return z;
             default:
-                throw new IllegalArgumentException("oof"); //FIXME
+                throw new IllegalArgumentException("Unsupported variable name");
         }
     }
 

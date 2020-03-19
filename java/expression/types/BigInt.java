@@ -1,5 +1,7 @@
 package expression.types;
 
+import expression.exceptions.DBZException;
+
 import java.math.BigInteger;
 
 public class BigInt extends Value<BigInt> {
@@ -58,7 +60,7 @@ public class BigInt extends Value<BigInt> {
         BigInteger b = (BigInteger) second.val;
 
         if (b.equals(BigInteger.ZERO)) {
-            throw new ArithmeticException("oof");//DBZException(this); FIXME
+            throw new DBZException(this, second);
         }
         return new BigInt(a.divide(b));
     }

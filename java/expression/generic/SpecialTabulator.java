@@ -22,8 +22,8 @@ public class SpecialTabulator<T extends Value<T>> {
                 for (int k = 0; k < zDelta; k++) {
                     try {
                         table[i][j][k] = expr.evaluate((T) calc.cast(x1 + i), (T) calc.cast(y1 + j), (T) calc.cast(z1 + k)).getVal();
-                    } catch (Exception e) { // EvaluateException FIXME
-                        // Keep null
+                    } catch (EvaluateException e) {
+                        table[i][j][k] = null;
                     }
                 }
             }

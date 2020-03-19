@@ -2,8 +2,8 @@ package expression.parser;
 
 import expression.*;
 import expression.calculators.AbstractCalculator;
-import expression.exceptions.*;
 import expression.exceptions.IllegalArgumentException;
+import expression.exceptions.ParserException;
 import expression.types.Value;
 
 import java.util.List;
@@ -110,7 +110,6 @@ public class ExpressionParser<E extends Value<E>> implements Parser<E> {
             } else if (between('0', '9')) {
                 return parseNumber(true);
             } else {
-                // Что-то про Set<Character> и "xyz".indexOf() . . .
                 for (char var : List.of('x', 'y', 'z')) {
                     if (test(var)) {
                         return new Variable<E>(String.valueOf(var));

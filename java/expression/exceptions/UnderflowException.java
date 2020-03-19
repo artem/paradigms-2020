@@ -1,9 +1,9 @@
 package expression.exceptions;
 
-import expression.Expression;
+import expression.types.Value;
 
 public class UnderflowException extends EvaluateException {
-    public UnderflowException(Expression expr) {
-        super(expr.getClass().getName() + " underflow", expr);
+    public UnderflowException(Value<?> first) {
+        super(first.getClass().getName() + " underflow", "" + first.getVal());
     }
 }

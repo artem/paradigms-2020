@@ -1,9 +1,9 @@
 package expression.exceptions;
 
-import expression.Expression;
+import expression.types.Value;
 
 public class DBZException extends EvaluateException {
-    public DBZException(Expression expr) {
-        super("Division by zero", expr);
+    public DBZException(Value<?> first, Value<?> second) {
+        super("Division by zero", first.getVal() + " and " + second.getVal());
     }
 }

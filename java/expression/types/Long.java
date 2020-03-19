@@ -55,7 +55,7 @@ public class Long extends Value<Long> {
         long b = (long) second.val;
 
         if (b == 0) {
-            throw new ArithmeticException("oof");//DBZException(this); FIXME
+            throw new DBZException(this, second);
         }
         return new Long(a / b);
     }

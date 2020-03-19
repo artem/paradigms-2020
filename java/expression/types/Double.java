@@ -52,7 +52,7 @@ public class Double extends Value<Double> {
         double a = (double) this.val;
         double b = (double) second.val;
 
-        return new Double(a / b);
+        return new Double(a / b); //FIXME
     }
 
     public Double negate() {
