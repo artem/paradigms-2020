@@ -41,6 +41,17 @@
         * `cube` – возведение в куб, `2 cube` равно 8;
         * `cuberoot` – кубический корень, `8 cuberoot` равно 2;
     * [Исходный код тестов](javascript/jstest/functional/FunctionalCubeTest.java)
+    
+ * *PieAvgMed*. Дополнительно реализовать поддержку:
+    * переменных: `y`, `z`;
+    * констант:
+        * `pi` – π;
+        * `e` – основание натурального логарифма;
+    * операций:
+        * `avg5` – арифметическое среднее пяти аргументов, `1 2 3 4 5 avg5` равно 7.5;
+        * `med3` – медиана трех аргументов, `1 2 -10 med3` равно 1.
+    * [Исходный код тестов](javascript/jstest/functional/FunctionalPieAvgMedTest.java)
+        * Запускать c аргументом `hard` или `easy`
 
 Запуск тестов
  * Для запуска тестов используется [GraalJS](https://github.com/graalvm/graaljs)
