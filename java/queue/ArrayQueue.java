@@ -4,7 +4,7 @@ package queue;
  * INV: n >= 0
  *      for i 0..n-1 : queue[i] != null
  */
-public class ArrayQueue extends AbstractQueue implements Queue {
+public class ArrayQueue extends AbstractQueue {
     private static int INIT_CAPACITY = 32;
     private Object[] queue = new Object[INIT_CAPACITY];
     private int start = 0;
