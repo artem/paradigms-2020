@@ -26,8 +26,8 @@ case "$2" in
         ;;
     5)
         package=expression/generic
-        test=queue.QueueTest
-        args=
+        test=expression.generic.GenericTest
+        args=easy
         ;;
     *)
         echo Unknown homework \"$2\"
