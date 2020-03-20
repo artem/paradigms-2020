@@ -1,1 +1,1 @@
-compile-homework.sh text eol=lf
+test-homework.sh text eol=lf

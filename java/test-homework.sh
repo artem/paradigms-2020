@@ -14,11 +14,20 @@ if [[ "${2:-}" == "" ]] ; then
 fi
 
 case "$2" in
-    3|4)
-        tests=queue
+    3)
+        package=queue
+        test=queue.ArrayQueueTest
+        args=
+        ;;
+    4)
+        package=queue
+        test=queue.QueueTest
+        args=
         ;;
     5)
-        tests=expression/generic
+        package=expression/generic
+        test=queue.QueueTest
+        args=
         ;;
     *)
         echo Unknown homework \"$2\"
@@ -33,14 +42,16 @@ base="$(dirname "${BASH_SOURCE[0]}")"
 repo="$base/../../$1"
 check_dir "$repo"
 check_dir "$repo/java-solutions"
-check_dir "$repo/java-solutions/$tests"
+check_dir "$repo/java-solutions/$package"
 
 build="$base/_build"
 [[ -e "$build" ]] || rm -rf "$build"
 
-sources=$(find "$repo/java-solutions/$tests" -name '*.java')
+sources=$(find "$repo/java-solutions/$package" -name '*.java')
 
-echo javac -d "$build" -cp "$base:$repo/java-solutions" "$base/$tests/*.java" $sources
-     javac -d "$build" -cp "$base:$repo/java-solutions" "$base/$tests/*.java" $sources
+echo javac -d "$build" -cp "$base;$repo/java-solutions" "$base/$package/*.java" $sources
+     javac -d "$build" -cp "$base;$repo/java-solutions" "$base/$package/*.java" $sources
+
+java -ea -cp "$build" "$test" $args
 
 echo SUCCESS
