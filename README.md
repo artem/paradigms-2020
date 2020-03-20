@@ -23,7 +23,6 @@
     * Код находится в файле [functionalMiniExpression.js](javascript/functionalMiniExpression.js).
     * [Исходный код тестов](javascript/jstest/functional/FunctionalMiniTest.java)
         * Запускать c аргументом `hard` или `easy`;
-
  * *PieSinCos*. Дополнительно реализовать поддержку:
     * переменных: `y`, `z`;
     * констант:
@@ -34,14 +33,12 @@
         * `cos` – косинус, `pi cos` равно -1.
     * [Исходный код тестов](javascript/jstest/functional/FunctionalPieSinCosTest.java)
         * Запускать c аргументом `hard` или `easy`
-
  * *Cube*. Дополнительно реализовать поддержку:
     * переменных: `y`, `z`;
     * унарных функций:
         * `cube` – возведение в куб, `2 cube` равно 8;
         * `cuberoot` – кубический корень, `8 cuberoot` равно 2;
     * [Исходный код тестов](javascript/jstest/functional/FunctionalCubeTest.java)
-    
  * *PieAvgMed*. Дополнительно реализовать поддержку:
     * переменных: `y`, `z`;
     * констант:
@@ -51,6 +48,22 @@
         * `avg5` – арифметическое среднее пяти аргументов, `1 2 3 4 5 avg5` равно 7.5;
         * `med3` – медиана трех аргументов, `1 2 -10 med3` равно 1.
     * [Исходный код тестов](javascript/jstest/functional/FunctionalPieAvgMedTest.java)
+        * Запускать c аргументом `hard` или `easy`
+ * *OneIffAbs*. Дополнительно реализовать поддержку:
+    * переменных: `y`, `z`;
+    * констант:
+        * `one` – 1;
+        * `two` – 2;
+    * операций:
+        * `abs` – абсолютное значение, `-2 abs` равно 2;
+        * `iff` – условный выбор:
+            если первый аргумент неотрицательный,
+            вернуть второй аргумент,
+            иначе вернуть первый третий аргумент.
+            * `iff one two 3` равно 2
+            * `iff -1 -2 -3` равно -3
+            * `iff 0 one two` равно 1;
+    * [Исходный код тестов](javascript/jstest/functional/FunctionalOneIffAbsTest.java)
         * Запускать c аргументом `hard` или `easy`
 
 Запуск тестов
