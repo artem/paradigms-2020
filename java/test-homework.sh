@@ -49,8 +49,8 @@ build="$base/_build"
 
 sources=$(find "$repo/java-solutions/$package" -name '*.java')
 
-echo javac -d "$build" -cp "$base;$repo/java-solutions" "$base/$package/*.java" $sources
-     javac -d "$build" -cp "$base;$repo/java-solutions" "$base/$package/*.java" $sources
+echo javac -encoding utf8 -d "$build" -cp "$base;$repo/java-solutions" "$base/$package/*.java" $sources
+     javac -encoding utf8 -d "$build" -cp "$base;$repo/java-solutions" "$base/$package/*.java" $sources
 
 java -ea -cp "$build" "$test" $args
 

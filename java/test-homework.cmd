@@ -40,8 +40,8 @@ for /f %%a in (compile-homework.tmp) do (
 )
 del "compile-homework.tmp"
 
-echo javac -d "%~dp0_build" -cp "%~dp0;%repo%\java-solutions" %~dp0%package%\*.java %sources%
-     javac -d "%~dp0_build" -cp "%~dp0;%repo%\java-solutions" %~dp0%package%\*.java %sources% || exit /b 1
+echo javac -encoding utf8 -d "%~dp0_build" -cp "%~dp0;%repo%\java-solutions" %~dp0%package%\*.java %sources%
+     javac -encoding utf8 -d "%~dp0_build" -cp "%~dp0;%repo%\java-solutions" %~dp0%package%\*.java %sources% || exit /b 1
 
 java -ea -cp "%~dp0_build" "%test%" %args% || exit /b 1
 
