@@ -40,7 +40,7 @@ build="$base/_build"
 
 sources=$(find "$repo/java-solutions/$tests" -name '*.java')
 
-echo javac -d "$build" -cp "$base;$repo/java-solutions" "$base/$tests/*.java" $sources
-     javac -d "$build" -cp "$base;$repo/java-solutions" "$base/$tests/*.java" $sources
+echo javac -d "$build" -cp "$base:$repo/java-solutions" "$base/$tests/*.java" $sources
+     javac -d "$build" -cp "$base:$repo/java-solutions" "$base/$tests/*.java" $sources
 
 echo SUCCESS
