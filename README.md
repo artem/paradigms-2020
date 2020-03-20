@@ -60,9 +60,9 @@
             если первый аргумент неотрицательный,
             вернуть второй аргумент,
             иначе вернуть первый третий аргумент.
-            * `iff one two 3` равно 2
-            * `iff -1 -2 -3` равно -3
-            * `iff 0 one two` равно 1;
+            * `one two 3 iff` равно 2
+            * `-1 -2 -3 iff` равно -3
+            * `0 one two iff` равно 1;
     * [Исходный код тестов](javascript/jstest/functional/FunctionalOneIffAbsTest.java)
         * Запускать c аргументом `hard` или `easy`
 
