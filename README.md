@@ -3,6 +3,15 @@
 [Условия домашних заданий](http://www.kgeorgiy.info/courses/paradigms/homeworks.html)
 
 
+## Домашнее задание 8. Обработка ошибок на JavaScript
+
+Модификации
+ * *Базовая*
+    * Код должен находиться в файле `objectExpression.js`.
+    * [Исходный код тестов](javascript/jstest/prefix/PrefixParserTest.java)
+        * Запускать c аргументом `easy` или `hard`
+
+
 ## Домашнее задание 7. Объектные выражения на JavaScript
 
 Модификации
