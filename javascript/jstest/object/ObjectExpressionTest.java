@@ -16,12 +16,12 @@ public class ObjectExpressionTest extends BaseJavascriptTest<JSEngine> {
     public static final double D = 1e-4;
 
 
-    public static final Dialect PURE_OBJECT = dialect(
+    public static final Dialect PURE_DIALECT = dialect(
             "new Variable('%s')",
             "new Const(%s)",
             (op, args) -> "new " + op + "(" + String.join(", ", args) + ")"
     );
-    public static final Dialect ARITHMETIC_OBJECT = PURE_OBJECT.copy()
+    public static final Dialect ARITHMETIC_DIALECT = PURE_DIALECT.copy()
             .rename("+", "Add")
             .rename("-", "Subtract")
             .rename("*", "Multiply")
@@ -130,7 +130,7 @@ public class ObjectExpressionTest extends BaseJavascriptTest<JSEngine> {
     }
 
     public static void main(final String... args) {
-        test(ObjectExpressionTest.class, ObjectExpressionTest::new, new ArithmeticTests(), args, ARITHMETIC_OBJECT);
+        test(ObjectExpressionTest.class, ObjectExpressionTest::new, new ArithmeticTests(), args, ARITHMETIC_DIALECT);
     }
 
     public static <T extends BaseTest> void test(final Class<T> type, final BiFunction<Integer, Language, T> cons, final AbstractTests tests, final String[] args, final Dialect parsed) {
