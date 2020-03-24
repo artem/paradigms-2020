@@ -114,8 +114,19 @@
  * [Функции](javascript/examples/1_2_functions.js)
  * [Функции высшего порядка](javascript/examples/1_3_functions-hi.js).
    Обратите внимание на реализацию функции `mCurry`.
+
 Лекция 2. Объекты и методы
  * [Объекты](javascript/examples/2_1_objects.js)
+ * [Замыкания](javascript/examples/2_2_closures.js)
+ * [Модули](javascript/examples/2_3_modules.js)
+ * [Пример: стеки](javascript/examples/2_4_stacks.js)
+
+Лекция 3. Другие возможности
+ * [Обработка ошибок](javascript/examples/3_1_errors.js)
+ * [Чего нет в JS](javascript/examples/3_2_no.js)
+ * [Стандартная библиотека](javascript/examples/3_3_builtins.js)
+ * [Работа со свойствами](javascript/examples/3_4_properties.js)
+ * [JS 6+](javascript/examples/3_5_js6.js)
 
 
 ## Домашнее задание 5. Вычисление в различных типах
