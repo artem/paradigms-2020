@@ -1,9 +1,6 @@
 package expression.generic;
 
-import expression.types.BigIntCalculator;
-import expression.types.Calculator;
-import expression.types.CheckedIntCalculator;
-import expression.types.DoubleCalculator;
+import expression.types.*;
 
 import java.util.Map;
 
@@ -11,7 +8,10 @@ public class GenericTabulator implements Tabulator {
     private static final Map<String, Calculator<? extends Number>> CALCULATOR_MAP = Map.of(
             "i", new CheckedIntCalculator(),
             "d", new DoubleCalculator(),
-            "bi", new BigIntCalculator()
+            "bi", new BigIntCalculator(),
+            "u", new IntCalculator(),
+            "l", new LongCalculator(),
+            "s", new ShortCalculator()
     );
 
     @Override
