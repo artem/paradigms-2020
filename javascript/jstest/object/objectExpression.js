@@ -1,8 +1,10 @@
 "use strict";
 
+
 function Const(value) {
     this.value = value;
 }
+
 Const.prototype.evaluate = function () {
     return this.value;
 };
@@ -14,6 +16,7 @@ Const.prototype.toString = function () {
 function Variable(value) {
     this.name = value;
 }
+
 Variable.prototype.evaluate = function (x, y, z) {
     switch (this.name) {
         case 'x':
@@ -29,43 +32,32 @@ Variable.prototype.toString = function () {
 };
 
 
-function abstractOp(type, calc, op) {
+function OpImpl() {
+    this.args = [].slice.call(arguments);
+}
+
+OpImpl.prototype.evaluate = function () {
+    return this.calculate(...(this.args.map(val => val.evaluate(...arguments))));
+};
+OpImpl.prototype.toString = function () {
+    return this.args.join(' ') + ' ' + this.op;
+};
+
+
+function abstractOp(calc, op) {
     let Operation = function () {
-        type.apply(this, arguments);
+        OpImpl.apply(this, arguments);
         this.op = op;
     };
-    Operation.prototype = Object.create(type.prototype);
+    Operation.prototype = Object.create(OpImpl.prototype);
     Operation.prototype.constructor = Operation;
     Operation.prototype.calculate = calc;
     return Operation;
 }
 
 
-function Unary(f1) {
-    this.f1 = f1;
-}
-Unary.prototype.evaluate = function(x, y, z) {
-    return this.calculate(this.f1.evaluate(x, y, z));
-};
-Unary.prototype.toString = function() {
-    return `${this.f1} ${this.op}`;
-};
-
-
-function Binary(f1, f2) {
-    this.f1 = f1;
-    this.f2 = f2;
-}
-Binary.prototype.evaluate = function(x, y, z) {
-    return this.calculate(this.f1.evaluate(x, y, z), this.f2.evaluate(x, y, z));
-};
-Binary.prototype.toString = function() {
-    return `${this.f1} ${this.f2} ${this.op}`;
-};
-
-
-const Add = abstractOp(Binary, (x, y) => x + y, '+');
-const Subtract = abstractOp(Binary, (x, y) => x - y, '-');
-const Multiply = abstractOp(Binary, (x, y) => x * y, '*');
-const Divide = abstractOp(Binary, (x, y) => x / y, '/');
-const Negate = abstractOp(Unary, x => -x, 'negate');
+const Add = abstractOp((x, y) => x + y, '+');
+const Subtract = abstractOp((x, y) => x - y, '-');
+const Multiply = abstractOp((x, y) => x * y, '*');
+const Divide = abstractOp((x, y) => x / y, '/');
+const Negate = abstractOp(x => -x, 'negate');
