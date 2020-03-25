@@ -11,7 +11,6 @@ Const.prototype.toString = function () {
 };
 
 
-
 function Variable(value) {
     this.name = value;
 }
@@ -30,6 +29,17 @@ Variable.prototype.toString = function () {
 };
 
 
+function abstractOp(type, calc, op) {
+    let Operation = function () {
+        type.apply(this, arguments);
+        this.op = op;
+    };
+    Operation.prototype = Object.create(type.prototype);
+    Operation.prototype.constructor = Operation;
+    Operation.prototype.calculate = calc;
+    return Operation;
+}
+
 
 function Unary(f1) {
     this.f1 = f1;
@@ -40,7 +50,6 @@ Unary.prototype.evaluate = function(x, y, z) {
 Unary.prototype.toString = function() {
     return `${this.f1} ${this.op}`;
 };
-
 
 
 function Binary(f1, f2) {
@@ -55,51 +64,8 @@ Binary.prototype.toString = function() {
 };
 
 
-
-const Add = function (f1, f2) {
-    Binary.apply(this, arguments);
-    this.op = '+';
-};
-Add.prototype = Object.create(Binary.prototype);
-Add.prototype.constructor = Add;
-Add.prototype.calculate = (x, y) => x + y;
-
-
-
-const Subtract = function (f1, f2) {
-    Binary.apply(this, arguments);
-    this.op = '-';
-};
-Subtract.prototype = Object.create(Binary.prototype);
-Subtract.prototype.constructor = Subtract;
-Subtract.prototype.calculate = (x, y) => x - y;
-
-
-
-const Multiply = function (f1, f2) {
-    Binary.apply(this, arguments);
-    this.op = '*';
-};
-Multiply.prototype = Object.create(Binary.prototype);
-Multiply.prototype.constructor = Multiply;
-Multiply.prototype.calculate = (x, y) => x * y;
-
-
-
-const Divide = function (f1, f2) {
-    Binary.apply(this, arguments);
-    this.op = '/';
-};
-Divide.prototype = Object.create(Binary.prototype);
-Divide.prototype.constructor = Divide;
-Divide.prototype.calculate = (x, y) => x / y;
-
-
-
-const Negate = function (f1) {
-    Unary.apply(this, arguments);
-    this.op = 'negate';
-};
-Negate.prototype = Object.create(Unary.prototype);
-Negate.prototype.constructor = Negate;
-Negate.prototype.calculate = x => -x;
+const Add = abstractOp(Binary, (x, y) => x + y, '+');
+const Subtract = abstractOp(Binary, (x, y) => x - y, '-');
+const Multiply = abstractOp(Binary, (x, y) => x * y, '*');
+const Divide = abstractOp(Binary, (x, y) => x / y, '/');
+const Negate = abstractOp(Unary, x => -x, 'negate');
