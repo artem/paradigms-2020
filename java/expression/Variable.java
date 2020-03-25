@@ -2,8 +2,6 @@ package expression;
 
 import expression.types.Calculator;
 
-import java.util.Objects;
-
 public class Variable<E> implements Expression<E> {
     private final String variable;
 
@@ -28,20 +26,5 @@ public class Variable<E> implements Expression<E> {
     @Override
     public String toString() {
         return variable;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj != null && getClass() == obj.getClass()) {
-            Variable second = (Variable) obj;
-            return Objects.equals(variable, second.variable);
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(variable);
     }
 }
