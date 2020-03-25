@@ -8,11 +8,11 @@ import expression.types.DoubleCalculator;
 import java.util.Map;
 
 public class GenericTabulator implements Tabulator {
-    private static final Map<String, Calculator<?>> CALCULATOR_MAP = Map.of(
+    private static final Map<String, Calculator<? extends Number>> CALCULATOR_MAP = Map.of(
             "i", new CheckedIntCalculator(),
             "d", new DoubleCalculator(),
             "bi", new BigIntCalculator()
-    ); //FIXME
+    );
 
     @Override
     public Object[][][] tabulate(String mode, String expression, int x1, int x2, int y1, int y2, int z1, int z2) throws Exception {

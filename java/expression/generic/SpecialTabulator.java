@@ -14,7 +14,7 @@ public class SpecialTabulator {
         int zDelta = z2 - z1 + 1;
         Object[][][] table = new Object[xDelta][yDelta][zDelta];
 
-        Parser<T> parser = new ExpressionParser<T>();
+        Parser<T> parser = new ExpressionParser<>();
         Expression<T> expr = parser.parse(expression, calc);
         for (int i = 0; i < xDelta; i++) {
             for (int j = 0; j < yDelta; j++) {
