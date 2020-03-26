@@ -3,6 +3,24 @@
 [Условия домашних заданий](http://www.kgeorgiy.info/courses/paradigms/homeworks.html)
 
 
+## Домашнее задание 9. Обработка ошибок на JavaScript
+
+Модификации
+ * *Базовая*
+    * Код должен находиться в файле `objectExpression.js`.
+    * [Исходный код тестов](javascript/jstest/prefix/PrefixParserTest.java)
+        * Запускать c аргументом `easy` или `hard`
+
+
+## Домашнее задание 8. Обработка ошибок на JavaScript
+
+Модификации
+ * *Базовая*
+    * Код должен находиться в файле `objectExpression.js`.
+    * [Исходный код тестов](javascript/jstest/prefix/PrefixParserTest.java)
+        * Запускать c аргументом `easy` или `hard`
+
+
 ## Домашнее задание 7. Объектные выражения на JavaScript
 
 Модификации
@@ -10,6 +28,17 @@
     * Код должен находиться в файле `objectExpression.js`.
     * [Исходный код тестов](javascript/jstest/object/ObjectExpressionTest.java)
         * Запускать c аргументом `easy`, `hard` или `bonus`.
+ * *MinMax*. Дополнительно реализовать поддержку:
+    * функций:
+        * `Min3` (`min3`) – минимум из трех аргументов, `1 2 3 min` равно 1;
+        * `Max5` (`max5`) – максимум из пяти аргументов, `1 2 3 4 5 max` равно 5;
+    * [Исходный код тестов](javascript/jstest/object/ObjectMinMaxTest.java)
+ * *PowLog*. Дополнительно реализовать поддержку:
+    * бинарных операций:
+        * `Power` (`pow`) – возведение в степень, `2 3 pow` равно 8;
+        * `Log` (`log`) – логарифм абсолютного значения аргумента
+            по абсолютному значению основания `-2 -8 log` равно 3;
+    * [Исходный код тестов](javascript/jstest/object/ObjectPowLogTest.java)
 
 ## Домашнее задание 6. Функциональные выражения на JavaScript
 
@@ -23,7 +52,6 @@
     * Код находится в файле [functionalMiniExpression.js](javascript/functionalMiniExpression.js).
     * [Исходный код тестов](javascript/jstest/functional/FunctionalMiniTest.java)
         * Запускать c аргументом `hard` или `easy`;
-
  * *PieSinCos*. Дополнительно реализовать поддержку:
     * переменных: `y`, `z`;
     * констант:
@@ -34,14 +62,12 @@
         * `cos` – косинус, `pi cos` равно -1.
     * [Исходный код тестов](javascript/jstest/functional/FunctionalPieSinCosTest.java)
         * Запускать c аргументом `hard` или `easy`
-
  * *Cube*. Дополнительно реализовать поддержку:
     * переменных: `y`, `z`;
     * унарных функций:
         * `cube` – возведение в куб, `2 cube` равно 8;
-        * `cuberoot` – кубический корень, `8 cuberoot` равно 2;
+        * `cuberoot` – кубический корень, `-8 cuberoot` равно -2;
     * [Исходный код тестов](javascript/jstest/functional/FunctionalCubeTest.java)
-    
  * *PieAvgMed*. Дополнительно реализовать поддержку:
     * переменных: `y`, `z`;
     * констант:
@@ -51,6 +77,22 @@
         * `avg5` – арифметическое среднее пяти аргументов, `1 2 3 4 5 avg5` равно 7.5;
         * `med3` – медиана трех аргументов, `1 2 -10 med3` равно 1.
     * [Исходный код тестов](javascript/jstest/functional/FunctionalPieAvgMedTest.java)
+        * Запускать c аргументом `hard` или `easy`
+ * *OneIffAbs*. Дополнительно реализовать поддержку:
+    * переменных: `y`, `z`;
+    * констант:
+        * `one` – 1;
+        * `two` – 2;
+    * операций:
+        * `abs` – абсолютное значение, `-2 abs` равно 2;
+        * `iff` – условный выбор:
+            если первый аргумент неотрицательный,
+            вернуть второй аргумент,
+            иначе вернуть первый третий аргумент.
+            * `one two 3 iff` равно 2
+            * `-1 -2 -3 iff` равно -3
+            * `0 one two iff` равно 1;
+    * [Исходный код тестов](javascript/jstest/functional/FunctionalOneIffAbsTest.java)
         * Запускать c аргументом `hard` или `easy`
 
 Запуск тестов
@@ -92,8 +134,19 @@
  * [Функции](javascript/examples/1_2_functions.js)
  * [Функции высшего порядка](javascript/examples/1_3_functions-hi.js).
    Обратите внимание на реализацию функции `mCurry`.
+
 Лекция 2. Объекты и методы
  * [Объекты](javascript/examples/2_1_objects.js)
+ * [Замыкания](javascript/examples/2_2_closures.js)
+ * [Модули](javascript/examples/2_3_modules.js)
+ * [Пример: стеки](javascript/examples/2_4_stacks.js)
+
+Лекция 3. Другие возможности
+ * [Обработка ошибок](javascript/examples/3_1_errors.js)
+ * [Чего нет в JS](javascript/examples/3_2_no.js)
+ * [Стандартная библиотека](javascript/examples/3_3_builtins.js)
+ * [Работа со свойствами](javascript/examples/3_4_properties.js)
+ * [JS 6+](javascript/examples/3_5_js6.js)
 
 
 ## Домашнее задание 5. Вычисление в различных типах

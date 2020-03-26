@@ -41,7 +41,7 @@ public class Asserts {
         assertTrue(
                 String.format("%s: Expected %.12f, found %.12f", message, expected, actual),
                 Math.abs(actual - expected) < precision
-                        || Math.abs(actual - expected) < precision * Math.abs(actual)
+                        || Math.abs(actual - expected) < precision * Math.abs(expected)
                         || (Double.isNaN(actual) || Double.isInfinite(actual)) &&
                                 (Double.isNaN(expected) || Double.isInfinite(expected))
                         || (Double.isNaN(expected) && actual == 0)
