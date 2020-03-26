@@ -1,6 +1,6 @@
 package expression.types;
 
-public interface Calculator<E> {
+public interface Calculator<E extends Number> {
     E min(E val1, E val2);
     E max(E val1, E val2);
     E add(E val1, E val2);

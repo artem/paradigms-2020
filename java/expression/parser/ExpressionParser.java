@@ -7,7 +7,7 @@ import expression.types.Calculator;
 
 import java.util.List;
 
-public class ExpressionParser<E> implements Parser<E> {
+public class ExpressionParser<E extends Number> implements Parser<E> {
     @Override
     public Expression<E> parse(final String source, Calculator<E> op) throws ParserException {
         return parse(new StringSource(source), op);

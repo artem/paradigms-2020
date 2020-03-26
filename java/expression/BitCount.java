@@ -2,7 +2,7 @@ package expression;
 
 import expression.types.Calculator;
 
-public class BitCount<E> extends UnaryOperation<E> {
+public class BitCount<E extends Number> extends UnaryOperation<E> {
     public BitCount(Expression<E> arg) {
         super(arg);
     }

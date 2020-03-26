@@ -2,7 +2,7 @@ package expression;
 
 import expression.types.Calculator;
 
-public abstract class UnaryOperation<E> extends Operation<E> {
+public abstract class UnaryOperation<E extends Number> extends Operation<E> {
     private final Expression<E> arg1;
 
     protected UnaryOperation(Expression<E> arg1) {

@@ -8,7 +8,7 @@ import expression.parser.Parser;
 import expression.types.Calculator;
 
 public class SpecialTabulator {
-    public <T> Object[][][] tabulate(String expression, int x1, int x2, int y1, int y2, int z1, int z2, Calculator<T> calc) throws ParserException {
+    public <T extends Number> Object[][][] tabulate(String expression, int x1, int x2, int y1, int y2, int z1, int z2, Calculator<T> calc) throws ParserException {
         int xDelta = x2 - x1 + 1;
         int yDelta = y2 - y1 + 1;
         int zDelta = z2 - z1 + 1;

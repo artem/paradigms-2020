@@ -2,7 +2,7 @@ package expression;
 
 import expression.types.Calculator;
 
-public class Variable<E> implements Expression<E> {
+public class Variable<E extends Number> implements Expression<E> {
     private final String variable;
 
     public Variable(String variable) {

@@ -8,7 +8,7 @@ import expression.types.Calculator;
 /**
  * @author Georgiy Korneev (kgeorgiy@kgeorgiy.info)
  */
-public abstract class BaseParser<E> {
+public abstract class BaseParser<E extends Number> {
     private final ExpressionSource source;
     private final Calculator<E> calc;
     protected char ch;

@@ -2,7 +2,7 @@ package expression;
 
 import expression.types.Calculator;
 
-public class Add<E> extends BinaryOperation<E> {
+public class Add<E extends Number> extends BinaryOperation<E> {
     public Add(Expression<E> arg1, Expression<E> arg2) {
         super(arg1, arg2);
     }

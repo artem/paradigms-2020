@@ -2,7 +2,7 @@ package expression;
 
 import expression.types.Calculator;
 
-public class Negate<E> extends UnaryOperation<E> {
+public class Negate<E extends Number> extends UnaryOperation<E> {
     public Negate(Expression<E> arg) {
         super(arg);
     }
