@@ -3,15 +3,6 @@
 [Условия домашних заданий](http://www.kgeorgiy.info/courses/paradigms/homeworks.html)
 
 
-## Домашнее задание 9. Обработка ошибок на JavaScript
-
-Модификации
- * *Базовая*
-    * Код должен находиться в файле `objectExpression.js`.
-    * [Исходный код тестов](javascript/jstest/prefix/PrefixParserTest.java)
-        * Запускать c аргументом `easy` или `hard`
-
-
 ## Домашнее задание 8. Обработка ошибок на JavaScript
 
 Модификации
@@ -39,6 +30,11 @@
         * `Log` (`log`) – логарифм абсолютного значения аргумента
             по абсолютному значению основания `-2 -8 log` равно 3;
     * [Исходный код тестов](javascript/jstest/object/ObjectPowLogTest.java)
+ * *SinhCosh*. Дополнительно реализовать поддержку:
+    * унарных функций:
+        * `Sinh` (`sinh`) – гиперболический синус, `3 sinh` немного больше 10;
+        * `Cosh` (`cosh`) – гиперболический косинус, `3 cosh` немного меньше 10;
+    * [Исходный код тестов](javascript/jstest/object/ObjectSinhCoshTest.java)
 
 ## Домашнее задание 6. Функциональные выражения на JavaScript
 
