@@ -60,7 +60,7 @@
     * переменных: `y`, `z`;
     * унарных функций:
         * `cube` – возведение в куб, `2 cube` равно 8;
-        * `cuberoot` – кубический корень, `8 cuberoot` равно 2;
+        * `cuberoot` – кубический корень, `-8 cuberoot` равно -2;
     * [Исходный код тестов](javascript/jstest/functional/FunctionalCubeTest.java)
  * *PieAvgMed*. Дополнительно реализовать поддержку:
     * переменных: `y`, `z`;
