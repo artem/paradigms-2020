@@ -28,6 +28,11 @@
     * Код должен находиться в файле `objectExpression.js`.
     * [Исходный код тестов](javascript/jstest/object/ObjectExpressionTest.java)
         * Запускать c аргументом `easy`, `hard` или `bonus`.
+ * *MinMax*. Дополнительно реализовать поддержку:
+    * функций:
+        * `Min3` (`min3`) – минимум из трех аргументов, `1 2 3 min` равно 1;
+        * `Max5` (`max5`) – максимум из пяти аргументов, `1 2 3 4 5 max` равно 5;
+    * [Исходный код тестов](javascript/jstest/object/ObjectMinMaxTest.java)
 
 ## Домашнее задание 6. Функциональные выражения на JavaScript
 
