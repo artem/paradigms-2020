@@ -3,6 +3,28 @@
 [Условия домашних заданий](http://www.kgeorgiy.info/courses/paradigms/homeworks.html)
 
 
+## Исходный код к лекциям по Clojure
+
+Запуск Clojure
+ * Консоль: [Windows](clojure/RunClojure.cmd), [*nix](clojure/RunClojure.sh)
+    * Интерактивный: `RunClojure`
+    * С выражением: `RunClojure --eval "<выражение>"`
+    * Скрипт: `RunClojure <файл скрипта>`
+    * Справка: `RunClojure --help`
+ * IDE
+    * IntelliJ Idea: [плагин Cursive](https://cursive-ide.com/userguide/)
+    * Eclipse: [плагин Counterclockwise](https://doc.ccw-ide.org/documentation.html)
+
+[Скрипт со всеми примерами](clojure/examples.clj)
+
+Лекция 1. Функции
+ * [Введение](clojure/examples/1_1_intro.clj)
+ * [Функции](clojure/examples/1_2_functions.clj)
+ * [Списки](clojure/examples/1_3_lists.clj)
+ * [Вектора](clojure/examples/1_4_vectors.clj)
+ * [Функции высшего порядка](clojure/examples/1_5_functions-2.clj)
+
+
 ## Домашнее задание 8. Обработка ошибок на JavaScript
 
 Модификации
@@ -40,6 +62,7 @@
         * `Gauss` (`gauss`) – [функция Гаусса](https://ru.wikipedia.org/wiki/%D0%93%D0%B0%D1%83%D1%81%D1%81%D0%BE%D0%B2%D0%B0_%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F);
           от четырех аргументов: `a`, `b`, `c`, `x`.
     * [Исходный код тестов](javascript/jstest/object/ObjectGaussTest.java)
+
 
 ## Домашнее задание 6. Функциональные выражения на JavaScript
 
