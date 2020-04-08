@@ -3,6 +3,38 @@
 [Условия домашних заданий](http://www.kgeorgiy.info/courses/paradigms/homeworks.html)
 
 
+## Домашнее задание 9. Линейная алгебра на Clojure
+
+Модификации
+ * *Базовая*
+    * Код должен находиться в файле `linear.clj`.
+    * Исходный код тестов
+        * [Простой вариант](clojure/cljtest/linear/LinearBinaryTest.java)
+        * [Сложный вариант](clojure/cljtest/linear/LinearNaryTest.java)
+
+
+## Исходный код к лекциям по Clojure
+
+Запуск Clojure
+ * Консоль: [Windows](clojure/RunClojure.cmd), [*nix](clojure/RunClojure.sh)
+    * Интерактивный: `RunClojure`
+    * С выражением: `RunClojure --eval "<выражение>"`
+    * Скрипт: `RunClojure <файл скрипта>`
+    * Справка: `RunClojure --help`
+ * IDE
+    * IntelliJ Idea: [плагин Cursive](https://cursive-ide.com/userguide/)
+    * Eclipse: [плагин Counterclockwise](https://doc.ccw-ide.org/documentation.html)
+
+[Скрипт со всеми примерами](clojure/examples.clj)
+
+Лекция 1. Функции
+ * [Введение](clojure/examples/1_1_intro.clj)
+ * [Функции](clojure/examples/1_2_functions.clj)
+ * [Списки](clojure/examples/1_3_lists.clj)
+ * [Вектора](clojure/examples/1_4_vectors.clj)
+ * [Функции высшего порядка](clojure/examples/1_5_functions-2.clj)
+
+
 ## Домашнее задание 8. Обработка ошибок на JavaScript
 
 Модификации
@@ -10,6 +42,11 @@
     * Код должен находиться в файле `objectExpression.js`.
     * [Исходный код тестов](javascript/jstest/prefix/PrefixParserTest.java)
         * Запускать c аргументом `easy` или `hard`
+ * *PrefixAtanExp*. Дополнительно реализовать поддержку:
+    * унарных операций:
+        * `ArcTan` (`atan`) – арктангенс, `(atan 2)` примерно равно 1.1;
+        * `Exp` (`Exp`) – экспонента, `(exp 3)` примерно равно 20;
+    * [Исходный код тестов](javascript/jstest/prefix/PrefixAtanExpTest.java)
 
 
 ## Домашнее задание 7. Объектные выражения на JavaScript
@@ -35,6 +72,12 @@
         * `Sinh` (`sinh`) – гиперболический синус, `3 sinh` немного больше 10;
         * `Cosh` (`cosh`) – гиперболический косинус, `3 cosh` немного меньше 10;
     * [Исходный код тестов](javascript/jstest/object/ObjectSinhCoshTest.java)
+ * *Gauss*. Дополнительно реализовать поддержку:
+    * функций:
+        * `Gauss` (`gauss`) – [функция Гаусса](https://ru.wikipedia.org/wiki/%D0%93%D0%B0%D1%83%D1%81%D1%81%D0%BE%D0%B2%D0%B0_%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F);
+          от четырех аргументов: `a`, `b`, `c`, `x`.
+    * [Исходный код тестов](javascript/jstest/object/ObjectGaussTest.java)
+
 
 ## Домашнее задание 6. Функциональные выражения на JavaScript
 
