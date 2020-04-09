@@ -85,8 +85,8 @@ const Cosh = expression.Cosh;
 
 
 const parser = (function () {
-    function ParsingError(msg) {
-        this.message = msg;
+    function ParsingError(expr, msg) {
+        this.message = 'col ' + (expr.pos + 1) + ': ' + msg;
     }
 
     ParsingError.prototype = Object.create(Error.prototype);
@@ -119,7 +119,7 @@ const parser = (function () {
         let cur = this.curLetter();
 
         if (cur !== exp) {
-            throw new ParsingError('Expected ' + exp + ', got ' + cur);
+            throw new ParsingError(this, 'Expected ' + exp + ', got ' + cur);
         } else {
             this.pos++;
         }
@@ -146,7 +146,7 @@ const parser = (function () {
         let op = OPERATIONS[opName];
 
         if (op === undefined) {
-            throw new ParsingError('Unknown operation: ' + opName);
+            throw new ParsingError(expr, 'Unknown operation: ' + opName);
         }
 
         for (let i = 0; i < op[1]; i++) {
@@ -170,10 +170,10 @@ const parser = (function () {
             let numStr = expr.src.substring(oldPos, expr.pos);
             let number = parseFloat(numStr);
             if (isNaN(number)) {
-                throw new ParsingError('Constant ' + numStr + ' is not a valid value.');
+                throw new ParsingError(expr, 'Constant ' + numStr + ' is not a valid value.');
             }
             result = new Const(number);
-        } else if (VARS.includes(letter)) { //TODO messy
+        } else if (VARS.includes(letter)) {
             result = new Variable(letter);
             expr.pos++;
         } else {
@@ -188,7 +188,7 @@ const parser = (function () {
 
         src.skipWhitespace();
         if (src.curLetter() !== undefined) {
-            throw new ParsingError('Trailing characters present');
+            throw new ParsingError(expr, 'Trailing characters present');
         }
 
         return ret;
