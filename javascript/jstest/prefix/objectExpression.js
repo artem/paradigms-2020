@@ -90,7 +90,9 @@ StringSource.prototype.nextToken = function () {
     this.skipWhitespace();
     let newPos = this.pos;
 
-    while (this.src[newPos] !== ' ' && this.src[newPos] !== undefined) {
+    const SEPARATORS = [undefined, ' ', '(', ')'];
+
+    while (!SEPARATORS.includes(this.src[newPos])) {
         newPos++;
     }
     let ret = this.src.substring(this.pos, newPos);
@@ -123,12 +125,7 @@ function parseOperation(expr) {
     expr.expect('(');
     expr.skipWhitespace();
     let args = [];
-    let opName = expr.curLetter();
-    expr.pos++;
-    while (expr.curLetter() !== undefined && expr.curLetter() !== '(' && expr.curLetter() !== ' ' && VARS.includes(expr.curLetter()) === false) { //TODO ...........
-        opName += expr.curLetter();
-        expr.pos++;
-    }
+    let opName = expr.nextToken();
     let op = OPERATIONS[opName];
 
     if (op === undefined) {
@@ -157,10 +154,10 @@ function parseValue(expr) {
         }
         let number = parseFloat(numStr);
         if (isNaN(number)) {
-            throw new ParsingError('NaN'); // TODO
+            throw new ParsingError('Constant ' + numStr + ' is not a valid value.'); // TODO
         }
         result = new Const(number);
-    } else if (VARS.includes(letter) && (expr.src[expr.pos + 1] === ' ' || expr.src[expr.pos + 1] === undefined || expr.src[expr.pos + 1] === '(' || expr.src[expr.pos + 1] === ')')) { //TODO messy
+    } else if (VARS.includes(letter)) { //TODO messy
         result = new Variable(letter);
         expr.pos++;
     } else {
