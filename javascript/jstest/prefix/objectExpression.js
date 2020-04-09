@@ -1,39 +1,39 @@
 "use strict";
 
-const expression = (function () {
-    function Const(value) {
-        this.value = value;
+function Const(value) {
+    this.value = value;
+}
+
+Const.prototype.evaluate = function () {
+    return this.value;
+};
+Const.prototype.toString = function () {
+    return this.value.toString();
+};
+Const.prototype.prefix = Const.prototype.toString;
+
+
+function Variable(value) {
+    this.name = value;
+}
+
+Variable.prototype.evaluate = function (...values) {
+    switch (this.name) {
+        case 'x':
+            return values[0];
+        case 'y':
+            return values[1];
+        case 'z':
+            return values[2];
     }
-
-    Const.prototype.evaluate = function () {
-        return this.value;
-    };
-    Const.prototype.toString = function () {
-        return this.value.toString();
-    };
-    Const.prototype.prefix = Const.prototype.toString;
+};
+Variable.prototype.toString = function () {
+    return this.name;
+};
+Variable.prototype.prefix = Variable.prototype.toString;
 
 
-    function Variable(value) {
-        this.name = value;
-    }
-
-    Variable.prototype.evaluate = function (x, y, z) {
-        switch (this.name) {
-            case 'x':
-                return x;
-            case 'y':
-                return y;
-            case 'z':
-                return z;
-        }
-    };
-    Variable.prototype.toString = function () {
-        return this.name;
-    };
-    Variable.prototype.prefix = Variable.prototype.toString;
-
-
+const operations = (function () {
     function OpImpl() {
         this.args = [].slice.call(arguments);
     }
@@ -73,15 +73,13 @@ const expression = (function () {
 })();
 
 
-const Const = expression.Const;
-const Variable = expression.Variable;
-const Add = expression.Add;
-const Subtract = expression.Subtract;
-const Multiply = expression.Multiply;
-const Divide = expression.Divide;
-const Negate = expression.Negate;
-const Sinh = expression.Sinh;
-const Cosh = expression.Cosh;
+const Add = operations.Add;
+const Subtract = operations.Subtract;
+const Multiply = operations.Multiply;
+const Divide = operations.Divide;
+const Negate = operations.Negate;
+const Sinh = operations.Sinh;
+const Cosh = operations.Cosh;
 
 
 const parser = (function () {
@@ -128,17 +126,15 @@ const parser = (function () {
         }
     }
 
-    const VARS = ['x', 'y', 'z'];
-
     function parseOperation(expr) {
         const OPERATIONS = {
             '+': [Add, 2],
             '-': [Subtract, 2],
             '*': [Multiply, 2],
             '/': [Divide, 2],
-            'negate': [Negate, 1],
-            'sinh': [Sinh, 1],
-            'cosh': [Cosh, 1]
+            negate: [Negate, 1],
+            sinh: [Sinh, 1],
+            cosh: [Cosh, 1]
         };
 
         expr.expect('(');
@@ -162,8 +158,11 @@ const parser = (function () {
     }
 
     function parseValue(expr) {
+        const VARS = ['x', 'y', 'z'];
+
         expr.skipWhitespace();
         let letter = expr.curLetter();
+
         let result;
         if (letter >= '0' && letter <= '9' || letter === '-') {
             let oldPos = expr.pos++;
