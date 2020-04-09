@@ -119,7 +119,10 @@ const parser = (function () {
         let cur = this.curLetter();
 
         if (cur !== exp) {
-            throw new ParsingError(this, 'Expected ' + exp + ', got ' + cur);
+            throw new ParsingError(this, 'Expected ' +
+                (exp === undefined ? 'end of expression' : exp) +
+                ', got ' +
+                (cur === undefined ? 'end of expression' : cur));
         } else {
             this.pos++;
         }
@@ -187,10 +190,7 @@ const parser = (function () {
         let ret = parseValue(src);
 
         src.skipWhitespace();
-        if (src.curLetter() !== undefined) {
-            throw new ParsingError(expr, 'Trailing characters present');
-        }
-
+        src.expect(undefined);
         return ret;
     }
 
