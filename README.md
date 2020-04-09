@@ -59,6 +59,11 @@
         * `Sumexp` (`sumexp`) – сумма экспонент, `(8 8 9 sumexp)` примерно равно 14065;
         * `Softmax` (`softmax`) – [softmax](https://ru.wikipedia.org/wiki/Softmax) первого аргумента, `(1 2 3 softmax)` примерно 0.09;
     * [Исходный код тестов](javascript/jstest/prefix/PostfixSumexpSoftmaxTest.java)
+ * *PrefixSinhCosh*. Дополнительно реализовать поддержку:
+    * унарных операций:
+        * `Sinh` (`sinh`) – гиперболический синус, `(sinh 3)` немного больше 10;
+        * `Cosh` (`cosh`) – гиперболический косинус, `(cosh 3)` немного меньше 10;
+    * [Исходный код тестов](javascript/jstest/prefix/PrefixSinhCoshTest.java)
 
 ## Домашнее задание 7. Объектные выражения на JavaScript
 
