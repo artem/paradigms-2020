@@ -120,9 +120,9 @@ const parser = (function () {
 
         if (cur !== exp) {
             throw new ParsingError(this, 'Expected ' +
-                (exp === undefined ? 'end of expression' : exp) +
+                (exp === undefined ? 'end of expression' : '\'' + exp + '\'') +
                 ', got ' +
-                (cur === undefined ? 'end of expression' : cur));
+                (cur === undefined ? 'end of expression' : '\'' + cur + '\''));
         } else {
             this.pos++;
         }
@@ -149,7 +149,7 @@ const parser = (function () {
         let op = OPERATIONS[opName];
 
         if (op === undefined) {
-            throw new ParsingError(expr, 'Unknown operation: ' + opName);
+            throw new ParsingError(expr, 'Unknown operation: \'' + opName + '\'');
         }
 
         for (let i = 0; i < op[1]; i++) {
@@ -173,7 +173,7 @@ const parser = (function () {
             let numStr = expr.src.substring(oldPos, expr.pos);
             let number = parseFloat(numStr);
             if (isNaN(number)) {
-                throw new ParsingError(expr, 'Constant ' + numStr + ' is not a valid value.');
+                throw new ParsingError(expr, 'Constant \'' + numStr + '\' is not a valid value.');
             }
             result = new Const(number);
         } else if (VARS.includes(letter)) {
