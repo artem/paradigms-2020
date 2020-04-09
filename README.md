@@ -47,7 +47,23 @@
         * `ArcTan` (`atan`) – арктангенс, `(atan 2)` примерно равно 1.1;
         * `Exp` (`Exp`) – экспонента, `(exp 3)` примерно равно 20;
     * [Исходный код тестов](javascript/jstest/prefix/PrefixAtanExpTest.java)
-
+ * *PostfixSumAvg*. Дополнительно реализовать поддержку:
+    * выражений в постфиксной записи: `(2 3 +)` равно 5
+    * унарных операций:
+        * `Sum` (`sum`) – сумма, `(1 2 3 sum)` равно 6;
+        * `Avg` (`avg`) – арифметическое среднее, `(1 2 3 avg)` равно 2;
+    * [Исходный код тестов](javascript/jstest/prefix/PostfixSumAvgTest.java)
+ * *PostfixSumexpSoftmax*. Дополнительно реализовать поддержку:
+    * выражений в постфиксной записи: `(2 3 +)` равно 5
+    * унарных операций:
+        * `Sumexp` (`sumexp`) – сумма экспонент, `(8 8 9 sumexp)` примерно равно 14065;
+        * `Softmax` (`softmax`) – [softmax](https://ru.wikipedia.org/wiki/Softmax) первого аргумента, `(1 2 3 softmax)` примерно 0.09;
+    * [Исходный код тестов](javascript/jstest/prefix/PostfixSumexpSoftmaxTest.java)
+ * *PrefixSinhCosh*. Дополнительно реализовать поддержку:
+    * унарных операций:
+        * `Sinh` (`sinh`) – гиперболический синус, `(sinh 3)` немного больше 10;
+        * `Cosh` (`cosh`) – гиперболический косинус, `(cosh 3)` немного меньше 10;
+    * [Исходный код тестов](javascript/jstest/prefix/PrefixSinhCoshTest.java)
 
 ## Домашнее задание 7. Объектные выражения на JavaScript
 
