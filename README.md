@@ -12,6 +12,15 @@
         * [Простой вариант](clojure/cljtest/linear/LinearBinaryTest.java)
         * [Сложный вариант](clojure/cljtest/linear/LinearNaryTest.java)
 
+Для запуска тестов можно использовать скрипты
+[TestClojure.cmd](clojure/TestClojure.cmd) и [TestClojure.sh](clojure/TestClojure.sh)
+ * Репозиторий должен быть скачан целиком.
+ * Скрипты должны находиться в каталоге `clojure`
+    (их нельзя перемещать, но можно вызывать из других каталогов).
+ * Полное имя класса теста указывается в качестве аргумента командной строки,
+    например, `cljtest.linear.LinearBinaryTest`.
+ * Тестируемое решение должно находиться в текущем каталоге.
+
 
 ## Исходный код к лекциям по Clojure
 
