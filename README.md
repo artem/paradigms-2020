@@ -43,6 +43,13 @@
  * [Вектора](clojure/examples/1_4_vectors.clj)
  * [Функции высшего порядка](clojure/examples/1_5_functions-2.clj)
 
+Лекция 2. Внешний мир
+ * [Ввод-вывод](clojure/examples/2_1_io.clj)
+ * [Разбор и гомоиконность](clojure/examples/2_2_read.clj)
+ * [Порядки вычислений](clojure/examples/2_3_evaluation-orders.clj)
+ * [Потоки](clojure/examples/2_4_streams.clj)
+ * [Отображения и множества](clojure/examples/2_5_maps.clj)
+
 
 ## Домашнее задание 8. Обработка ошибок на JavaScript
 
