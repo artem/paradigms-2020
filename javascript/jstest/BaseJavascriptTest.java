@@ -116,11 +116,11 @@ public abstract class BaseJavascriptTest<E extends Engine> extends BaseTest {
 
     protected static int mode(final String[] args, final Class<?> type, final String... modes) {
         if (args.length == 0) {
-            System.err.println("No arguments found");
+            System.err.println("ERROR: No arguments found");
         } else if (args.length > 1) {
-            System.err.println("Only one argument expected, " + args.length + " found");
+            System.err.println("ERROR: Only one argument expected, " + args.length + " found");
         } else if (Arrays.asList(modes).indexOf(args[0]) < 0) {
-            System.err.println("First argument should be one of: \"" + String.join("\", \"", modes) + "\", found: \"" + args[0] + "\"");
+            System.err.println("ERROR: First argument should be one of: \"" + String.join("\", \"", modes) + "\", found: \"" + args[0] + "\"");
         } else {
             return Arrays.asList(modes).indexOf(args[0]);
         }
