@@ -11,6 +11,12 @@
     * Исходный код тестов
         * [Простой вариант](clojure/cljtest/linear/LinearBinaryTest.java)
         * [Сложный вариант](clojure/cljtest/linear/LinearNaryTest.java)
+ * *Shapeless*
+    * Добавьте операции поэлементного сложения (`s+`),
+        вычитания (`s-`) и умножения (`s*`) чисел и
+        векторов любой (в том числе, переменной) формы.
+        Например, `(s+ [[1 2] 3] [[4 5] 6])` должно быть равно `[[5 7] 9]`.
+    * [Исходный код тестов](clojure/cljtest/linear/LinearShapelessTest.java)
 
 Для запуска тестов можно использовать скрипты
 [TestClojure.cmd](clojure/TestClojure.cmd) и [TestClojure.sh](clojure/TestClojure.sh)
