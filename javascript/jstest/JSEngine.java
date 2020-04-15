@@ -4,9 +4,10 @@ import javax.script.ScriptContext;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
  * @author Georgiy Korneev (kgeorgiy@kgeorgiy.info)
  */
 public class JSEngine implements Engine {
+    public static Path JS_ROOT = Path.of(".");
     public static final String OPTIONS = "--module-path=<js>/graal";
     private final ScriptEngine engine;
     private final String evaluate;
@@ -47,11 +49,18 @@ public class JSEngine implements Engine {
         }
 
         try {
-            engine.eval(new FileReader(script, StandardCharsets.UTF_8));
+            include(script, engine);
         } catch (final ScriptException e) {
             throw new EngineException("Script error", e);
+        }
+    }
+
+    private static void include(final String script, final ScriptEngine engine) throws ScriptException {
+        final Path scriptPath = JS_ROOT.resolve(script);
+        try (final Reader reader = Files.newBufferedReader(scriptPath)) {
+            engine.eval(reader);
         } catch (final IOException e) {
-            throw new EngineException(String.format("Script '%s' not found", script), e);
+            throw new EngineException(String.format("Script '%s' not found", scriptPath), e);
         }
     }
 
@@ -116,8 +125,8 @@ public class JSEngine implements Engine {
             System.out.println(message);
         }
 
-        public void include(final String file) throws IOException, ScriptException {
-            engine.eval(new FileReader(file, StandardCharsets.UTF_8));
+        public void include(final String file) throws ScriptException {
+            JSEngine.include(file, engine);
         }
     }
 }

@@ -5,6 +5,7 @@ import clojure.lang.IFn;
 import jstest.Engine;
 import jstest.EngineException;
 
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -15,6 +16,7 @@ public class ClojureScript {
     public static final IFn LOAD_STRING = var("clojure.core/load-string");
     public static final IFn LOAD_FILE = asUser("load-file");
     public static final IFn LOAD_STRING_IN = asUser("load-string");
+    public static Path CLOJURE_ROOT = Path.of(".");
 
     private static IFn asUser(final String function) {
         return (IFn) LOAD_STRING.invoke(
@@ -26,8 +28,8 @@ public class ClojureScript {
     }
 
     public static void loadScript(final String script) {
-        LOAD_STRING.invoke("(println *ns*)");
-        LOAD_FILE.invoke(script);
+        System.setProperty("CLOJURE_ROOT", CLOJURE_ROOT.toString());
+        LOAD_FILE.invoke(CLOJURE_ROOT.resolve(script).toString());
     }
 
     protected static <T> Engine.Result<T> call(final IFn f, final Object[] args, final Class<T> type, final String context) {
