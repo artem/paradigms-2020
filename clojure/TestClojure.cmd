@@ -13,4 +13,4 @@ javac ^
  && java ^
     -ea ^
     "--class-path=%~dp0/lib/*;__out" ^
-    "%test%"
+    "%test%" "%~2"

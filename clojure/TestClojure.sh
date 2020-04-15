@@ -18,4 +18,4 @@ javac \
 java \
     -ea \
     "--class-path=$LIB/*:__out" \
-    "$TEST"
+    "$TEST" "$2"
