@@ -60,8 +60,6 @@ const operations = (function () {
 
 
     return {
-        Const: Const,
-        Variable: Variable,
         Add: abstractOp((x, y) => x + y, '+'),
         Subtract: abstractOp((x, y) => x - y, '-'),
         Multiply: abstractOp((x, y) => x * y, '*'),
@@ -81,51 +79,46 @@ const Negate = operations.Negate;
 const Sinh = operations.Sinh;
 const Cosh = operations.Cosh;
 
+function ParsingError(expr, msg) {
+    this.message = 'col ' + (expr.pos + 1) + ': ' + msg;
+}
+
+ParsingError.prototype = Object.create(Error.prototype);
+
+function StringSource(str) {
+    this.src = str;
+    this.pos = 0;
+}
+
+StringSource.prototype.curLetter = function () {
+    return this.src[this.pos];
+}
+StringSource.prototype.skipWhitespace = function () {
+    while (this.curLetter() === ' ') {
+        this.pos++;
+    }
+}
+StringSource.prototype.nextToken = function () {
+    const SEPARATORS = [undefined, ' ', '(', ')'];
+    this.skipWhitespace();
+
+    let oldPos = this.pos;
+    while (!SEPARATORS.includes(this.curLetter())) {
+        this.pos++;
+    }
+    return this.src.substring(oldPos, this.pos);
+}
+StringSource.prototype.expect = function (exp) {
+    let cur = this.curLetter();
+
+    if (cur !== exp) {
+        throw new ParsingError(this,
+            'Expected ' + (exp === undefined ? 'end of expression' : '\'' + exp + '\'') + ', got ' + (cur === undefined ? 'end of expression' : '\'' + cur + '\''));
+    }
+    this.pos++;
+}
 
 const parser = (function () {
-    function ParsingError(expr, msg) {
-        this.message = 'col ' + (expr.pos + 1) + ': ' + msg;
-    }
-
-    ParsingError.prototype = Object.create(Error.prototype);
-
-
-    function StringSource(str) {
-        this.src = str;
-        this.pos = 0;
-    }
-
-    StringSource.prototype.curLetter = function () {
-        return this.src[this.pos];
-    }
-    StringSource.prototype.skipWhitespace = function () {
-        while (this.curLetter() === ' ') {
-            this.pos++;
-        }
-    }
-    StringSource.prototype.nextToken = function () {
-        const SEPARATORS = [undefined, ' ', '(', ')'];
-        this.skipWhitespace();
-
-        let oldPos = this.pos;
-        while (!SEPARATORS.includes(this.curLetter())) {
-            this.pos++;
-        }
-        return this.src.substring(oldPos, this.pos);
-    }
-    StringSource.prototype.expect = function (exp) {
-        let cur = this.curLetter();
-
-        if (cur !== exp) {
-            throw new ParsingError(this, 'Expected ' +
-                (exp === undefined ? 'end of expression' : '\'' + exp + '\'') +
-                ', got ' +
-                (cur === undefined ? 'end of expression' : '\'' + cur + '\''));
-        } else {
-            this.pos++;
-        }
-    }
-
     function parseOperation(expr) {
         const OPERATIONS = {
             '+': [Add, 2],
@@ -139,15 +132,12 @@ const parser = (function () {
 
         expr.expect('(');
         expr.skipWhitespace();
-
         let args = [];
         let opName = expr.nextToken();
         let op = OPERATIONS[opName];
-
         if (op === undefined) {
             throw new ParsingError(expr, 'Unknown operation: \'' + opName + '\'');
         }
-
         for (let i = 0; i < op[1]; i++) {
             expr.skipWhitespace();
             args.push(parseValue(expr));
@@ -160,10 +150,9 @@ const parser = (function () {
     function parseValue(expr) {
         const VARS = ['x', 'y', 'z'];
 
+        let result;
         expr.skipWhitespace();
         let letter = expr.curLetter();
-
-        let result;
         if (letter >= '0' && letter <= '9' || letter === '-') {
             let oldPos = expr.pos++;
             while (expr.curLetter() >= '0' && expr.curLetter() <= '9') {
@@ -193,9 +182,7 @@ const parser = (function () {
         return ret;
     }
 
-    return {
-        parsePrefix: parsePrefix
-    };
+    return {parsePrefix: parsePrefix};
 })();
 
 const parsePrefix = parser.parsePrefix;
