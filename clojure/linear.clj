@@ -36,10 +36,12 @@
       #(mapv (partial scalar %1) transposed)
       a)))
 
-(defn shapeless [op a b]
-  (if (vector? a) (mapv #(shapeless op %1 %2) a b) (op a b)))
+(defn shapeless [op]
+  (fn [& args]
+    (if (vector? (first args))
+      (apply mapv (partial (shapeless op)) args)
+      (apply op args))))
 
-
-(defn s+ [a b] (shapeless + a b))
-(defn s- [a b] (shapeless - a b))
-(defn s* [a b] (shapeless * a b))
+(def s+ (shapeless +))
+(def s- (shapeless -))
+(def s* (shapeless *))
