@@ -31,7 +31,7 @@
   (apply mapv vector a))
 
 (defn m*m [a b]
-  (def transposed (transpose b))
-  (mapv
-    (fn [row] (mapv (partial scalar row) transposed))
-    a))
+  (let [transposed (transpose b)]
+    (mapv
+      #(mapv (partial scalar %1) transposed)
+      a)))
