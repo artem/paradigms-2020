@@ -25,6 +25,7 @@ public class LinearBinaryTest extends BaseTest {
     public static final ClojureScript.F<IPersistentVector> V_ADD = vectorFunction("v+");
     public static final ClojureScript.F<IPersistentVector> V_SUB = vectorFunction("v-");
     public static final ClojureScript.F<IPersistentVector> V_MUL = vectorFunction("v*");
+    public static final ClojureScript.F<IPersistentVector> V_DIV = vectorFunction("vd");
 
     public static final ClojureScript.F<Number> SCALAR = numberFunction("scalar");
     public static final ClojureScript.F<IPersistentVector> VECT = vectorFunction("vect");
@@ -33,6 +34,7 @@ public class LinearBinaryTest extends BaseTest {
     public static final ClojureScript.F<IPersistentVector> M_ADD = vectorFunction("m+");
     public static final ClojureScript.F<IPersistentVector> M_SUB = vectorFunction("m-");
     public static final ClojureScript.F<IPersistentVector> M_MUL = vectorFunction("m*");
+    public static final ClojureScript.F<IPersistentVector> M_DIV = vectorFunction("md");
 
     public static final ClojureScript.F<IPersistentVector> M_BY_S = vectorFunction("m*s");
     public static final ClojureScript.F<IPersistentVector> M_BY_V = vectorFunction("m*v");

@@ -92,16 +92,19 @@ public class ObjectExpressionTest extends BaseJavascriptTest<JSEngine> {
                 );
 //                actual[variable] = length;
             }
+
+            final double di = variable == 0 ? D : 0;
+            final double dj = variable == 1 ? D : 0;
+            final double dk = variable == 2 ? D : 0;
             for (int i = MIN; i <= N; i += 1) {
-                final double di = variable == 0 ? D : 0;
                 for (int j = MIN; j <= N; j += 1) {
-                    final double dj = variable == 1 ? D : 0;
                     for (int k = MIN; k <= N; k += 1) {
-                        final double dk = variable == 2 ? D : 0;
-                        final double expected = (
-                                test.answer.evaluate(i + di, j + dj, k + dk) -
-                                        test.answer.evaluate(i - di, j - dj, k - dk)) / D / 2;
-                        evaluate(new double[]{i, j, k}, expected, EPS);
+                        if (Double.isFinite(test.answer.evaluate(i, j, k))) {
+                            final double expected = (
+                                    test.answer.evaluate(i + di, j + dj, k + dk) -
+                                            test.answer.evaluate(i - di, j - dj, k - dk)) / D / 2;
+                            evaluate(new double[]{i, j, k}, expected, EPS);
+                        }
                     }
                 }
             }
