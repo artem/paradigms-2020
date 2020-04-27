@@ -104,6 +104,12 @@
  * [Потоки](clojure/examples/2_4_streams.clj)
  * [Отображения и множества](clojure/examples/2_5_maps.clj)
 
+Лекция 3. Объекты и вычисления
+ * [Прототипное наследование](clojure/examples/3_1_js-objects.clj)
+ * [Классы](clojure/examples/3_2_java-objects.clj)
+ * [Изменяемое состояние](clojure/examples/3_3_mutable-state.clj)
+ * [Числа Чёрча](clojure/examples/3_4_church.clj)
+
 
 ## Домашнее задание 8. Обработка ошибок на JavaScript
 
