@@ -3,6 +3,15 @@
 [Условия домашних заданий](http://www.kgeorgiy.info/courses/paradigms/homeworks.html)
 
 
+## Домашнее задание 11. Объектные выражения на Clojure
+
+Модификации
+ * *Базовая*
+    * Код должен находиться в файле `expression.clj`.
+    * [Исходный код тестов](clojure/cljtest/object/ClojureObjectExpressionTest.java)
+        * Запускать c аргументом `easy` или `hard`
+
+
 ## Домашнее задание 10. Функциональные выражения на Clojure
 
 Модификации
