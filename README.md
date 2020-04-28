@@ -19,7 +19,11 @@
     * Код должен находиться в файле `expression.clj`.
     * [Исходный код тестов](clojure/cljtest/functional/ClojureFunctionalExpressionTest.java)
         * Запускать c аргументом `easy` или `hard`
-
+ * *MinMax*. Дополнительно реализовать поддержку:
+    * операций произвольного числа аргументов:
+        * `min` – минимум, `(min 1 2 6)` равно 1;
+        * `max` – максимум, `(min 1 2 6)` равно 6;
+    * [Исходный код тестов](clojure/cljtest/functional/ClojureFunctionalMinMaxTest.java)
 
 ## Домашнее задание 9. Линейная алгебра на Clojure
 
