@@ -39,6 +39,12 @@
         * `pw` – возведение в степень, `(pow 2 3)` равно 8;
         * `lg` – логарифм абсолютной величины по основанию абсолютной величины, `(lg -8 -2)` равно 3.
     * [Исходный код тестов](clojure/cljtest/functional/ClojureFunctionalPwLgTest.java)
+ * *SumexpSoftmax*. Дополнительно реализовать поддержку:
+    * операций произвольного числа аргументов:
+        * `sumexp` – сумма экспонент, `(sumexp 8 8 9)` примерно равно 14065;
+        * `softmax` – [softmax](https://ru.wikipedia.org/wiki/Softmax) первого аргумента, `(softmax 1 2 3)` примерно равно 0.09;
+    * [Исходный код тестов](clojure/cljtest/functional/ClojureFunctionalSumexpSoftmaxTest.java)
+
 
 ## Домашнее задание 9. Линейная алгебра на Clojure
 
