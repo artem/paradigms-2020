@@ -29,6 +29,11 @@
         * `Sum` (`sum`) – сумма, `(sum 1 2 3)` равно 6;
         * `Avg` (`avg`) – арифметическое среднее, `(avg 1 2 3)` равно 2;
     * [Исходный код тестов](clojure/cljtest/object/ClojureObjectSumAvgTest.java)
+ * *SquareSqrt*. Дополнительно реализовать поддержку:
+    * унарных операций:
+        * `Square` (`square`) – возведение в квадрат, `(square 3)` равно 9;
+        * `Sqrt` (`sqrt`) – извлечение квадратного корня из абсолютной величины аргумента, `(sqrt -9)` равно 3.
+    * [Исходный код тестов](clojure/cljtest/object/ClojureObjectSquareSqrtTest.java)
 
 
 ## Домашнее задание 10. Функциональные выражения на Clojure
