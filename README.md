@@ -28,7 +28,7 @@
     * операций произвольного числа аргументов:
         * `Sum` (`sum`) – сумма, `(sum 1 2 3)` равно 6;
         * `Avg` (`avg`) – арифметическое среднее, `(avg 1 2 3)` равно 2;
-    * [Исходный код тестов](javascript/cljtest/object/ClojureObjectSumAvgTest.java)
+    * [Исходный код тестов](clojure/cljtest/object/ClojureObjectSumAvgTest.java)
 
 
 ## Домашнее задание 10. Функциональные выражения на Clojure
