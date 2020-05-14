@@ -34,6 +34,11 @@
         * `Square` (`square`) – возведение в квадрат, `(square 3)` равно 9;
         * `Sqrt` (`sqrt`) – извлечение квадратного корня из абсолютной величины аргумента, `(sqrt -9)` равно 3.
     * [Исходный код тестов](clojure/cljtest/object/ClojureObjectSquareSqrtTest.java)
+ * *SumexpSoftmax*. Дополнительно реализовать поддержку:
+    * операций произвольного числа аргументов:
+        * `Sumexp` (`sumexp`) – сумма экспонент, `(sumexp 8 8 9)` примерно равно 14065;
+        * `Softmax` (`Softmax`) – [softmax](https://ru.wikipedia.org/wiki/Softmax) первого аргумента, `(softmax 1 2 3)` примерно равно 0.09;
+    * [Исходный код тестов](clojure/cljtest/object/ClojureObjectSumexpSoftmaxTest.java)
 
 
 ## Домашнее задание 10. Функциональные выражения на Clojure
