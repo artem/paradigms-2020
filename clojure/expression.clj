@@ -34,6 +34,7 @@
 (def Negate)
 (def Square)
 (def Sqrt)
+(def Module)
 
 (def ConstantProto
   {
@@ -106,7 +107,8 @@
 (defn _Div [this x y] (_Binary this x y divideCljWorkaround "/"))
 (defn _Neg [this x] (_Unary this x - "negate"))
 (defn _Square [this x] (_Unary this x #(* %1 %1) "square"))
-(defn _Sqrt [this x] (_Unary this x #(Math/sqrt %1) "sqrt"))
+(defn _Sqrt [this x] (_Unary this x #(Math/sqrt (Math/abs %1)) "sqrt"))
+(defn _Mod [this x] (_Unary this x #(Math/abs %1) "module"))
 
 (def AddProto
   (assoc BinaryProto
@@ -141,9 +143,10 @@
                    ))
 (def SqrtProto (assoc UnaryProto
                  :diff (fn [this var]
-                         (Divide (Negate (diff (proto-get this :first) var))
-                                 (Multiply this (Constant 2))))
+                         (Multiply (diff (proto-get this :first) var)
+                                   (Divide (Module (proto-get this :first)) (Multiply (Constant 2) (Multiply this (proto-get this :first))))))
                  ))
+(def ModProto UnaryProto)
 
 
 (def Add (constructor _Add AddProto))
@@ -153,7 +156,7 @@
 (def Negate (constructor _Neg NegProto))
 (def Square (constructor _Square SquareProto))
 (def Sqrt (constructor _Sqrt SqrtProto))
-
+(def Module (constructor _Mod ModProto))
 
 
 
