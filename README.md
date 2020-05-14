@@ -3,6 +3,15 @@
 [Условия домашних заданий](http://www.kgeorgiy.info/courses/paradigms/homeworks.html)
 
 
+## Домашнее задание 12. Комбинаторные парсеры
+
+Модификации
+ * *Базовая*
+    * Код должен находиться в файле `expression.clj`.
+    * [Исходный код тестов](clojure/cljtest/parsing/ClojureObjectParsingTest.java)
+        * Запускать c аргументом `easy` или `hard`
+
+
 ## Домашнее задание 11. Объектные выражения на Clojure
 
 Модификации
@@ -10,6 +19,11 @@
     * Код должен находиться в файле `expression.clj`.
     * [Исходный код тестов](clojure/cljtest/object/ClojureObjectExpressionTest.java)
         * Запускать c аргументом `easy` или `hard`
+ * *ExpLn*. Дополнительно реализовать поддержку:
+    * унарных операций:
+        * `Exp` (`exp`) – экспонента, `(exp 8)` примерно равно 2981;
+        * `Ln`  (`Ln`)  – натуральный логарифм абсолютной величины, `(lg 2981)` примерно равно 8.
+    * [Исходный код тестов](clojure/cljtest/object/ClojureObjectExpLnTest.java)
 
 
 ## Домашнее задание 10. Функциональные выражения на Clojure
@@ -39,6 +53,12 @@
         * `pw` – возведение в степень, `(pow 2 3)` равно 8;
         * `lg` – логарифм абсолютной величины по основанию абсолютной величины, `(lg -8 -2)` равно 3.
     * [Исходный код тестов](clojure/cljtest/functional/ClojureFunctionalPwLgTest.java)
+ * *SumexpSoftmax*. Дополнительно реализовать поддержку:
+    * операций произвольного числа аргументов:
+        * `sumexp` – сумма экспонент, `(sumexp 8 8 9)` примерно равно 14065;
+        * `softmax` – [softmax](https://ru.wikipedia.org/wiki/Softmax) первого аргумента, `(softmax 1 2 3)` примерно равно 0.09;
+    * [Исходный код тестов](clojure/cljtest/functional/ClojureFunctionalSumexpSoftmaxTest.java)
+
 
 ## Домашнее задание 9. Линейная алгебра на Clojure
 
@@ -137,6 +157,12 @@
  * [Классы](clojure/examples/3_2_java-objects.clj)
  * [Изменяемое состояние](clojure/examples/3_3_mutable-state.clj)
  * [Числа Чёрча](clojure/examples/3_4_church.clj)
+
+Лекция 4. Комбинаторные парсеры
+ * [Базовые функции](clojure/examples/4_1_base.clj)
+ * [Комбинаторы](clojure/examples/4_2_combinators.clj)
+ * [JSON](clojure/examples/4_3_json.clj)
+ * [Макросы](clojure/examples/4_4_macro.clj)
 
 
 ## Домашнее задание 8. Обработка ошибок на JavaScript
