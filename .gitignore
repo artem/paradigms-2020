@@ -5,3 +5,6 @@
 # Compilation output
 out/
 *.class
+
+# Clojure nrepl
+.nrepl-port
