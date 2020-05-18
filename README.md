@@ -3,6 +3,15 @@
 [Условия домашних заданий](http://www.kgeorgiy.info/courses/paradigms/homeworks.html)
 
 
+## Домашнее задание 13. Простые числа на Prolog
+
+Модификации
+ * *Базовая*
+    * Код должен находиться в файле `primes.pl`.
+    * [Исходный код тестов](prolog/prtest/primes/PrologPrimesTest.java)
+        * Запускать c аргументом `easy`, `hard` или `bonus`
+
+
 ## Исходный код к лекциям по Prolog
 
 Запуск Prolog
