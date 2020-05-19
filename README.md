@@ -61,7 +61,11 @@
         * `Sumexp` (`sumexp`) – сумма экспонент, `(sumexp 8 8 9)` примерно равно 14065;
         * `Softmax` (`Softmax`) – [softmax](https://ru.wikipedia.org/wiki/Softmax) первого аргумента, `(softmax 1 2 3)` примерно равно 0.09;
     * [Исходный код тестов](clojure/cljtest/object/ClojureObjectSumexpSoftmaxTest.java)
-
+ * *PowLog*. Дополнительно реализовать поддержку:
+    * бинарных операций:
+        * `Pw` (`pw`)– возведение в степень, `(pow 2 3)` равно 8;
+        * `lg` – логарифм абсолютной величины по основанию абсолютной величины, `(lg -8 -2)` равно 3.
+    * [Исходный код тестов](clojure/cljtest/object/ClojureObjectPwLgTest.java)
 
 ## Домашнее задание 10. Функциональные выражения на Clojure
 
