@@ -35,27 +35,23 @@
 (def firstArg #(first (args %1)))
 (def secondArg #(second (args %1)))
 
-(def ConstantProto
-  {:toString (fn [this] (format "%.1f" (proto-get this :data)))
-   :evaluate (fn [this _] (proto-get this :data))
+(defn Constant [val]
+  {:toString (fn [_] (format "%.1f" val))
+   :evaluate (constantly val)
    :diff     (fn [_ _] (Constant 0))
    })
 
-(def Constant (constructor #(assoc %1 :data %2) ConstantProto))
-
+(def ZERO (Constant 0))
+(def ONE (Constant 1))
 (def TWO (Constant 2))
 
-(def VariableProto
-  {:toString (fn [this] (proto-get this :name))
-   :evaluate (fn [this m]
-               (get m (proto-get this :name) 0))
-   :diff     (fn [this var]
-               (if (= (proto-get this :name) var)
-                 (Constant 1)
-                 (Constant 0)))
+(defn Variable [name]
+  {:toString (constantly name)
+   :evaluate (fn [_ m]
+               (get m name 0))
+   :diff     (fn [_ var]
+               (if (= name var) ONE ZERO))
    })
-
-(def Variable (constructor #(assoc %1 :name %2) VariableProto))
 
 (defn _Operation [f s]
   (fn [this & arguments]
@@ -72,47 +68,45 @@
                       (mapv #(evaluate %1 m) (args this))))
    })
 
-(def _Add (_Operation + "+"))
-(def _Sub (_Operation - "-"))
-(def _Mul (_Operation * "*"))
-(def _Div (_Operation divideCljWorkaround "/"))
-(def _Neg (_Operation - "negate"))
-(def _Square (_Operation #(* %1 %1) "square"))
-(def _Sqrt (_Operation #(Math/sqrt (Math/abs %1)) "sqrt"))
+(defn applyDiffer [f]
+  (assoc OperationProto
+    :diff f))
 
-(def AddProto (assoc OperationProto
-                :diff (fn [this var] (Add (diff (firstArg this) var)
-                                          (diff (secondArg this) var)))))
-(def SubProto (assoc OperationProto
-                :diff (fn [this var] (Subtract (diff (firstArg this) var)
-                                               (diff (secondArg this) var)))))
-(def MulProto (assoc OperationProto
-                :diff (fn [this var] (Add (Multiply (diff (firstArg this) var) (secondArg this))
-                                          (Multiply (firstArg this) (diff (secondArg this) var))))))
-(def DivProto (assoc OperationProto
-                :diff (fn [this var] (Divide (Subtract
-                                               (Multiply (diff (firstArg this) var) (secondArg this))
-                                               (Multiply (firstArg this) (diff (secondArg this) var)))
-                                             (Square (secondArg this))))))
+(def Add (constructor (_Operation + "+")
+                      (applyDiffer (fn [this var]
+                                     (Add (diff (firstArg this) var)
+                                          (diff (secondArg this) var))))))
 
-(def NegProto (assoc OperationProto
-                :diff (fn [this var] (Negate (diff (firstArg this) var)))))
+(def Subtract (constructor (_Operation - "-")
+                           (applyDiffer (fn [this var]
+                                          (Subtract (diff (firstArg this) var)
+                                                    (diff (secondArg this) var))))))
 
-(def SquareProto (assoc OperationProto
-                   :diff (fn [this var] (Multiply TWO (Multiply (diff (firstArg this) var) (firstArg this))))))
+(def Multiply (constructor (_Operation * "*")
+                           (applyDiffer (fn [this var]
+                                          (Add (Multiply (diff (firstArg this) var) (secondArg this))
+                                               (Multiply (firstArg this) (diff (secondArg this) var)))))))
 
-(def SqrtProto (assoc OperationProto
-                 :diff (fn [this var] (Multiply (diff (firstArg this) var)
+(def Divide (constructor (_Operation divideCljWorkaround "/")
+                         (applyDiffer (fn [this var]
+                                        (Divide (Subtract
+                                                  (Multiply (diff (firstArg this) var) (secondArg this))
+                                                  (Multiply (firstArg this) (diff (secondArg this) var)))
+                                                (Square (secondArg this)))))))
+
+(def Negate (constructor (_Operation - "negate")
+                         (applyDiffer (fn [this var]
+                                        (Negate (diff (firstArg this) var))))))
+
+(def Square (constructor (_Operation #(* %1 %1) "square")
+                         (applyDiffer (fn [this var]
+                                        (Multiply TWO (Multiply (diff (firstArg this) var) (firstArg this)))))))
+
+(def Sqrt (constructor (_Operation #(Math/sqrt (Math/abs %1)) "sqrt")
+                       (applyDiffer (fn [this var]
+                                      (Multiply (diff (firstArg this) var)
                                                 (Divide (Sqrt (Square (firstArg this)))
-                                                        (Multiply TWO (Multiply this (firstArg this))))))))
-
-(def Add (constructor _Add AddProto))
-(def Subtract (constructor _Sub SubProto))
-(def Multiply (constructor _Mul MulProto))
-(def Divide (constructor _Div DivProto))
-(def Negate (constructor _Neg NegProto))
-(def Square (constructor _Square SquareProto))
-(def Sqrt (constructor _Sqrt SqrtProto))
+                                                        (Multiply TWO (Multiply this (firstArg this)))))))))
 
 (def variables {'x (Variable "x") 'y (Variable "y") 'z (Variable "z")})
 (def ops {'+ Add '- Subtract '* Multiply '/ Divide 'negate Negate 'square Square 'sqrt Sqrt})
