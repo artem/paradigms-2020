@@ -59,6 +59,12 @@
             и [longBitsToDouble](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Double.html#longBitsToDouble(long))
         * операции по увеличению приоритета: `^`, `|`, `&`, `+` и `-`, `*` и `/`
     * [Исходный код тестов](clojure/cljtest/parsing/ClojureBitwiseParsingTest.java)
+ * *ImplIff*. Сделать модификацию *Bitwise* и дополнительно реализовать поддержку:
+    * Побитовых операций
+        * `Impl` (`=>`) – импликация (правоассоциативна): `4 => 1` примерно равно -2
+        * `Iff` (`<=>`) - тогда и только тогда: `2 <=> 6` примерно равно -1.34827E308
+        * операции по увеличению приоритета: `<=>`, `=>`, `^`, `|`, `&`, `+` и `-`, `*` и `/`
+    * [Исходный код тестов](clojure/cljtest/parsing/ClojureImplIffParsingTest.java)
 
 
 ## Домашнее задание 11. Объектные выражения на Clojure
