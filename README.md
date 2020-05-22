@@ -49,6 +49,16 @@
         * `Log` (`//`) – взятия логарифма:
             `8 // 9 // 3` равно `8 // (9 // 3)` равно 3
     * [Исходный код тестов](clojure/cljtest/parsing/ClojurePowLogParsingTest.java)
+ * *Bitwise*. Дополнительно реализовать поддержку:
+    * Побитовых операций
+        * `And` (`&`) – и: `5 & 6` равно 4
+        * `Or` (`|`) - или: `5 & 6` равно 7
+        * `Xor` (`^`) - исключающее или: `5 ^ 6` примерно равно 1.66881E-308
+        * для реализации операций используйте
+            [doubleToLongBits](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Double.html#doubleToLongBits(double))
+            и [longBitsToDouble](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Double.html#longBitsToDouble(long))
+        * операции по увеличению приоритета: `^`, `|`, `&`, `+` и `-`, `*` и `/`
+    * [Исходный код тестов](clojure/cljtest/parsing/ClojureBitwiseParsingTest.java)
 
 
 ## Домашнее задание 11. Объектные выражения на Clojure
