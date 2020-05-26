@@ -33,6 +33,10 @@
  * [Списки](prolog/examples/1_3_lists.pl)
  * [Задача о расстановке ферзей](prolog/examples/1_4_queens.pl)
 
+Лекция 2. ООП в Prolog
+ * [Загадка Эйнштейна](prolog/examples/2_1_einstein.pl)
+ * [Арифметические выражения](prolog/examples/2_2_expressions.pl)
+
 
 ## Домашнее задание 12. Комбинаторные парсеры
 
