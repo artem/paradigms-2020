@@ -3,6 +3,15 @@
 [Условия домашних заданий](http://www.kgeorgiy.info/courses/paradigms/homeworks.html)
 
 
+## Домашнее задание 14. Дерево поиска на Prolog
+
+Модификации
+ * *Базовая*
+    * Код должен находиться в файле `tree-map.pl`.
+    * [Исходный код тестов](prolog/prtest/tree/PrologTreeTest.java)
+        * Запускать c аргументом `easy` или `hard`
+
+
 ## Домашнее задание 13. Простые числа на Prolog
 
 Модификации
