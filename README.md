@@ -23,6 +23,9 @@
     * Добавьте правило `prime_palindrome(N, K)`,
       определяющее, является ли `N` простым палиндромом в `K`-ичной системе счисления
     * [Исходный код тестов](prolog/prtest/primes/PrologPalindromeTest.java)
+ * *Nth*
+    * Добавьте правило `nth(N, P)`, подсчитывающее `N`-ое простое число
+    * [Исходный код тестов](prolog/prtest/primes/PrologNthTest.java)
 
 Для запуска тестов можно использовать скрипты
 [TestProlog.cmd](prolog/TestProlog.cmd) и [TestProlog.sh](prolog/TestProlog.sh)
