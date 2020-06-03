@@ -3,6 +3,15 @@
 [Условия домашних заданий](http://www.kgeorgiy.info/courses/paradigms/homeworks.html)
 
 
+## Домашнее задание 14. Дерево поиска на Prolog
+
+Модификации
+ * *Базовая*
+    * Код должен находиться в файле `tree-map.pl`.
+    * [Исходный код тестов](prolog/prtest/tree/PrologTreeTest.java)
+        * Запускать c аргументом `easy` или `hard`
+
+
 ## Домашнее задание 13. Простые числа на Prolog
 
 Модификации
@@ -10,6 +19,22 @@
     * Код должен находиться в файле `primes.pl`.
     * [Исходный код тестов](prolog/prtest/primes/PrologPrimesTest.java)
         * Запускать c аргументом `easy`, `hard` или `bonus`
+ * *Unique*
+    * Добавьте правило `unique_prime_divisors(N, Divisors)`,
+      возвращающее простые делители без повторов
+    * [Исходный код тестов](prolog/prtest/primes/PrologUniqueTest.java)
+
+ * *Palindrome*
+    * Добавьте правило `prime_palindrome(N, K)`,
+      определяющее, является ли `N` простым палиндромом в `K`-ичной системе счисления
+    * [Исходный код тестов](prolog/prtest/primes/PrologPalindromeTest.java)
+ * *Nth*
+    * Добавьте правило `nth(N, P)`, подсчитывающее `N`-ое простое число
+    * [Исходный код тестов](prolog/prtest/primes/PrologNthTest.java)
+ * *Lcm*
+    * Добавьте правило `lcm(A, B, LCM)`,
+      подсчитывающее НОК(`A`, `B`) через разложение на простые множители
+    * [Исходный код тестов](prolog/prtest/primes/PrologLcmTest.java)
 
 Для запуска тестов можно использовать скрипты
 [TestProlog.cmd](prolog/TestProlog.cmd) и [TestProlog.sh](prolog/TestProlog.sh)
@@ -33,6 +58,10 @@
  * [Списки](prolog/examples/1_3_lists.pl)
  * [Задача о расстановке ферзей](prolog/examples/1_4_queens.pl)
 
+Лекция 2. ООП в Prolog
+ * [Загадка Эйнштейна](prolog/examples/2_1_einstein.pl)
+ * [Арифметические выражения](prolog/examples/2_2_expressions.pl)
+
 
 ## Домашнее задание 12. Комбинаторные парсеры
 
@@ -41,7 +70,6 @@
     * Код должен находиться в файле `expression.clj`.
     * [Исходный код тестов](clojure/cljtest/parsing/ClojureObjectParsingTest.java)
         * Запускать c аргументом `easy` или `hard`
-        * *PowLog*. Дополнительно реализовать поддержку:
  * *PowLog*. Дополнительно реализовать поддержку:
     * Бинарных правоассоциативных операций максимального приоритета:
         * `Pow` (`**`) – возведения в степень:
@@ -49,6 +77,10 @@
         * `Log` (`//`) – взятия логарифма:
             `8 // 9 // 3` равно `8 // (9 // 3)` равно 3
     * [Исходный код тестов](clojure/cljtest/parsing/ClojurePowLogParsingTest.java)
+ * *Variables*. Дополнительно реализовать поддержку:
+    * Переменных, состоящих из произвольного количества букв `XYZ` в любом регистре
+        * Настоящее имя переменной определяется первой буквой ее имени
+    * [Исходный код тестов](clojure/cljtest/parsing/ClojureVariablesParsingTest.java)
  * *Bitwise*. Дополнительно реализовать поддержку:
     * Побитовых операций
         * `And` (`&`) – и: `5 & 6` равно 4
