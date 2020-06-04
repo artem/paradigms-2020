@@ -25,9 +25,6 @@
 (defn method [key]
   (fn [this & args] (apply proto-call this key args)))
 
-(defn constructor [ctor prototype]
-  (fn [& args] (apply ctor {:prototype prototype} args)))
-
 (def toString (method :toString))
 (def toStringSuffix (method :toStringSuffix))
 (def evaluate (method :evaluate))
@@ -37,10 +34,10 @@
 (def secondArg #(second (args %1)))
 
 (defn Constant [val]
-  {:toString (fn [_] (format "%.1f" val))
-   :toStringSuffix (fn [_] (format "%.1f" val))                   ;TODO
-   :evaluate (constantly val)
-   :diff     (fn [_ _] (Constant 0))
+  {:toString       (fn [_] (format "%.1f" val))
+   :toStringSuffix (fn [_] (format "%.1f" val))
+   :evaluate       (constantly val)
+   :diff           (fn [_ _] (Constant 0))
    })
 
 (def ZERO (Constant 0))
@@ -48,13 +45,16 @@
 (def TWO (Constant 2))
 
 (defn Variable [name]
-  {:toString (constantly name)
-   :toStringSuffix (constantly name)                        ;TODO
-   :evaluate (fn [_ m]
-               (get m name 0))
-   :diff     (fn [_ var]
-               (if (= name var) ONE ZERO))
+  {:toString       (constantly name)
+   :toStringSuffix (constantly name)
+   :evaluate       (fn [_ m]
+                     (get m name 0))
+   :diff           (fn [_ var]
+                     (if (= name var) ONE ZERO))
    })
+
+(defn constructor [ctor prototype]
+  (fn [& args] (apply ctor {:prototype prototype} args)))
 
 (defn _Operation [f s]
   (fn [this & arguments]
@@ -64,55 +64,51 @@
       :arguments arguments)))
 
 (def OperationProto
-  {:toString (fn [this] (format "(%s %s)" (proto-get this :op)
-                                (clojure.string/join " " (mapv (partial toString) (args this)))))
+  {:toString       (fn [this] (format "(%s %s)" (proto-get this :op)
+                                      (clojure.string/join " " (mapv (partial toString) (args this)))))
    :toStringSuffix (fn [this] (format "(%s %s)"
-                                (clojure.string/join " " (mapv (partial toStringSuffix) (args this)))
+                                      (clojure.string/join " " (mapv (partial toStringSuffix) (args this)))
                                       (proto-get this :op)))
-   :evaluate (fn [this m]
-               (apply (proto-get this :func)
-                      (mapv #(evaluate %1 m) (args this))))
+   :evaluate       (fn [this m]
+                     (apply (proto-get this :func)
+                            (mapv #(evaluate %1 m) (args this))))
    })
 
 (defn applyDiffer [f]
   (assoc OperationProto
     :diff f))
 
+(defn diffArg [op var rest]
+  (Multiply (diff (firstArg op) var) rest))
+
 (def Add (constructor (_Operation + "+")
-                      (applyDiffer (fn [this var]
-                                     (Add (diff (firstArg this) var)
-                                          (diff (secondArg this) var))))))
+                      (applyDiffer #(Add (diff (firstArg %1) %2)
+                                         (diff (secondArg %1) %2)))))
 
 (def Subtract (constructor (_Operation - "-")
-                           (applyDiffer (fn [this var]
-                                          (Subtract (diff (firstArg this) var)
-                                                    (diff (secondArg this) var))))))
+                           (applyDiffer #(Subtract (diff (firstArg %1) %2)
+                                                   (diff (secondArg %1) %2)))))
 
 (def Multiply (constructor (_Operation * "*")
-                           (applyDiffer (fn [this var]
-                                          (Add (Multiply (diff (firstArg this) var) (secondArg this))
-                                               (Multiply (firstArg this) (diff (secondArg this) var)))))))
+                           (applyDiffer #(Add (Multiply (diff (firstArg %1) %2) (secondArg %1))
+                                              (Multiply (firstArg %1) (diff (secondArg %1) %2))))))
 
 (def Divide (constructor (_Operation divideCljWorkaround "/")
-                         (applyDiffer (fn [this var]
-                                        (Divide (Subtract
-                                                  (Multiply (diff (firstArg this) var) (secondArg this))
-                                                  (Multiply (firstArg this) (diff (secondArg this) var)))
-                                                (Square (secondArg this)))))))
+                         (applyDiffer #(Divide (Subtract
+                                                 (Multiply (diff (firstArg %1) %2) (secondArg %1))
+                                                 (Multiply (firstArg %1) (diff (secondArg %1) %2)))
+                                               (Square (secondArg %1))))))
 
 (def Negate (constructor (_Operation - "negate")
-                         (applyDiffer (fn [this var]
-                                        (Negate (diff (firstArg this) var))))))
+                         (applyDiffer #(Negate (diff (firstArg %1) %2)))))
 
 (def Square (constructor (_Operation #(* %1 %1) "square")
-                         (applyDiffer (fn [this var]
-                                        (Multiply TWO (Multiply (diff (firstArg this) var) (firstArg this)))))))
+                         (applyDiffer #(Multiply TWO (diffArg %1 %2 (firstArg %1))))))
 
 (def Sqrt (constructor (_Operation #(Math/sqrt (Math/abs %1)) "sqrt")
-                       (applyDiffer (fn [this var]
-                                      (Multiply (diff (firstArg this) var)
-                                                (Divide (Sqrt (Square (firstArg this)))
-                                                        (Multiply TWO (Multiply this (firstArg this)))))))))
+                       (applyDiffer #(diffArg %1 %2
+                                              (Divide (Sqrt (Square (firstArg %1)))
+                                                      (Multiply TWO (Multiply %1 (firstArg %2))))))))
 
 (def Pow (constructor (_Operation #(Math/pow %1 %2) "**")
                       (applyDiffer #(ZERO))))
@@ -193,6 +189,7 @@
 
 (defn +plus [p] (+seqf cons p (+star p)))
 (defn +str [p] (+map (partial apply str) p))
+(defn +symbol [p] (+map (partial symbol) p))
 
 (def *digit (+char "0123456789"))
 (def *number (+map read-string (+str (+seqf #(flatten %&)
@@ -202,20 +199,12 @@
                                             (+opt (+plus *digit))))))
 (def *space (+char " \t\n\r"))
 (def *ws (+ignore (+star *space)))
+(def smallLetters (apply str (mapv char (range 97 123))))
 
 ; ---------------------------------------------------
-(defn *opName [name]
-  (+map
-    (constantly (symbol name))
-    (apply +seq (mapv #(+char (str %)) name))))             ; FIXME
-(def *add (*opName "+"))
-(def *minus (*opName "-"))
-(def *mul (*opName "*"))
-(def *div (*opName "/"))
-(def *negate (*opName "negate"))
-(def *pow (*opName "**"))
-(def *log (*opName "//"))
 
+(def *opName
+  (+symbol (+str (+star (+char (str smallLetters "+-/*"))))))
 
 (def *const (+map Constant *number))
 (def *var (+map (comp variables symbol str) (+char "xyz")))
@@ -224,7 +213,7 @@
   (+seqf
     (fn [args op]
       (apply op args))
-    (+plus (delay *value)) (+map (partial ops) (+or *add *minus *pow *log *mul *div *negate))))
+    (+plus (delay *value)) (+map (partial ops) *opName)))
 (def *term (+seqn 1 (+char "(") *ws *operation *ws (+char ")")))
 
 
