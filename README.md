@@ -14,6 +14,11 @@
     * Добавьте правило `map_ceilingKey(Map, Key, CeilingKey)`,
       возвращающее минимальный ключ, больший либо равный заданному.
     * [Исходный код тестов](prolog/prtest/tree/PrologTreeCeilingTest.java)
+ * *MinMax*
+    * Добавьте правила:
+        * `map_minKey(Map, Key)`, возвращающее минимальный ключ в дереве,
+        * `map_maxKey(Map, Key)`, возвращающее максимальный ключ в дереве.
+    * [Исходный код тестов](prolog/prtest/tree/PrologTreeMinMaxTest.java)
 
 
 ## Домашнее задание 13. Простые числа на Prolog
