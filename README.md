@@ -10,6 +10,10 @@
     * Код должен находиться в файле `tree-map.pl`.
     * [Исходный код тестов](prolog/prtest/tree/PrologTreeTest.java)
         * Запускать c аргументом `easy` или `hard`
+ * *CeilingKey*
+    * Добавьте правило `map_ceilingKey(Map, Key, CeilingKey)`,
+      возвращающее минимальный ключ, больший либо равный заданному.
+    * [Исходный код тестов](prolog/prtest/tree/PrologTreeCeilingTest.java)
 
 
 ## Домашнее задание 13. Простые числа на Prolog
