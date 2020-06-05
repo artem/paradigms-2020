@@ -14,6 +14,10 @@
     * Добавьте правило `map_ceilingKey(Map, Key, CeilingKey)`,
       возвращающее минимальный ключ, больший либо равный заданному.
     * [Исходный код тестов](prolog/prtest/tree/PrologTreeCeilingTest.java)
+ * *FloorKey*
+    * Добавьте правило `map_floorKey(Map, Key, FloorKey)`,
+      возвращающее максимальный ключ, меньший либо равный заданному.
+    * [Исходный код тестов](prolog/prtest/tree/PrologTreeFloorTest.java)
  * *MinMax*
     * Добавьте правила:
         * `map_minKey(Map, Key)`, возвращающее минимальный ключ в дереве,
