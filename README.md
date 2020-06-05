@@ -23,6 +23,10 @@
         * `map_minKey(Map, Key)`, возвращающее минимальный ключ в дереве,
         * `map_maxKey(Map, Key)`, возвращающее максимальный ключ в дереве.
     * [Исходный код тестов](prolog/prtest/tree/PrologTreeMinMaxTest.java)
+ * *SubmapSize*
+    * Добавьте правило `map_submapSize(Map, FromKey, ToKey, Size)`,
+      возвращающее число ключей в диапазоне `[FromKey, ToKey)`.
+    * [Исходный код тестов](prolog/prtest/tree/PrologTreeSubmapTest.java)
 
 
 ## Домашнее задание 13. Простые числа на Prolog
