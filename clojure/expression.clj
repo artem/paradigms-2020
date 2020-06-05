@@ -53,9 +53,6 @@
                      (if (= name var) ONE ZERO))
    })
 
-(defn constructor [ctor prototype]
-  (fn [& args] (apply ctor {:prototype prototype} args)))
-
 (defn _Operation [f s]
   (fn [this & arguments]
     (assoc this
@@ -76,45 +73,36 @@
 
 (defn applyDiffer [f]
   (assoc OperationProto
-    :diff f))
+    :diff (fn [this var]
+            (f this var
+               (mapv #(diff %1 var) (args this))))))
 
-(defn diffArg [op var rest]
-  (Multiply (diff (firstArg op) var) rest))
+(defn constructor [f s differ]
+  (fn [& args] (apply (_Operation f s) {:prototype (applyDiffer differ)} args)))
 
-(def Add (constructor (_Operation + "+")
-                      (applyDiffer #(Add (diff (firstArg %1) %2)
-                                         (diff (secondArg %1) %2)))))
+(def Add (constructor + "+" #(Add (first %3) (second %3))))
 
-(def Subtract (constructor (_Operation - "-")
-                           (applyDiffer #(Subtract (diff (firstArg %1) %2)
-                                                   (diff (secondArg %1) %2)))))
+(def Subtract (constructor - "-" #(Subtract (first %3) (second %3))))
 
-(def Multiply (constructor (_Operation * "*")
-                           (applyDiffer #(Add (Multiply (diff (firstArg %1) %2) (secondArg %1))
-                                              (Multiply (firstArg %1) (diff (secondArg %1) %2))))))
+(def Multiply (constructor * "*" #(Add (Multiply (first %3) (secondArg %1))
+                                       (Multiply (firstArg %1) (second %3)))))
 
-(def Divide (constructor (_Operation divideCljWorkaround "/")
-                         (applyDiffer #(Divide (Subtract
-                                                 (Multiply (diff (firstArg %1) %2) (secondArg %1))
-                                                 (Multiply (firstArg %1) (diff (secondArg %1) %2)))
-                                               (Square (secondArg %1))))))
+(def Divide (constructor divideCljWorkaround "/"
+                         #(Divide (Subtract (Multiply (first %3) (secondArg %1))
+                                            (Multiply (firstArg %1) (second %3)))
+                                  (Square (secondArg %1)))))
 
-(def Negate (constructor (_Operation - "negate")
-                         (applyDiffer #(Negate (diff (firstArg %1) %2)))))
+(def Negate (constructor - "negate" #(Negate (first %3))))
 
-(def Square (constructor (_Operation #(* %1 %1) "square")
-                         (applyDiffer #(Multiply TWO (diffArg %1 %2 (firstArg %1))))))
+(def Square (constructor #(* %1 %1) "square" #(Multiply TWO (Multiply (first %3) (firstArg %1)))))
 
-(def Sqrt (constructor (_Operation #(Math/sqrt (Math/abs %1)) "sqrt")
-                       (applyDiffer #(diffArg %1 %2
-                                              (Divide (Sqrt (Square (firstArg %1)))
-                                                      (Multiply TWO (Multiply %1 (firstArg %2))))))))
+(def Sqrt (constructor #(Math/sqrt (Math/abs %1)) "sqrt"
+                       #(Multiply (first %3)
+                                  (Divide (Sqrt (Square (firstArg %1)))
+                                          (Multiply TWO (Multiply %1 (firstArg %1)))))))
 
-(def Pow (constructor (_Operation #(Math/pow %1 %2) "**")
-                      (applyDiffer #(ZERO))))
-
-(def Log (constructor (_Operation #(/ (Math/log (Math/abs %2)) (Math/log (Math/abs %1))) "//")
-                      (applyDiffer #(ZERO))))
+(def Pow (constructor #(Math/pow %1 %2) "**" (constantly ZERO)))
+(def Log (constructor #(/ (Math/log (Math/abs %2)) (Math/log (Math/abs %1))) "//" (constantly ZERO)))
 
 (def variables {'x (Variable "x") 'y (Variable "y") 'z (Variable "z")})
 (def ops {'+ Add '- Subtract '* Multiply '/ Divide 'negate Negate 'square Square 'sqrt Sqrt '** Pow (symbol "//") Log})
