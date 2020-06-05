@@ -6,12 +6,12 @@ init(LIMIT) :- mark_comp(2, 2, 4, LIMIT), sieve(2, 3, LIMIT).
 
 prime(N) :- N > 1, not(composite(N)).
 
+table_nth(1, 2).
 nth_prime(N, P) :- table_nth(N, P), !.
-nth_prime(N, P) :- nth_p(N, 2, P), assert(table_nth(N, P)), !.
-nth_p(N, 2, P)  :- N1 is N - 1, table_nth(N1, K), K1 is K + 1, nth_p(1, K1, P), !.
-nth_p(1, I, P)  :- prime(I), P = I, !.
-nth_p(N, I, P)  :- prime(I), N1 is N - 1, I1 is I + 1, nth_p(N1, I1, P), !.
-nth_p(N, I, P)  :- I1 is I + 1, nth_p(N, I1, P), !.
+nth_prime(N, P) :- N1 is N - 1, nth_prime(N1, P1), NEXT is P1 + 2, next_prime(NEXT, P), assert(table_nth(N, P)), !.
+
+next_prime(OLD, NEW) :- composite(OLD), NEXT is OLD + 2, next_prime(NEXT, NEW), !.
+next_prime(OLD, NEW) :- OLD = NEW, !.
 
 sieve(N, CUR, LIMIT) :- SQUARE is CUR * CUR, sieve(N, CUR, SQUARE, LIMIT).
 sieve(N, CUR, SQUARE, LIMIT) :- SQUARE > LIMIT, !.
