@@ -15,6 +15,10 @@
         * `map_minKey(Map, Key)`, возвращающее минимальный ключ в дереве,
         * `map_maxKey(Map, Key)`, возвращающее максимальный ключ в дереве.
     * [Исходный код тестов](prolog/prtest/tree/PrologTreeMinMaxTest.java)
+ * *Replace*
+    * Добавьте правило `map_replace(Map, Key, Value, Result)`,
+        заменяющего значения ключа на указанное, если ключ присутствует.
+    * [Исходный код тестов](prolog/prtest/tree/PrologTreeReplaceTest.java)
  * *FloorKey*
     * Добавьте правило `map_floorKey(Map, Key, FloorKey)`,
       возвращающее максимальный ключ, меньший либо равный заданному.
