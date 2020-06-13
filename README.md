@@ -10,23 +10,23 @@
     * Код должен находиться в файле `tree-map.pl`.
     * [Исходный код тестов](prolog/prtest/tree/PrologTreeTest.java)
         * Запускать c аргументом `easy` или `hard`
- * *Replace*
-    * Добавьте правило `map_replace(Map, Key, Value, Result)`,
-        заменяющего значения ключа на указанное, если ключ присутствует.
-    * [Исходный код тестов](prolog/prtest/tree/PrologTreeReplaceTest.java)
- * *CeilingKey*
-    * Добавьте правило `map_ceilingKey(Map, Key, CeilingKey)`,
-      возвращающее минимальный ключ, больший либо равный заданному.
-    * [Исходный код тестов](prolog/prtest/tree/PrologTreeCeilingTest.java)
- * *FloorKey*
-    * Добавьте правило `map_floorKey(Map, Key, FloorKey)`,
-      возвращающее максимальный ключ, меньший либо равный заданному.
-    * [Исходный код тестов](prolog/prtest/tree/PrologTreeFloorTest.java)
  * *MinMax*
     * Добавьте правила:
         * `map_minKey(Map, Key)`, возвращающее минимальный ключ в дереве,
         * `map_maxKey(Map, Key)`, возвращающее максимальный ключ в дереве.
     * [Исходный код тестов](prolog/prtest/tree/PrologTreeMinMaxTest.java)
+ * *Replace*
+    * Добавьте правило `map_replace(Map, Key, Value, Result)`,
+        заменяющего значения ключа на указанное, если ключ присутствует.
+    * [Исходный код тестов](prolog/prtest/tree/PrologTreeReplaceTest.java)
+ * *FloorKey*
+    * Добавьте правило `map_floorKey(Map, Key, FloorKey)`,
+      возвращающее максимальный ключ, меньший либо равный заданному.
+    * [Исходный код тестов](prolog/prtest/tree/PrologTreeFloorTest.java)
+ * *CeilingKey*
+    * Добавьте правило `map_ceilingKey(Map, Key, CeilingKey)`,
+      возвращающее минимальный ключ, больший либо равный заданному.
+    * [Исходный код тестов](prolog/prtest/tree/PrologTreeCeilingTest.java)
  * *SubmapSize*
     * Добавьте правило `map_submapSize(Map, FromKey, ToKey, Size)`,
       возвращающее число ключей в диапазоне `[FromKey, ToKey)`.
@@ -44,7 +44,6 @@
     * Добавьте правило `unique_prime_divisors(N, Divisors)`,
       возвращающее простые делители без повторов
     * [Исходный код тестов](prolog/prtest/primes/PrologUniqueTest.java)
-
  * *Palindrome*
     * Добавьте правило `prime_palindrome(N, K)`,
       определяющее, является ли `N` простым палиндромом в `K`-ичной системе счисления
@@ -91,6 +90,10 @@
     * Код должен находиться в файле `expression.clj`.
     * [Исходный код тестов](clojure/cljtest/parsing/ClojureObjectParsingTest.java)
         * Запускать c аргументом `easy` или `hard`
+ * *Variables*. Дополнительно реализовать поддержку:
+    * Переменных, состоящих из произвольного количества букв `XYZ` в любом регистре
+        * Настоящее имя переменной определяется первой буквой ее имени
+    * [Исходный код тестов](clojure/cljtest/parsing/ClojureVariablesParsingTest.java)
  * *PowLog*. Дополнительно реализовать поддержку:
     * Бинарных правоассоциативных операций максимального приоритета:
         * `Pow` (`**`) – возведения в степень:
@@ -98,10 +101,6 @@
         * `Log` (`//`) – взятия логарифма:
             `8 // 9 // 3` равно `8 // (9 // 3)` равно 3
     * [Исходный код тестов](clojure/cljtest/parsing/ClojurePowLogParsingTest.java)
- * *Variables*. Дополнительно реализовать поддержку:
-    * Переменных, состоящих из произвольного количества букв `XYZ` в любом регистре
-        * Настоящее имя переменной определяется первой буквой ее имени
-    * [Исходный код тестов](clojure/cljtest/parsing/ClojureVariablesParsingTest.java)
  * *Bitwise*. Дополнительно реализовать поддержку:
     * Побитовых операций
         * `And` (`&`) – и: `5 & 6` равно 4
@@ -127,6 +126,16 @@
     * Код должен находиться в файле `expression.clj`.
     * [Исходный код тестов](clojure/cljtest/object/ClojureObjectExpressionTest.java)
         * Запускать c аргументом `easy` или `hard`
+ * *SquareSqrt*. Дополнительно реализовать поддержку:
+    * унарных операций:
+        * `Square` (`square`) – возведение в квадрат, `(square 3)` равно 9;
+        * `Sqrt` (`sqrt`) – извлечение квадратного корня из абсолютной величины аргумента, `(sqrt -9)` равно 3.
+    * [Исходный код тестов](clojure/cljtest/object/ClojureObjectSquareSqrtTest.java)
+ * *PwLg*. Дополнительно реализовать поддержку:
+    * бинарных операций:
+        * `Pw` (`pw`) – возведение в степень, `(pow 2 3)` равно 8;
+        * `Lg` (`lg`) – логарифм абсолютной величины по основанию абсолютной величины, `(lg -8 -2)` равно 3.
+    * [Исходный код тестов](clojure/cljtest/object/ClojureObjectPwLgTest.java)
  * *ExpLn*. Дополнительно реализовать поддержку:
     * унарных операций:
         * `Exp` (`exp`) – экспонента, `(exp 8)` примерно равно 2981;
@@ -137,49 +146,39 @@
         * `Sum` (`sum`) – сумма, `(sum 1 2 3)` равно 6;
         * `Avg` (`avg`) – арифметическое среднее, `(avg 1 2 3)` равно 2;
     * [Исходный код тестов](clojure/cljtest/object/ClojureObjectSumAvgTest.java)
- * *SquareSqrt*. Дополнительно реализовать поддержку:
-    * унарных операций:
-        * `Square` (`square`) – возведение в квадрат, `(square 3)` равно 9;
-        * `Sqrt` (`sqrt`) – извлечение квадратного корня из абсолютной величины аргумента, `(sqrt -9)` равно 3.
-    * [Исходный код тестов](clojure/cljtest/object/ClojureObjectSquareSqrtTest.java)
  * *SumexpSoftmax*. Дополнительно реализовать поддержку:
     * операций произвольного числа аргументов:
         * `Sumexp` (`sumexp`) – сумма экспонент, `(sumexp 8 8 9)` примерно равно 14065;
         * `Softmax` (`Softmax`) – [softmax](https://ru.wikipedia.org/wiki/Softmax) первого аргумента, `(softmax 1 2 3)` примерно равно 0.09;
     * [Исходный код тестов](clojure/cljtest/object/ClojureObjectSumexpSoftmaxTest.java)
- * *PowLog*. Дополнительно реализовать поддержку:
-    * бинарных операций:
-        * `Pw` (`pw`)– возведение в степень, `(pow 2 3)` равно 8;
-        * `lg` – логарифм абсолютной величины по основанию абсолютной величины, `(lg -8 -2)` равно 3.
-    * [Исходный код тестов](clojure/cljtest/object/ClojureObjectPwLgTest.java)
 
 ## Домашнее задание 10. Функциональные выражения на Clojure
 
 Модификации
  * *Базовая*
-    * Код должен находиться в файле `expression.clj`.
+    * Код должен находиться в файле `clojure-solutions/expression.clj`.
     * [Исходный код тестов](clojure/cljtest/functional/ClojureFunctionalExpressionTest.java)
         * Запускать c аргументом `easy` или `hard`
- * *MinMax*. Дополнительно реализовать поддержку:
-    * операций произвольного числа аргументов:
-        * `min` – минимум, `(min 1 2 6)` равно 1;
-        * `max` – максимум, `(min 1 2 6)` равно 6;
-    * [Исходный код тестов](clojure/cljtest/functional/ClojureFunctionalMinMaxTest.java)
- * *ExpLn*. Дополнительно реализовать поддержку:
-    * унарных операций:
-        * `exp` – экспонента, `(exp 8)` примерно равно 2981;
-        * `ln`  – натуральный логарифм абсолютной величины, `(ln -2981)` примерно равно 8.
-    * [Исходный код тестов](clojure/cljtest/functional/ClojureFunctionalExpLnTest.java)
- * *MedAvg*. Дополнительно реализовать поддержку:
-    * операций произвольного числа аргументов:
-        * `med` – медиана, `(med 1 2 6)` равно 2;
-        * `avg` – среднее, `(avg 1 2 6)` равно 3;
-    * [Исходный код тестов](clojure/cljtest/functional/ClojureFunctionalMedAvgTest.java)
  * *PwLg*. Дополнительно реализовать поддержку:
     * бинарных операций:
         * `pw` – возведение в степень, `(pow 2 3)` равно 8;
         * `lg` – логарифм абсолютной величины по основанию абсолютной величины, `(lg -8 -2)` равно 3.
     * [Исходный код тестов](clojure/cljtest/functional/ClojureFunctionalPwLgTest.java)
+ * *ExpLn*. Дополнительно реализовать поддержку:
+    * унарных операций:
+        * `exp` – экспонента, `(exp 8)` примерно равно 2981;
+        * `ln`  – натуральный логарифм абсолютной величины, `(ln -2981)` примерно равно 8.
+    * [Исходный код тестов](clojure/cljtest/functional/ClojureFunctionalExpLnTest.java)
+ * *MinMax*. Дополнительно реализовать поддержку:
+    * операций произвольного числа аргументов:
+        * `min` – минимум, `(min 1 2 6)` равно 1;
+        * `max` – максимум, `(min 1 2 6)` равно 6;
+    * [Исходный код тестов](clojure/cljtest/functional/ClojureFunctionalMinMaxTest.java)
+ * *MedAvg*. Дополнительно реализовать поддержку:
+    * операций произвольного числа аргументов:
+        * `med` – медиана, `(med 1 2 6)` равно 2;
+        * `avg` – среднее, `(avg 1 2 6)` равно 3;
+    * [Исходный код тестов](clojure/cljtest/functional/ClojureFunctionalMedAvgTest.java)
  * *SumexpSoftmax*. Дополнительно реализовать поддержку:
     * операций произвольного числа аргументов:
         * `sumexp` – сумма экспонент, `(sumexp 8 8 9)` примерно равно 14065;
@@ -304,6 +303,16 @@
         * `ArcTan` (`atan`) – арктангенс, `(atan 2)` примерно равно 1.1;
         * `Exp` (`Exp`) – экспонента, `(exp 3)` примерно равно 20;
     * [Исходный код тестов](javascript/jstest/prefix/PrefixAtanExpTest.java)
+ * *PrefixSinhCosh*. Дополнительно реализовать поддержку:
+    * унарных операций:
+        * `Sinh` (`sinh`) – гиперболический синус, `(sinh 3)` немного больше 10;
+        * `Cosh` (`cosh`) – гиперболический косинус, `(cosh 3)` немного меньше 10;
+    * [Исходный код тестов](javascript/jstest/prefix/PrefixSinhCoshTest.java)
+ * *PrefixSumAvg*. Дополнительно реализовать поддержку:
+    * операций произвольного числа аргументов:
+        * `Sum` (`sum`) – сумма, `(sum 1 2 3)` равно 6;
+        * `Avg` (`avg`) – арифметическое среднее, `(avg 1 2 3)` равно 2;
+    * [Исходный код тестов](javascript/jstest/prefix/PrefixSumAvgTest.java)
  * *PostfixSumAvg*. Дополнительно реализовать поддержку:
     * выражений в постфиксной записи: `(2 3 +)` равно 5
     * унарных операций:
@@ -316,22 +325,12 @@
         * `Sumexp` (`sumexp`) – сумма экспонент, `(8 8 9 sumexp)` примерно равно 14065;
         * `Softmax` (`softmax`) – [softmax](https://ru.wikipedia.org/wiki/Softmax) первого аргумента, `(1 2 3 softmax)` примерно 0.09;
     * [Исходный код тестов](javascript/jstest/prefix/PostfixSumexpSoftmaxTest.java)
- * *PrefixSinhCosh*. Дополнительно реализовать поддержку:
-    * унарных операций:
-        * `Sinh` (`sinh`) – гиперболический синус, `(sinh 3)` немного больше 10;
-        * `Cosh` (`cosh`) – гиперболический косинус, `(cosh 3)` немного меньше 10;
-    * [Исходный код тестов](javascript/jstest/prefix/PrefixSinhCoshTest.java)
  * *PostfixMeanVar*. Дополнительно реализовать поддержку:
     * выражений в постфиксной записи: `(2 3 +)` равно 5
     * операций произвольного числа аргументов:
         * `Mean` (`mean`) – математическое ожидание аргументов, `(1 2 6 mean)` равно 3;
         * `Var` (`var`) – дисперсию аргументов, `(2 5 11 var)` равно 14;
     * [Исходный код тестов](javascript/jstest/prefix/PostfixMeanVarTest.java)
- * *PrefixSumAvg*. Дополнительно реализовать поддержку:
-    * операций произвольного числа аргументов:
-        * `Sum` (`sum`) – сумма, `(sum 1 2 3)` равно 6;
-        * `Avg` (`avg`) – арифметическое среднее, `(avg 1 2 3)` равно 2;
-    * [Исходный код тестов](javascript/jstest/prefix/PrefixSumAvgTest.java)
 
 ## Домашнее задание 7. Объектные выражения на JavaScript
 
@@ -340,11 +339,6 @@
     * Код должен находиться в файле `objectExpression.js`.
     * [Исходный код тестов](javascript/jstest/object/ObjectExpressionTest.java)
         * Запускать c аргументом `easy`, `hard` или `bonus`.
- * *MinMax*. Дополнительно реализовать поддержку:
-    * функций:
-        * `Min3` (`min3`) – минимум из трех аргументов, `1 2 3 min` равно 1;
-        * `Max5` (`max5`) – максимум из пяти аргументов, `1 2 3 4 5 max` равно 5;
-    * [Исходный код тестов](javascript/jstest/object/ObjectMinMaxTest.java)
  * *PowLog*. Дополнительно реализовать поддержку:
     * бинарных операций:
         * `Power` (`pow`) – возведение в степень, `2 3 pow` равно 8;
@@ -356,6 +350,11 @@
         * `Sinh` (`sinh`) – гиперболический синус, `3 sinh` немного больше 10;
         * `Cosh` (`cosh`) – гиперболический косинус, `3 cosh` немного меньше 10;
     * [Исходный код тестов](javascript/jstest/object/ObjectSinhCoshTest.java)
+ * *MinMax*. Дополнительно реализовать поддержку:
+    * функций:
+        * `Min3` (`min3`) – минимум из трех аргументов, `1 2 3 min` равно 1;
+        * `Max5` (`max5`) – максимум из пяти аргументов, `1 2 3 4 5 max` равно 5;
+    * [Исходный код тестов](javascript/jstest/object/ObjectMinMaxTest.java)
  * *Gauss*. Дополнительно реализовать поддержку:
     * функций:
         * `Gauss` (`gauss`) – [функция Гаусса](https://ru.wikipedia.org/wiki/%D0%93%D0%B0%D1%83%D1%81%D1%81%D0%BE%D0%B2%D0%B0_%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F);
@@ -375,32 +374,12 @@
     * Код находится в файле [functionalMiniExpression.js](javascript/functionalMiniExpression.js).
     * [Исходный код тестов](javascript/jstest/functional/FunctionalMiniTest.java)
         * Запускать c аргументом `hard` или `easy`;
- * *PieSinCos*. Дополнительно реализовать поддержку:
-    * переменных: `y`, `z`;
-    * констант:
-        * `pi` – π;
-        * `e` – основание натурального логарифма;
-    * операций:
-        * `sin` – синус, `pi sin` равно 0;
-        * `cos` – косинус, `pi cos` равно -1.
-    * [Исходный код тестов](javascript/jstest/functional/FunctionalPieSinCosTest.java)
-        * Запускать c аргументом `hard` или `easy`
  * *Cube*. Дополнительно реализовать поддержку:
     * переменных: `y`, `z`;
     * унарных функций:
         * `cube` – возведение в куб, `2 cube` равно 8;
         * `cuberoot` – кубический корень, `-8 cuberoot` равно -2;
     * [Исходный код тестов](javascript/jstest/functional/FunctionalCubeTest.java)
- * *PieAvgMed*. Дополнительно реализовать поддержку:
-    * переменных: `y`, `z`;
-    * констант:
-        * `pi` – π;
-        * `e` – основание натурального логарифма;
-    * операций:
-        * `avg5` – арифметическое среднее пяти аргументов, `1 2 3 4 5 avg5` равно 7.5;
-        * `med3` – медиана трех аргументов, `1 2 -10 med3` равно 1.
-    * [Исходный код тестов](javascript/jstest/functional/FunctionalPieAvgMedTest.java)
-        * Запускать c аргументом `hard` или `easy`
  * *OneIffAbs*. Дополнительно реализовать поддержку:
     * переменных: `y`, `z`;
     * констант:
@@ -416,6 +395,26 @@
             * `-1 -2 -3 iff` равно -3
             * `0 one two iff` равно 1;
     * [Исходный код тестов](javascript/jstest/functional/FunctionalOneIffAbsTest.java)
+        * Запускать c аргументом `hard` или `easy`
+ * *PieAvgMed*. Дополнительно реализовать поддержку:
+    * переменных: `y`, `z`;
+    * констант:
+        * `pi` – π;
+        * `e` – основание натурального логарифма;
+    * операций:
+        * `avg5` – арифметическое среднее пяти аргументов, `1 2 3 4 5 avg5` равно 7.5;
+        * `med3` – медиана трех аргументов, `1 2 -10 med3` равно 1.
+    * [Исходный код тестов](javascript/jstest/functional/FunctionalPieAvgMedTest.java)
+        * Запускать c аргументом `hard` или `easy`
+ * *PieSinCos*. Дополнительно реализовать поддержку:
+    * переменных: `y`, `z`;
+    * констант:
+        * `pi` – π;
+        * `e` – основание натурального логарифма;
+    * операций:
+        * `sin` – синус, `pi sin` равно 0;
+        * `cos` – косинус, `pi cos` равно -1.
+    * [Исходный код тестов](javascript/jstest/functional/FunctionalPieSinCosTest.java)
         * Запускать c аргументом `hard` или `easy`
 
 Запуск тестов
@@ -569,11 +568,6 @@
     * Классы должны находиться в пакете `queue`
     * [Исходный код тестов](java/queue/ArrayQueueTest.java)
     * [Откомпилированные тесты](artifacts/queue/ArrayQueueTest.jar)
- * *ToStr* (простая)
-    * Реализовать метод `toStr`, возвращающий строковое представление
-      очереди в виде '`[`' _голова_ '`, `' ... '`, `' _хвост_ '`]`'
-    * [Исходный код тестов](java/queue/ArrayQueueToStrTest.java)
-    * [Откомпилированные тесты](artifacts/queue/ArrayQueueToStrTest.jar)
  * *ToArray* (простая)
     * Реализовать метод `toArray`, возвращающий массив,
       содержащий элементы, лежащие в очереди в порядке
@@ -582,6 +576,11 @@
     * Дублирования кода быть не должно
     * [Исходный код тестов](java/queue/ArrayQueueToArrayTest.java)
     * [Откомпилированные тесты](artifacts/queue/ArrayQueueToArrayTest.jar)
+ * *ToStr* (простая)
+    * Реализовать метод `toStr`, возвращающий строковое представление
+      очереди в виде '`[`' _голова_ '`, `' ... '`, `' _хвост_ '`]`'
+    * [Исходный код тестов](java/queue/ArrayQueueToStrTest.java)
+    * [Откомпилированные тесты](artifacts/queue/ArrayQueueToStrTest.jar)
  * *Deque* (сложная)
     * Реализовать методы
         * `push` – добавить элемент в начало очереди
